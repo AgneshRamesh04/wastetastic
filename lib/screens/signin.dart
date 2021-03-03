@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
-class signin extends StatelessWidget{
+class signin extends StatefulWidget {
+  static String id = 'sigin_page';
   @override
-  Widget build (BuildContext context){
-    return MaterialApp (
+  _signinState createState() => _signinState();
+}
+
+class _signinState extends State<signin> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       home: Scaffold(
         //backgroundColor: Colors.lightGreen[200],
         body: Center(
@@ -44,9 +50,7 @@ class signin extends StatelessWidget{
                         "Login",
                       ],
                       textStyle: TextStyle(
-                          fontSize: 40.0,
-                          fontFamily: "Source Sans Pro"
-                      ),
+                          fontSize: 40.0, fontFamily: "Source Sans Pro"),
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -61,10 +65,8 @@ class signin extends StatelessWidget{
                       decoration: InputDecoration(
                         icon: Icon(Icons.person, color: Colors.teal[900]),
                         labelText: 'Username',
-                        labelStyle: TextStyle(
-                            color: Colors.teal[900],
-                            fontSize: 20
-                        ),
+                        labelStyle:
+                            TextStyle(color: Colors.teal[900], fontSize: 20),
                         // helperText: 'Number of characters',
                         // helperStyle: TextStyle(
                         //     color: Colors.teal[900],
@@ -83,13 +85,12 @@ class signin extends StatelessWidget{
                       cursorColor: Colors.teal[900],
                       maxLength: 30,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.vpn_key_rounded, color: Colors.teal[900]),
+                        icon: Icon(Icons.vpn_key_rounded,
+                            color: Colors.teal[900]),
 
                         labelText: 'Password',
-                        labelStyle: TextStyle(
-                          color: Colors.teal[900],
-                          fontSize: 20
-                        ),
+                        labelStyle:
+                            TextStyle(color: Colors.teal[900], fontSize: 20),
                         // helperText: 'Number of characters',
                         // helperStyle: TextStyle(
                         //     color: Colors.teal[900],
@@ -102,11 +103,8 @@ class signin extends StatelessWidget{
                       ),
                     ),
                   ),
-
-
                   FlatButton(
-
-                    onPressed: (){},
+                    onPressed: () {},
                     child: Text(
                       'Forgot Password?',
                       style: TextStyle(color: Colors.white, fontSize: 15),
@@ -122,12 +120,11 @@ class signin extends StatelessWidget{
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
-
-                      onPressed: (){},
+                      onPressed: () {},
                       color: Colors.lime[50],
                       padding: EdgeInsets.all(15.0),
-                      child:
-                      Text('Login',
+                      child: Text(
+                        'Login',
                         style: TextStyle(
                           fontFamily: 'Source Sans Pro',
                           fontSize: 25.0,
@@ -137,7 +134,6 @@ class signin extends StatelessWidget{
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),

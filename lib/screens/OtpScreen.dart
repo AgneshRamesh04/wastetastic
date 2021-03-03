@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 TextEditingController emailController = new TextEditingController();
-void main() {
-  runApp(MyApp());
-}
 
 class MyApp extends StatelessWidget {
   @override

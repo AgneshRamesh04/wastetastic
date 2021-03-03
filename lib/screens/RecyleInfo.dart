@@ -7,26 +7,24 @@ class RecycleInfo extends StatelessWidget {
       title: Center(
         child: Text('Lets Recycle'),
       ),
-      content: Expanded(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Image(
-                image: AssetImage('assets/images/Wastetastic (2).png'),
-              ),
-              Text(
-                  "Recycling is good... \nblah.... blah.... blah.................................................."),
-              SizedBox(
-                height: 250,
-              ),
-              Text("Scroll"),
-              SizedBox(
-                height: 250,
-              ),
-              Text("Recycling is good... \nblah.... blah.... blah...."),
-            ],
-          ),
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Image(
+              image: AssetImage('assets/images/Wastetastic (2).png'),
+            ),
+            Text(
+                "Recycling is good... \nblah.... blah.... blah.................................................."),
+            SizedBox(
+              height: 250,
+            ),
+            Text("Scroll"),
+            SizedBox(
+              height: 250,
+            ),
+            Text("Recycling is good... \nblah.... blah.... blah...."),
+          ],
         ),
       ),
       actions: <Widget>[

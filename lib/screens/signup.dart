@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
-class signup extends StatelessWidget{
+class signup extends StatefulWidget {
+  static String id = 'signin_page';
   @override
-  Widget build (BuildContext context){
-    return MaterialApp (
+  _signupState createState() => _signupState();
+}
+
+class _signupState extends State<signup> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       home: Scaffold(
         //backgroundColor: Colors.lightGreen[200],
         body: Center(
@@ -35,7 +41,6 @@ class signup extends StatelessWidget{
                         // Container(
                         //     padding: const EdgeInsets.all(8.0), child: Text('YourAppTitle'))
                       ],
-
                     ),
                   ),
                   // CircleAvatar(
@@ -56,9 +61,7 @@ class signup extends StatelessWidget{
                         "Sign Up",
                       ],
                       textStyle: TextStyle(
-                          fontSize: 40.0,
-                          fontFamily: "Source Sans Pro"
-                      ),
+                          fontSize: 40.0, fontFamily: "Source Sans Pro"),
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -71,12 +74,11 @@ class signup extends StatelessWidget{
                       cursorColor: Colors.teal[900],
                       maxLength: 50,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.perm_identity_rounded, color: Colors.teal[900]),
+                        icon: Icon(Icons.perm_identity_rounded,
+                            color: Colors.teal[900]),
                         labelText: 'Name',
-                        labelStyle: TextStyle(
-                            color: Colors.teal[900],
-                            fontSize: 17
-                        ),
+                        labelStyle:
+                            TextStyle(color: Colors.teal[900], fontSize: 17),
                         // helperText: 'Number of characters',
                         // helperStyle: TextStyle(
                         //     color: Colors.teal[900],
@@ -95,13 +97,12 @@ class signup extends StatelessWidget{
                       cursorColor: Colors.teal[900],
                       maxLength: 50,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.email_rounded, color: Colors.teal[900]),
+                        icon:
+                            Icon(Icons.email_rounded, color: Colors.teal[900]),
 
                         labelText: 'Email',
-                        labelStyle: TextStyle(
-                            color: Colors.teal[900],
-                            fontSize: 17
-                        ),
+                        labelStyle:
+                            TextStyle(color: Colors.teal[900], fontSize: 17),
                         // helperText: 'Number of characters',
                         // helperStyle: TextStyle(
                         //     color: Colors.teal[900],
@@ -123,10 +124,8 @@ class signup extends StatelessWidget{
                         icon: Icon(Icons.person, color: Colors.teal[900]),
 
                         labelText: 'Username',
-                        labelStyle: TextStyle(
-                            color: Colors.teal[900],
-                            fontSize: 17
-                        ),
+                        labelStyle:
+                            TextStyle(color: Colors.teal[900], fontSize: 17),
                         // helperText: 'Number of characters',
                         // helperStyle: TextStyle(
                         //     color: Colors.teal[900],
@@ -146,13 +145,12 @@ class signup extends StatelessWidget{
                       maxLength: 30,
                       obscureText: true,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.vpn_key_rounded, color: Colors.teal[900]),
+                        icon: Icon(Icons.vpn_key_rounded,
+                            color: Colors.teal[900]),
 
                         labelText: 'Password',
-                        labelStyle: TextStyle(
-                            color: Colors.teal[900],
-                            fontSize: 17
-                        ),
+                        labelStyle:
+                            TextStyle(color: Colors.teal[900], fontSize: 17),
                         // helperText: 'Number of characters',
                         // helperStyle: TextStyle(
                         //     color: Colors.teal[900],
@@ -172,14 +170,13 @@ class signup extends StatelessWidget{
                       maxLength: 30,
                       obscureText: true,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.vpn_key_outlined, color: Colors.teal[900]),
+                        icon: Icon(Icons.vpn_key_outlined,
+                            color: Colors.teal[900]),
 
                         labelText: 'Confirm Password',
 
-                        labelStyle: TextStyle(
-                            color: Colors.teal[900],
-                            fontSize: 17
-                        ),
+                        labelStyle:
+                            TextStyle(color: Colors.teal[900], fontSize: 17),
                         // helperText: 'Number of characters',
                         // helperStyle: TextStyle(
                         //     color: Colors.teal[900],
@@ -202,12 +199,11 @@ class signup extends StatelessWidget{
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
-
-                      onPressed: (){},
+                      onPressed: () {},
                       color: Colors.lime[50],
                       padding: EdgeInsets.all(15.0),
-                      child:
-                      Text('Sign Up',
+                      child: Text(
+                        'Sign Up',
                         style: TextStyle(
                           fontFamily: 'Source Sans Pro',
                           fontSize: 25.0,
