@@ -38,7 +38,8 @@ class _welcomePageState extends State<welcomePage> {
                     radius: 120.0,
                     //backgroundImage: AssetImage('')
                     backgroundColor: Colors.transparent,
-                    backgroundImage: AssetImage('images/wastetastic_1.png'),
+                    backgroundImage:
+                        AssetImage('assets/images/wastetastic_1.png'),
                   ),
                   Container(
                     padding: EdgeInsets.all(10.0),
@@ -97,9 +98,9 @@ class _welcomePageState extends State<welcomePage> {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(builder: (context) => signin()),
+                          signin.id,
                         );
                       },
                       color: Colors.lime[50],

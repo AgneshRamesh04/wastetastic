@@ -3,7 +3,13 @@ import 'package:flutter/widgets.dart';
 
 TextEditingController emailController = new TextEditingController();
 
-class MyApp extends StatelessWidget {
+class ResetPassword extends StatefulWidget {
+  static String id = 'Forgot_password_page';
+  @override
+  _ResetPasswordState createState() => _ResetPasswordState();
+}
+
+class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +31,7 @@ class MyApp extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.transparent,
                     image: DecorationImage(
-                        image: AssetImage('images/wastastic.png'),
+                        image: AssetImage('assets/images/wastetastic_1.png'),
                         fit: BoxFit.cover),
                   ),
                 ),

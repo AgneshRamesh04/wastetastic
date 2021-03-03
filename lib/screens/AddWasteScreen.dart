@@ -93,9 +93,11 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                       elevation: 20,
                       style: TextStyle(color: Colors.white),
                       onChanged: (String newValue) {
-                        setState(() {
-                          selectedCategory = newValue;
-                        });
+                        setState(
+                          () {
+                            selectedCategory = newValue;
+                          },
+                        );
                       },
                       dropdownColor: Colors.grey[900],
                       items: kWasteCategory
