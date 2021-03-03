@@ -14,12 +14,12 @@ class _BasicTestingScreenState extends State<BasicTestingScreen> {
       body: Center(
         child: FloatingActionButton(
           onPressed: () {
-            //DatabaseCreator.createDatabaseForEWaste();
-//            DatabaseCreator.createDatabaseForLightingWaste();
-//            DatabaseCreator.createDatabaseForWasteTreatment();
-//            DatabaseCreator.createDatabaseForCashForTrash();
-            //DatabaseCreator.createDatabaseForGeneralWasteCollectors();
-            DatabaseCreator.createDatabaseForCarPark();
+            DatabaseCreator.createDatabaseForEWaste();
+            //DatabaseCreator.createDatabaseForLightingWaste();
+            DatabaseCreator.createDatabaseForWasteTreatment();
+            DatabaseCreator.createDatabaseForCashForTrash();
+            DatabaseCreator.createDatabaseForGeneralWasteCollectors();
+            //DatabaseCreator.createDatabaseForCarPark();
             //CatalogMgr.readAllWastePOI();
           },
         ),

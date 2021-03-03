@@ -9,6 +9,7 @@ import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:csv/csv.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sortedmap/sortedmap.dart';
 
 import '../entity/WasteCategory.dart';
 import '../entity/WastePOI.dart';
@@ -18,6 +19,41 @@ const String carParkDataURL =
 
 class DatabaseCreator {
   static final _firestore = FirebaseFirestore.instance;
+
+  static getTop5CarPark(gp.GeoPoint location) async {
+    final Distance distance = Distance();
+    Map<String, LatLng> listOfCarParkLocations = await readAllCarParks();
+    double m;
+    var distances = SortedMap(Ordering.byValue());
+    print(distances);
+    for (String key in listOfCarParkLocations.keys) {
+      m = distance.as(
+          LengthUnit.Meter, location.toLatLng(), listOfCarParkLocations[key]);
+      distances.addAll({key: m});
+//        print("$key: ${distances[key]}");
+    }
+    print(distances);
+    List<String> nearbyCarpark = List<String>();
+    int counter = 0;
+    for (var carParkNum in distances.keys) {
+      if (counter == 5) break;
+      nearbyCarpark.add(carParkNum);
+      counter++;
+    }
+    return nearbyCarpark;
+  }
+
+  static readAllCarParks() async {
+    Map<String, LatLng> listOfCarParkLocations = Map<String, LatLng>();
+    await for (var snaps in _firestore.collection('CarPark').snapshots()) {
+      for (var carpark in snaps.docs) {
+        Map<String, dynamic> c = carpark.data();
+        listOfCarParkLocations[carpark.id] =
+            LatLng(c['location'].latitude, c['location'].longitude);
+      }
+      return listOfCarParkLocations;
+    }
+  }
 
   static createDatabaseForEWaste() async {
     String rawGeoJson = await rootBundle
@@ -47,18 +83,19 @@ class DatabaseCreator {
       POI_inc_crc = table.getElementsByTagName('td')[12].text;
       POI_feml_upd_d = table.getElementsByTagName('td')[13].text;
       location = feature.geometry.geoPoint;
+      List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
         name: name,
         category: category,
         location: location,
         address: address,
         POI_postalcode: postalCode,
+        nearbyCarPark: nearbyCarPark,
         POI_description: POI_desc,
         POI_inc_crc: POI_inc_crc,
         POI_feml_upd_d: POI_feml_upd_d,
       );
       w.printDetails();
-
       _firestore.collection('WastePOI').doc('E_WASTE_$count').set({
         'name': name,
         'category': category.toString(),
@@ -68,6 +105,7 @@ class DatabaseCreator {
         'POI_description': POI_desc,
         'POI_inc_crc': POI_inc_crc,
         'POI_feml_upd_d': POI_feml_upd_d,
+        'nearbyCarPark': nearbyCarPark,
       });
       count++;
 //      if (feature.type == GeoJsonFeatureType.point) {
@@ -103,19 +141,20 @@ class DatabaseCreator {
       POI_inc_crc = table.getElementsByTagName('td')[13].text;
       POI_feml_upd_d = table.getElementsByTagName('td')[14].text;
       location = feature.geometry.geoPoint;
+      print('Count: $count');
+      List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
         name: name,
         category: category,
         location: location,
         address: address,
         POI_postalcode: postalCode,
+        nearbyCarPark: nearbyCarPark,
         POI_description: POI_desc,
         POI_inc_crc: POI_inc_crc,
         POI_feml_upd_d: POI_feml_upd_d,
       );
-
       w.printDetails();
-
       _firestore.collection('WastePOI').doc('LIGHTING_WASTE_$count').set({
         'name': name,
         'category': category.toString(),
@@ -125,6 +164,7 @@ class DatabaseCreator {
         'POI_description': POI_desc,
         'POI_inc_crc': POI_inc_crc,
         'POI_feml_upd_d': POI_feml_upd_d,
+        'nearbyCarPark': nearbyCarPark,
       });
       count++;
 //      if (feature.type == GeoJsonFeatureType.point) {
@@ -159,17 +199,18 @@ class DatabaseCreator {
       POI_inc_crc = table.getElementsByTagName('td')[12].text;
       POI_feml_upd_d = table.getElementsByTagName('td')[13].text;
       location = feature.geometry.geoPoint;
+      List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
           name: name,
           category: category,
           address: address,
           location: location,
           POI_postalcode: postalCode,
+          nearbyCarPark: nearbyCarPark,
           POI_description: POI_desc,
           POI_feml_upd_d: POI_feml_upd_d,
           POI_inc_crc: POI_inc_crc);
       w.printDetails();
-
       _firestore.collection('WastePOI').doc('WASTE_TREATMENT_$count').set({
         'name': name,
         'category': category.toString(),
@@ -179,6 +220,7 @@ class DatabaseCreator {
         'POI_description': POI_desc,
         'POI_inc_crc': POI_inc_crc,
         'POI_feml_upd_d': POI_feml_upd_d,
+        'nearbyCarPark': nearbyCarPark,
       });
       count++;
     }
@@ -207,17 +249,18 @@ class DatabaseCreator {
       POI_inc_crc = table.getElementsByTagName('td')[11].text;
       POI_feml_upd_d = table.getElementsByTagName('td')[12].text;
       location = feature.geometry.geoPoint;
+      List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
           name: name,
           category: category,
           address: address,
           POI_description: POI_desc,
+          nearbyCarPark: nearbyCarPark,
           POI_inc_crc: POI_inc_crc,
           POI_feml_upd_d: POI_feml_upd_d,
           POI_postalcode: postalCode,
           location: location);
       w.printDetails();
-
       _firestore.collection('WastePOI').doc('CASH_FOR_TRASH_$count').set({
         'name': name,
         'category': category.toString(),
@@ -227,6 +270,7 @@ class DatabaseCreator {
         'POI_description': POI_desc,
         'POI_inc_crc': POI_inc_crc,
         'POI_feml_upd_d': POI_feml_upd_d,
+        'nearbyCarPark': nearbyCarPark,
       });
       count++;
     }
@@ -261,15 +305,16 @@ class DatabaseCreator {
           complete_address.substring(0, complete_address.length - 6);
       location = gp.GeoPoint.fromLatLng(
           point: LatLng(coordinates.latitude, coordinates.longitude));
+      List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
         name: name,
         category: category,
         POI_postalcode: postalCode,
+        nearbyCarPark: nearbyCarPark,
         location: location,
         address: complete_address,
       );
       w.printDetails();
-
       _firestore.collection('WastePOI').doc('NORMAL_WASTE_$count').set({
         'name': name,
         'category': category.toString(),
@@ -279,6 +324,7 @@ class DatabaseCreator {
         'POI_description': 'Normal Waste Disposal',
         'POI_inc_crc': 'No inc_crc',
         'POI_feml_upd_d': 'No feml_upd_d',
+        'nearbyCarPark': nearbyCarPark,
       });
       count++;
     }
@@ -301,7 +347,7 @@ class DatabaseCreator {
       address = lst[1];
       carParkType = lst[4];
       parkingType = lst[5];
-      location = gp.GeoPoint.fromLatLng(point: LatLng(lst[12], lst[12]));
+      location = gp.GeoPoint.fromLatLng(point: LatLng(lst[12], lst[13]));
       freeParking = lst[7] == 'NO'
           ? 'Paid Parking'
           : 'Free on Sundays and Public Holidays';
