@@ -49,22 +49,15 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
       return fav_card_list;
     }
 
-    return MaterialApp(
-      home: SafeArea(
-        maintainBottomViewPadding: true,
-        top: true,
-        left: true,
-        bottom: true,
-        right: true,
-        child: Column(
-          children: [
-            header_card(
-              title: 'Favourites',
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(children: build_fav_cards()
-                    /*  [
+    return Column(
+      children: [
+        header_card(
+          title: 'Favourites',
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(children: build_fav_cards()
+                /*  [
                     POI_card(
                       name: 'POI1',
                       address: 'address',
@@ -91,12 +84,10 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                       description: 'description',
                     ),
                   ],*/
-                    ),
-              ),
-            )
-          ],
-        ),
-      ),
+                ),
+          ),
+        )
+      ],
     );
   }
 }

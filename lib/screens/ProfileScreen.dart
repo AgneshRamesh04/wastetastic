@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wastetastic/Constants.dart';
+import 'package:wastetastic/screens/ResetPasword.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -56,8 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 borderRadius: BorderRadius.circular(18.0),
                               ),
                               onPressed: () {
-                                print("Password change");
-                                //@todo redirect to change password page and logic
+                                Navigator.pushNamed(context, ResetPassword.id);
                               },
                               child: Text('   Reset Password   '),
                             )

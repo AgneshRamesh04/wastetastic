@@ -73,7 +73,6 @@ class _NearYouScreenState extends State<NearYouScreen> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                padding: EdgeInsets.all(15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: build_nearby_cards(), //POI_cards

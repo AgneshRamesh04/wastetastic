@@ -35,8 +35,8 @@ class _MainScreenState extends State<MainScreen> {
     ];
     return SafeArea(
       child: Scaffold(
-        //resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

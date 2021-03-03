@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/screens/ResetPasword.dart';
+import 'package:wastetastic/widgets/SimpleButton.dart';
 
 TextEditingController emailController = new TextEditingController();
 
 final _formKey = GlobalKey<FormState>();
+String enteredOTP;
 
 class OTPScreen extends StatefulWidget {
   static String id = 'OPT_Screen';
@@ -13,74 +16,74 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  String enteredOTP;
   @override
   Widget build(BuildContext context) {
-    enteredOTP = null;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false, //removes the debug thingy from screen
-      home: Scaffold(
-        backgroundColor: Colors.teal,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        body: SafeArea(
+        elevation: 0.0,
+      ),
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: [Colors.green[700], Colors.lime[200]],
+          ),
+        ),
+        child: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  width: 100.0,
-                  height: 100.0,
-                  margin: EdgeInsets.all(35),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/wastetastic_1.png'),
-                        fit: BoxFit.cover),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Text('OTP Screen',
-                    style: TextStyle(color: Colors.black, fontSize: 18)),
-                Container(
-                  margin: EdgeInsets.all(25),
-                  child: TextFormField(
-                    onFieldSubmitted: (value) {
-                      enteredOTP = value;
-                      return null;
-                    },
-                    validator: (value) {
-                      if (value.isEmpty) return "Enter OTP";
-                      enteredOTP = value;
-                      return null;
-                    },
-                    cursorColor: Colors.black,
-                    maxLength: 6,
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.lock, color: Colors.black),
-                      labelText: 'OTP',
-                      labelStyle: TextStyle(
-                        color: Colors.black,
-                      ),
-                      helperText: 'Number of digits',
-                      //suffixIcon: Icon(Icons.check_circle, color: Colors.black),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 150),
+                  Text('OTP Screen',
+                      style: TextStyle(color: Colors.black, fontSize: 18)),
+                  Container(
+                    margin: EdgeInsets.all(25),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (value) {
+                        enteredOTP = value;
+                        return null;
+                      },
+                      validator: (value) {
+                        if (value.isEmpty) return "Enter OTP";
+                        enteredOTP = value;
+                        return null;
+                      },
+                      cursorColor: Colors.black,
+                      maxLength: 6,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.lock, color: Colors.black),
+                        labelText: 'OTP',
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                        helperText: 'Number of digits',
+                        //suffixIcon: Icon(Icons.check_circle, color: Colors.black),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      Navigator.pushNamed(context, ResetPassword.id);
-                    }
-                  },
-                  child: const Text('Reset Password',
-                      style: TextStyle(fontSize: 20)),
-                ),
-              ],
+                  SimpleButton(
+                    content: 'Submit',
+                    onPress: () {
+                      if (_formKey.currentState.validate())
+                        Navigator.pushNamed(context, ResetPassword.id);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

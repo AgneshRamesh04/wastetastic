@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'signin.dart';
 import 'signup.dart';
 
@@ -61,61 +62,27 @@ class _welcomePageState extends State<welcomePage> {
                   Container(
                     padding: EdgeInsets.all(20.0),
                   ),
-                  SizedBox(
-                    width: 270,
-                    height: 60,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => signup()),
-                        );
-                      },
-                      color: Colors.lime[50],
-                      padding: EdgeInsets.all(15.0),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          fontFamily: 'Source Sans Pro',
-                          fontSize: 25.0,
-                          color: Colors.teal[900],
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                  SimpleButton(
+                    content: 'Sign Up',
+                    onPress: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => signup()),
+                      );
+                    },
                   ),
                   Container(
                     padding: EdgeInsets.all(10.0),
                   ),
-                  SizedBox(
-                    width: 270,
-                    height: 60,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          signin.id,
-                        );
-                      },
-                      color: Colors.lime[50],
-                      padding: EdgeInsets.all(15.0),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          fontFamily: 'Source Sans Pro',
-                          fontSize: 25.0,
-                          color: Colors.teal[900],
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+                  SimpleButton(
+                    content: 'LogIn',
+                    onPress: () {
+                      Navigator.pushNamed(
+                        context,
+                        signin.id,
+                      );
+                    },
+                  )
                 ],
               ),
             ),
