@@ -6,7 +6,7 @@ class WastePOI {
   String _POI_name;
   WasteCategory _wasteCategory;
   GeoPoint _location;
-  List<CarPark> _nearbyCarPark = List<CarPark>(5);
+  List<String> _nearbyCarPark = List<String>(5);
   int _POI_postalcode;
   String _address;
   String _POI_description;
@@ -21,6 +21,7 @@ class WastePOI {
     GeoPoint location,
     int POI_postalcode,
     String address,
+    List<String> nearbyCarPark,
     String POI_description: 'Normal Waste Disposal',
     String POI_inc_crc: 'No inc_crc',
     String POI_feml_upd_d: 'No feml_upd_d',
@@ -29,13 +30,14 @@ class WastePOI {
         _location = location,
         _address = address,
         _POI_postalcode = POI_postalcode,
+        _nearbyCarPark = nearbyCarPark,
         _POI_description = POI_description,
         _POI_inc_crc = POI_inc_crc,
         _POI_feml_upd_d = POI_feml_upd_d;
 
   WasteCategory get wasteCategory => _wasteCategory;
   GeoPoint get location => _location;
-  List<CarPark> get nearbyCarPark => _nearbyCarPark;
+  List<String> get nearbyCarPark => _nearbyCarPark;
   String get POI_name => _POI_name;
   String get address => _address;
   int get POI_postalcode => _POI_postalcode;
@@ -53,5 +55,9 @@ class WastePOI {
     print("Description: $_POI_description");
     print("Inc crc: $_POI_inc_crc");
     print("Feml Upd d: $_POI_feml_upd_d");
+    print("Nearby Car Parks: ");
+    for (String carParkNum in _nearbyCarPark) {
+      print(carParkNum);
+    }
   }
 }
