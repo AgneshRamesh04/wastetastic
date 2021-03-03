@@ -33,61 +33,63 @@ class _MainScreenState extends State<MainScreen> {
       ProfileScreen(),
       BasicTestingScreen(),
     ];
-    return Scaffold(
-      //resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GestureDetector(
-              child: Icon(Icons.restore_from_trash),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext dialogContext) {
-                    return RecycleInfo();
-                  },
-                );
-              },
-            ),
-            Text('Wastetastic'),
-            Icon(Icons.pending_actions_rounded)
-          ],
+    return SafeArea(
+      child: Scaffold(
+        //resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                child: Icon(Icons.restore_from_trash),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext dialogContext) {
+                      return RecycleInfo();
+                    },
+                  );
+                },
+              ),
+              Text('Wastetastic'),
+              Icon(Icons.pending_actions_rounded)
+            ],
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: _widgetOptions.elementAt(_selectedPageIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Catalog',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add Waste',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            label: 'Favourite',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.build),
-            label: 'Test Screen',
-          ),
-        ],
-        currentIndex: _selectedPageIndex,
-        selectedItemColor: Colors.lightGreenAccent,
-        unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
+        body: _widgetOptions.elementAt(_selectedPageIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              label: 'Catalog',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              label: 'Add Waste',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.star),
+              label: 'Favourite',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              label: 'Profile',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.build),
+              label: 'Test Screen',
+            ),
+          ],
+          currentIndex: _selectedPageIndex,
+          selectedItemColor: Colors.lightGreenAccent,
+          unselectedItemColor: Colors.grey,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }

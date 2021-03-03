@@ -13,28 +13,37 @@ class _CarParkScreenState extends State<CarParkScreen> {
   Widget build(BuildContext context) {
     final WastePOI POI = ModalRoute.of(context).settings.arguments;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Wastetastic'),
-        centerTitle: true,
-      ),
-      body: Container(
-        child: Column(children: [
-          header_card(
-            title: 'Car Parking Facilities',
+    return MaterialApp(
+      home: SafeArea(
+        maintainBottomViewPadding: true,
+        top: true,
+        left: true,
+        bottom: true,
+        right: true,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Wastetastic'),
+            centerTitle: true,
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Near ' + POI.POI_name),
-                ], //POI_cards
+          body: Container(
+            child: Column(children: [
+              header_card(
+                title: 'Car Parking Facilities',
               ),
-            ),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Near ' + POI.POI_name),
+                    ], //POI_cards
+                  ),
+                ),
+              ),
+            ]),
           ),
-        ]),
+        ),
       ),
     );
   }

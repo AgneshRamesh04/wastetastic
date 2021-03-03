@@ -49,45 +49,54 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
       return fav_card_list;
     }
 
-    return Column(
-      children: [
-        header_card(
-          title: 'Favourites',
+    return MaterialApp(
+      home: SafeArea(
+        maintainBottomViewPadding: true,
+        top: true,
+        left: true,
+        bottom: true,
+        right: true,
+        child: Column(
+          children: [
+            header_card(
+              title: 'Favourites',
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(children: build_fav_cards()
+                    /*  [
+                    POI_card(
+                      name: 'POI1',
+                      address: 'address',
+                      postalcode: 310204,
+                      description: 'description',
+                      TO_POI_page: () {
+                        Navigator.pushNamed(
+                          context,
+                          POI_DetialScreen.id,
+                          arguments: kSample,
+                        );
+                      },
+                    ),
+                    POI_card(
+                      name: 'POI2',
+                      address: 'address',
+                      postalcode: 321045,
+                      description: 'description',
+                    ),
+                    POI_card(
+                      name: 'POI3',
+                      address: 'address',
+                      postalcode: 321045,
+                      description: 'description',
+                    ),
+                  ],*/
+                    ),
+              ),
+            )
+          ],
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(children: build_fav_cards()
-                /*  [
-                POI_card(
-                  name: 'POI1',
-                  address: 'address',
-                  postalcode: 310204,
-                  description: 'description',
-                  TO_POI_page: () {
-                    Navigator.pushNamed(
-                      context,
-                      POI_DetialScreen.id,
-                      arguments: kSample,
-                    );
-                  },
-                ),
-                POI_card(
-                  name: 'POI2',
-                  address: 'address',
-                  postalcode: 321045,
-                  description: 'description',
-                ),
-                POI_card(
-                  name: 'POI3',
-                  address: 'address',
-                  postalcode: 321045,
-                  description: 'description',
-                ),
-              ],*/
-                ),
-          ),
-        )
-      ],
+      ),
     );
   }
 }

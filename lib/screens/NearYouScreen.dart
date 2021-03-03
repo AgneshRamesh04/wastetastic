@@ -56,30 +56,32 @@ class _NearYouScreenState extends State<NearYouScreen> {
     }
 
     //@todo get user location and filter nearby locations
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Wastetastic'),
-        centerTitle: true,
-      ),
-      body: Container(
-        child: Column(children: [
-          header_card(
-            title: title,
-          ),
-          Text('Nearby Locations:'),
-          SizedBox(
-            height: 5,
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: build_nearby_cards(), //POI_cards
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Wastetastic'),
+          centerTitle: true,
+        ),
+        body: Container(
+          child: Column(children: [
+            header_card(
+              title: title,
+            ),
+            Text('Nearby Locations:'),
+            SizedBox(
+              height: 5,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: build_nearby_cards(), //POI_cards
+                ),
               ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }

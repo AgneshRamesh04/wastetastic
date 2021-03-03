@@ -4,6 +4,8 @@ import 'package:wastetastic/screens/ResetPasword.dart';
 
 TextEditingController emailController = new TextEditingController();
 
+final _formKey = GlobalKey<FormState>();
+
 class OTPScreen extends StatefulWidget {
   static String id = 'OPT_Screen';
   @override
@@ -48,6 +50,11 @@ class _OTPScreenState extends State<OTPScreen> {
                       enteredOTP = value;
                       return null;
                     },
+                    validator: (value) {
+                      if (value.isEmpty) return "Enter OTP";
+                      enteredOTP = value;
+                      return null;
+                    },
                     cursorColor: Colors.black,
                     maxLength: 6,
                     decoration: InputDecoration(
@@ -66,7 +73,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    if (enteredOTP.isNotEmpty) {
+                    if (_formKey.currentState.validate()) {
                       Navigator.pushNamed(context, ResetPassword.id);
                     }
                   },

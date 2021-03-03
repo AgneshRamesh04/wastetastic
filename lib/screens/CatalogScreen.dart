@@ -53,67 +53,77 @@ class _CatalogScreenState extends State<CatalogScreen> {
       return catalog_Cat;
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-      child: Column(
-        children: [
-          header_card(
-            title: 'Catalog',
-          ),
-          DropdownButtonFormField<String>(
-            value: selectedCategory,
-            icon: Icon(Icons.arrow_drop_down),
-            decoration: InputDecoration(
-              icon: Icon(Icons.receipt_long),
-              prefix: Text("Filter by Waste Category: "),
-            ),
-            iconSize: 24,
-            elevation: 20,
-            style: TextStyle(color: Colors.white),
-            onChanged: (String newValue) {
-              setState(() {
-                selectedCategory = newValue;
-              });
-            },
-            dropdownColor: Colors.grey[900],
-            items: kWasteCategory.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: build_cat_cards(),
-                /*[
-                  POI_card(
-                    name: 'POI1',
-                    address: 'address',
-                    postalcode: 310204,
-                    description: 'description',
-                  ),
-                  POI_card(
-                    name: 'POI2',
-                    address: 'address',
-                    postalcode: 321045,
-                    description: 'description',
-                  ),
-                  POI_card(
-                    name: 'POI3',
-                    address: 'address',
-                    postalcode: 321045,
-                    description: 'description',
-                  ),
-                ],*/
+    return MaterialApp(
+      home: SafeArea(
+        maintainBottomViewPadding: true,
+        top: true,
+        left: true,
+        bottom: true,
+        right: true,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(
+            children: [
+              header_card(
+                title: 'Catalog',
               ),
-            ),
-          )
-        ],
+              DropdownButtonFormField<String>(
+                value: selectedCategory,
+                icon: Icon(Icons.arrow_drop_down),
+                decoration: InputDecoration(
+                  icon: Icon(Icons.receipt_long),
+                  prefix: Text("Filter by Waste Category: "),
+                ),
+                iconSize: 24,
+                elevation: 20,
+                style: TextStyle(color: Colors.white),
+                onChanged: (String newValue) {
+                  setState(() {
+                    selectedCategory = newValue;
+                  });
+                },
+                dropdownColor: Colors.grey[900],
+                items: kWasteCategory
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: build_cat_cards(),
+                    /*[
+                      POI_card(
+                        name: 'POI1',
+                        address: 'address',
+                        postalcode: 310204,
+                        description: 'description',
+                      ),
+                      POI_card(
+                        name: 'POI2',
+                        address: 'address',
+                        postalcode: 321045,
+                        description: 'description',
+                      ),
+                      POI_card(
+                        name: 'POI3',
+                        address: 'address',
+                        postalcode: 321045,
+                        description: 'description',
+                      ),
+                    ],*/
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

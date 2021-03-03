@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 
 TextEditingController emailController = new TextEditingController();
 
+final _formKey = GlobalKey<FormState>();
+
 class ResetPassword extends StatefulWidget {
   static String id = 'Forgot_password_page';
   @override
@@ -10,6 +12,8 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  String newPassword = null;
+  String confirmPassword = null;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,6 +45,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   child: TextFormField(
+                    validator: (value) {
+                      if (value.isEmpty) return "Enter Password";
+                      newPassword = value;
+                      return null;
+                    },
                     cursorColor: Colors.black,
                     maxLength: 100,
                     obscureText: true,
@@ -61,6 +70,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   child: TextFormField(
+                    validator: (value) {
+                      if (value.isEmpty) return "Enter Password";
+                      confirmPassword = value;
+                      return null;
+                    },
                     cursorColor: Colors.black,
                     maxLength: 100,
                     obscureText: true,
@@ -79,7 +93,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                   ),
                 ),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      // Navigator.pushNamed(context, ResetPassword.id);
+                    }
+                  },
                   child: const Text('Confirm', style: TextStyle(fontSize: 20)),
                 ),
               ],
