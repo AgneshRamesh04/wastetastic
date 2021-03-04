@@ -1,21 +1,29 @@
 import 'package:wastetastic/entity/WasteCategory.dart';
 
 class WasteRecord {
+  String _username;
   DateTime _dateTime;
   WasteCategory _category;
   double _weight;
 
   WasteRecord({
+    String username,
     DateTime dateTime,
     WasteCategory category,
     double weight,
-  })  : _dateTime = dateTime,
+  })  : _username = username,
+        _dateTime = dateTime,
         _category = category,
         _weight = weight;
 
+  String get username => _username;
   DateTime get dateTime => _dateTime;
   WasteCategory get category => _category;
   double get weight => _weight;
+
+  set username(String username) {
+    _username = username;
+  }
 
   set dateTime(DateTime dateTime) {
     _dateTime = dateTime;

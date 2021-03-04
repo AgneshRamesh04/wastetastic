@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:wastetastic/Constants.dart';
+import 'package:wastetastic/control/WasteRecordMgr.dart';
+import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -122,12 +124,23 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                               // If the form is valid, display a Snackbar.
 
                               print(
-                                  'date: $selectedDate \n time: $selectedTime \n'
+                                  'date: ${selectedDate.substring(0, 10)} \n time: $selectedTime \n'
                                   'weight: $enteredWeight \n category: $selectedCategory');
                               Scaffold.of(context).showSnackBar(
                                   SnackBar(content: Text('Processing Data')));
                               //@todo code to add details to user waste records
-
+                              print(selectedCategory.replaceAll(' ', '_'));
+                              WasteRecordMgr.addNewRecord(
+                                'sdidt',
+                                DateTime.parse(selectedDate.substring(0, 10) +
+                                    " " +
+                                    selectedTime),
+                                double.parse(enteredWeight),
+                                WasteCategory.values.firstWhere((element) =>
+                                    element.toString() ==
+                                    ('WasteCategory.' +
+                                        selectedCategory.replaceAll(' ', '_'))),
+                              );
                               //Dialog box
                               showDialog(
                                 context: context,
