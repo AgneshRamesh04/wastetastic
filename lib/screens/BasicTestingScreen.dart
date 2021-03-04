@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wastetastic/control/DatabaseCreator.dart';
+import 'package:wastetastic/control/CatalogMgr.dart';
+import 'package:wastetastic/entity/WasteCategory.dart';
 
 class BasicTestingScreen extends StatefulWidget {
   static const String id = 'basic_testing_screen';
@@ -14,13 +16,13 @@ class _BasicTestingScreenState extends State<BasicTestingScreen> {
       body: Center(
         child: FloatingActionButton(
           onPressed: () {
-            DatabaseCreator.createDatabaseForEWaste();
+            //DatabaseCreator.createDatabaseForEWaste();
             //DatabaseCreator.createDatabaseForLightingWaste();
-            DatabaseCreator.createDatabaseForWasteTreatment();
-            DatabaseCreator.createDatabaseForCashForTrash();
-            DatabaseCreator.createDatabaseForGeneralWasteCollectors();
+            //DatabaseCreator.createDatabaseForWasteTreatment();
+            //DatabaseCreator.createDatabaseForCashForTrash();
+            //DatabaseCreator.createDatabaseForGeneralWasteCollectors();
             //DatabaseCreator.createDatabaseForCarPark();
-            //CatalogMgr.readAllWastePOI();
+            CatalogMgr.readWastePOIByCategory(WasteCategory.LIGHTING_WASTE);
           },
         ),
       ),
