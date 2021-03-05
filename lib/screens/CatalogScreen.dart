@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wastetastic/control/CatalogMgr.dart';
+import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/widgets/POICard.dart';
 import 'package:wastetastic/Constants.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
@@ -12,13 +15,22 @@ class CatalogScreen extends StatefulWidget {
 }
 
 class _CatalogScreenState extends State<CatalogScreen> {
-  String selectedCategory = 'NORMAL WASTE';
+  String selectedCategory = 'LIGHTING WASTE';
+  List<WastePOI> WastePOIs;
   @override
+//  List<WastePOI> getAllWastePOI() {
+//    return CatalogMgr.readAllWastePOI();
+//  }
+
+//  void initState() {
+//    super.initState();
+//    WastePOIs = CatalogMgr.readAllWastePOI();
+//  }
+
   Widget build(BuildContext context) {
-    List<POI_card> build_cat_cards() {
-      //List<WastePOI> WastePOIs = retrievePOIFromDatabase();
+    List<POI_card> build_cat_cards(List<WastePOI> WastePOIs) {
       List<POI_card> catalog_Cat = [];
-      for (WastePOI w in kWastePOI_List) {
+      for (WastePOI w in WastePOIs) {
         String POICategory = w.wasteCategory.toString().split('.').last;
         POICategory = POICategory.replaceAll('_', ' ');
         if (POICategory == selectedCategory)
@@ -38,7 +50,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                 );
               },
               FavFunct: () {
-                setState(() {
+                setState(() async {
                   if (kFav_POI_list.contains(w))
                     kFav_POI_list.remove(w);
                   else
@@ -94,28 +106,26 @@ class _CatalogScreenState extends State<CatalogScreen> {
         ),
         Expanded(
           child: SingleChildScrollView(
-            child: Column(
-              children: build_cat_cards(),
-              /*[
-                    POI_card(
-                      name: 'POI1',
-                      address: 'address',
-                      postalcode: 310204,
-                      description: 'description',
-                    ),
-                    POI_card(
-                      name: 'POI2',
-                      address: 'address',
-                      postalcode: 321045,
-                      description: 'description',
-                    ),
-                    POI_card(
-                      name: 'POI3',
-                      address: 'address',
-                      postalcode: 321045,
-                      description: 'description',
-                    ),
-                  ],*/
+            child: StreamBuilder(
+              stream: CatalogMgr.getWastePOISnapshotsByCategory(
+                WasteCategory.values.firstWhere((element) =>
+                    element.toString() ==
+                    ('WasteCategory.' + selectedCategory.replaceAll(' ', '_'))),
+              ),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final List<DocumentSnapshot> documents = snapshot.data.docs;
+                  print('Inside builder $snapshot');
+                  WastePOIs = CatalogMgr.getWastePOIFromSnapshots(documents);
+                  return Column(
+                    children: build_cat_cards(WastePOIs),
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
             ),
           ),
         )

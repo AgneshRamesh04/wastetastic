@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wastetastic/control/CatalogMgr.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/POICard.dart';
@@ -18,7 +19,7 @@ class _NearYouScreenState extends State<NearYouScreen> {
     final String title = ModalRoute.of(context).settings.arguments;
 
     List<POI_card> build_nearby_cards() {
-      //List<WastePOI> WastePOIs = retrievePOIFromDatabase();
+      //List<WastePOI> WastePOIs = CatalogMgr.readAllWastePOI();
       List<POI_card> nearbyPOI = [];
       for (WastePOI w in kWastePOI_List) {
         String POICategory = w.wasteCategory.toString().split('.').last;

@@ -13,6 +13,7 @@ class POI_DetialScreen extends StatefulWidget {
 
 class _POI_DetialScreenState extends State<POI_DetialScreen> {
   @override
+  bool changed = false;
   Widget build(BuildContext context) {
     final WastePOI POI = ModalRoute.of(context).settings.arguments;
 
@@ -51,6 +52,8 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                                 kFav_POI_list.add(POI);
                               //@todo add function to favourite/un-favourite POI in the database
                               //@todo logic to refresh catalog and favourites screen
+                              changed = !changed;
+                              Navigator.pop(context, changed);
                             });
                           },
                           label: Text('Favourite'),

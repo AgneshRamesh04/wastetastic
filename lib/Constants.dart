@@ -89,3 +89,24 @@ List<WastePOI> kFav_POI_list = [
   kSample4,
   kSample5
 ];
+
+/*[
+                    POI_card(
+                      name: 'POI1',
+                      address: 'address',
+                      postalcode: 310204,
+                      description: 'description',
+                    ),
+                    POI_card(
+                      name: 'POI2',
+                      address: 'address',
+                      postalcode: 321045,
+                      description: 'description',
+                    ),
+                    POI_card(
+                      name: 'POI3',
+                      address: 'address',
+                      postalcode: 321045,
+                      description: 'description',
+                    ),
+                  ],*/

@@ -36,4 +36,11 @@ class WasteRecord {
   set weight(double weight) {
     _weight = weight;
   }
+
+  void printDetails() {
+    print('Username: ' + _username);
+    print('Date and Time: ' + _dateTime.toString());
+    print('Waste Category: ' + _category.toString());
+    print('Weight: ' + _weight.toString());
+  }
 }

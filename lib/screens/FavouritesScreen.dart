@@ -27,12 +27,13 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
             description: w.POI_description,
             wasteCategory: POICategory,
             fav: true,
-            TO_POI_page: () {
-              Navigator.pushNamed(
+            TO_POI_page: () async {
+              var favoriteChanged = await Navigator.pushNamed(
                 context,
                 POI_DetialScreen.id,
                 arguments: w,
               );
+              if (favoriteChanged == true) setState(() {});
             },
             FavFunct: () {
               setState(() {

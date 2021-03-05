@@ -36,8 +36,13 @@ class POI_card extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("$name \n$address. Singapore $postalcode "
-                "\n$description \nCategory: $wasteCategory"),
+            Flexible(
+              child: Text(
+                "$name \n$address. Singapore $postalcode "
+                "\nCategory: $wasteCategory \n$description",
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             VerticalDivider(
               width: 10.0,
               thickness: 10.0,
