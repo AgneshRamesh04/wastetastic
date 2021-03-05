@@ -22,6 +22,12 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
         appBar: AppBar(
           title: Text('Wastetastic'),
           centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context, changed);
+            },
+          ),
         ),
         body: Container(
           child: Column(children: [
@@ -53,7 +59,6 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                               //@todo add function to favourite/un-favourite POI in the database
                               //@todo logic to refresh catalog and favourites screen
                               changed = !changed;
-                              Navigator.pop(context, changed);
                             });
                           },
                           label: Text('Favourite'),

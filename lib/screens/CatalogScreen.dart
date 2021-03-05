@@ -42,12 +42,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
               description: w.POI_description,
               wasteCategory: POICategory,
               fav: kFav_POI_list.contains(w),
-              TO_POI_page: () {
-                Navigator.pushNamed(
+              TO_POI_page: () async {
+                var changed = await Navigator.pushNamed(
                   context,
                   POI_DetialScreen.id,
                   arguments: w,
                 );
+                if (changed) setState(() {});
               },
               FavFunct: () {
                 setState(() async {
