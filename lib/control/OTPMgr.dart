@@ -1,4 +1,5 @@
 import 'package:email_auth/email_auth.dart';
+
 class OTPMgr {
   static void sendOTP(String email) async {
     EmailAuth.sessionName = "Verification";
