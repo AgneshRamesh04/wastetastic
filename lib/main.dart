@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wastetastic/screens/BasicTestingScreen.dart';
 import 'package:wastetastic/screens/CarParkScreen.dart';
 import 'package:wastetastic/screens/ForgotPassword.dart';
+import 'package:wastetastic/screens/LoadingScreen.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/screens/NearYouScreen.dart';
 import 'package:wastetastic/screens/OtpScreen.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         welcomePage.id: (context) => welcomePage(),
         signin.id: (context) => signin(),
         signup.id: (context) => signup(),
+        LoadingScreen.id: (context) => LoadingScreen(),
       },
     );
   }

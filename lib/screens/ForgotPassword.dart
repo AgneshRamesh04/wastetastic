@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:wastetastic/control/OTPMgr.dart';
 import 'package:wastetastic/screens/OtpScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:email_validator/email_validator.dart';
+
 final _formKey = GlobalKey<FormState>();
 String enteredEmail;
 
@@ -76,8 +78,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     SimpleButton(
                       content: 'Request OTP',
                       onPress: () {
-                        if (_formKey.currentState.validate())
-                          Navigator.pushNamed(context, OTPScreen.id);
+                        if (_formKey.currentState.validate()) {
+                          OTPMgr.sendOTP(enteredEmail);
+                          Navigator.pushNamed(
+                            context,
+                            OTPScreen.id,
+                            arguments: enteredEmail,
+                          );
+                        }
                       },
                     ),
                   ],

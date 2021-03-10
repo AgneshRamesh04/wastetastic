@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wastetastic/screens/NearYouScreen.dart';
+import 'package:wastetastic/screens/LoadingScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/CategoryButton.dart';
 
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       redirect: () {
                         Navigator.pushNamed(
                           context,
-                          NearYouScreen.id,
+                          LoadingScreen.id,
                           arguments: 'Normal Waste',
                         );
                       },
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       redirect: () {
                         Navigator.pushNamed(
                           context,
-                          NearYouScreen.id,
+                          LoadingScreen.id,
                           arguments: 'E Waste',
                         );
                       },
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       redirect: () {
                         Navigator.pushNamed(
                           context,
-                          NearYouScreen.id,
+                          LoadingScreen.id,
                           arguments: 'Lighting Waste',
                         );
                       },
@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       redirect: () {
                         Navigator.pushNamed(
                           context,
-                          NearYouScreen.id,
+                          LoadingScreen.id,
                           arguments: 'Waste Treatment',
                         );
                       },
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       redirect: () {
                         Navigator.pushNamed(
                           context,
-                          NearYouScreen.id,
+                          LoadingScreen.id,
                           arguments: 'Cash For Trash',
                         );
                       },

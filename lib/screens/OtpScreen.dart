@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wastetastic/control/OTPMgr.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/screens/ResetPasword.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
@@ -18,14 +19,12 @@ class OTPScreen extends StatefulWidget {
 class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
+    final String email = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
         elevation: 0.0,
       ),
       body: Container(
@@ -54,8 +53,8 @@ class _OTPScreenState extends State<OTPScreen> {
                         if (value.isEmpty) return "Enter OTP";
                         return null;
                       },
-                      onChanged: (value){
-                        enteredOTP=value;
+                      onChanged: (value) {
+                        enteredOTP = value;
                       },
                       cursorColor: Colors.black,
                       maxLength: 6,
@@ -76,8 +75,12 @@ class _OTPScreenState extends State<OTPScreen> {
                   SimpleButton(
                     content: 'Submit',
                     onPress: () {
-                      if (_formKey.currentState.validate())
-                        Navigator.pushNamed(context, ResetPassword.id);
+                      if (_formKey.currentState.validate()) {
+                        if (OTPMgr.verifyOTP(email, enteredOTP))
+                          Navigator.pushNamed(context, ResetPassword.id);
+                        else
+                          print('Wrong otp entered, retry');
+                      }
                     },
                   ),
                 ],
