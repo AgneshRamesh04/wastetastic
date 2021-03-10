@@ -52,10 +52,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                       child: TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) return "Enter Password";
+                        validator: (value) =>
+                        value.isEmpty ? "Enter Password" : null,
+                        onChanged: (value) {
                           newPassword = value;
-                          return null;
                         },
                         cursorColor: Colors.black,
                         maxLength: 100,
@@ -81,8 +81,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                           if (value.isEmpty) return "Enter Password";
                           if (value != newPassword)
                             return "Passwords Dont Match";
-                          confirmPassword = value;
                           return null;
+                        },
+                        onChanged: (value){
+                          confirmPassword=value;
                         },
                         cursorColor: Colors.black,
                         maxLength: 100,

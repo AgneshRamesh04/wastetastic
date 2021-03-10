@@ -50,14 +50,12 @@ class _OTPScreenState extends State<OTPScreen> {
                     margin: EdgeInsets.all(25),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
-                      onFieldSubmitted: (value) {
-                        enteredOTP = value;
-                        return null;
-                      },
                       validator: (value) {
                         if (value.isEmpty) return "Enter OTP";
-                        enteredOTP = value;
                         return null;
+                      },
+                      onChanged: (value){
+                        enteredOTP=value;
                       },
                       cursorColor: Colors.black,
                       maxLength: 6,

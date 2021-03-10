@@ -22,7 +22,7 @@ class _BasicTestingScreenState extends State<BasicTestingScreen> {
             //DatabaseCreator.createDatabaseForCashForTrash();
             //DatabaseCreator.createDatabaseForGeneralWasteCollectors();
             //DatabaseCreator.createDatabaseForCarPark();
-            CatalogMgr.readWastePOIByCategory(WasteCategory.LIGHTING_WASTE);
+            //CatalogMgr.readWastePOIByCategory(WasteCategory.LIGHTING_WASTE);
           },
         ),
       ),

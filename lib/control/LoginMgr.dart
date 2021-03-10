@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 class LoginMgr {
   static final _firestore = FirebaseFirestore.instance;
 
@@ -16,9 +17,9 @@ class LoginMgr {
       }
     }
   }
-  static Future<bool> loginToSystem(String username, String password)
-  {
-    var login= verifyCredentials(username, password);
+
+  static dynamic loginToSystem(String username, String password) async {
+    var login = await verifyCredentials(username, password);
     return login;
   }
 }

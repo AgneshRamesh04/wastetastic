@@ -44,8 +44,10 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                         if (val.isEmpty) {
                           return 'Please enter Date';
                         }
-                        selectedDate = val;
                         return null;
+                      },
+                      onChanged: (val){
+                        selectedDate = val;
                       },
                     ),
                     SizedBox(
@@ -60,8 +62,10 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                         if (val.isEmpty) {
                           return 'Please enter Time';
                         }
-                        selectedTime = val;
                         return null;
+                      },
+                      onChanged: (val){
+                        selectedTime = val;
                       },
                     ),
                     SizedBox(
@@ -78,8 +82,10 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                         if (value.isEmpty) {
                           return 'Please enter weight';
                         }
-                        enteredWeight = value;
                         return null;
+                      },
+                      onChanged: (value){
+                        enteredWeight = value;
                       },
                     ),
                     SizedBox(

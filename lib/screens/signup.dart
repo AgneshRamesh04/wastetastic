@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
+import 'package:email_validator/email_validator.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -53,10 +54,10 @@ class _signupState extends State<signup> {
                         margin:
                             EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                         child: TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) return "Enter Name";
+                          validator: (value) =>
+                              value.isEmpty ? "Enter Name" : null,
+                          onChanged: (value) {
                             enteredName = value;
-                            return null;
                           },
                           cursorColor: Colors.teal[900],
                           maxLength: 50,
@@ -84,10 +85,12 @@ class _signupState extends State<signup> {
                         child: TextFormField(
                           validator: (value) {
                             if (value.isEmpty) return "Enter Email";
-                            if (!value.contains('@'))
-                              return "Enter Valid Email";
-                            enteredEmail = value;
+                            final bool isValid = EmailValidator.validate(value);
+                            if (isValid == false) return "Enter Valid Email";
                             return null;
+                          },
+                          onChanged: (value) {
+                            enteredEmail = value;
                           },
                           cursorColor: Colors.teal[900],
                           maxLength: 50,
@@ -114,10 +117,10 @@ class _signupState extends State<signup> {
                         margin:
                             EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                         child: TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) return "Enter Username";
+                          validator: (value) =>
+                              value.isEmpty ? "Enter Username" : null,
+                          onChanged: (value) {
                             enteredUsername = value;
-                            return null;
                           },
                           cursorColor: Colors.teal[900],
                           maxLength: 30,
@@ -143,10 +146,10 @@ class _signupState extends State<signup> {
                         margin:
                             EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                         child: TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) return "Enter Password";
+                          validator: (value) =>
+                              value.isEmpty ? "Enter Password" : null,
+                          onChanged: (value) {
                             enteredPassword = value;
-                            return null;
                           },
                           cursorColor: Colors.teal[900],
                           maxLength: 30,
@@ -178,8 +181,10 @@ class _signupState extends State<signup> {
                             if (value.isEmpty) return "Confirm Password";
                             if (value != enteredPassword)
                               return "Passwords Dont Match";
-                            enteredConfirmPassword = value;
                             return null;
+                          },
+                          onChanged: (value) {
+                            enteredConfirmPassword = value;
                           },
                           cursorColor: Colors.teal[900],
                           maxLength: 30,

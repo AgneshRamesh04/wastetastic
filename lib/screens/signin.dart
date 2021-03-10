@@ -4,6 +4,7 @@ import 'package:wastetastic/screens/ForgotPassword.dart';
 import 'package:wastetastic/screens/HomeScreen.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
+import 'package:wastetastic/control/LoginMgr.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -13,8 +14,8 @@ class signin extends StatefulWidget {
   _signinState createState() => _signinState();
 }
 
-String enteredPassword;
-String enteredUsername;
+String enteredPassword = "";
+String enteredUsername = "";
 
 class _signinState extends State<signin> {
   @override
@@ -67,10 +68,10 @@ class _signinState extends State<signin> {
                       ),
                     ),
                     TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) return "Enter Username";
+                      validator: (value) =>
+                          value.isEmpty ? "Enter Username" : null,
+                      onChanged: (value) {
                         enteredUsername = value;
-                        return null;
                       },
                       cursorColor: Colors.teal[900],
                       maxLength: 30,
@@ -91,10 +92,10 @@ class _signinState extends State<signin> {
                       ),
                     ),
                     TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) return "Enter Password";
+                      validator: (value) =>
+                          value.isEmpty ? "Enter Password" : null,
+                      onChanged: (value) {
                         enteredPassword = value;
-                        return null;
                       },
                       obscureText: true,
                       cursorColor: Colors.teal[900],
@@ -128,9 +129,14 @@ class _signinState extends State<signin> {
                     ),
                     SimpleButton(
                       content: 'LogIn',
-                      onPress: () {
-                        if (_formKey.currentState.validate())
+                      onPress: () async {
+                        //print(enteredPassword);
+                        //print(enteredUsername);
+                        var k = await LoginMgr.loginToSystem(
+                            enteredUsername, enteredPassword);
+                        if (_formKey.currentState.validate() && k) {
                           Navigator.pushNamed(context, MainScreen.id);
+                        }
                       },
                     ),
                   ],

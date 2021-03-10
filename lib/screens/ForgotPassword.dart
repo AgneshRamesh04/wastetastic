@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:wastetastic/screens/OtpScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
-
+import 'package:email_validator/email_validator.dart';
 final _formKey = GlobalKey<FormState>();
 String enteredEmail;
 
@@ -50,9 +50,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       child: TextFormField(
                         validator: (value) {
                           if (value.isEmpty) return "Enter Email";
-                          if (!value.contains('@')) return "Enter Valid Email";
-                          enteredEmail = value;
+                          final bool isValid = EmailValidator.validate(value);
+                          if (isValid == false) return "Enter Valid Email";
                           return null;
+                        },
+                        onChanged: (value) {
+                          enteredEmail = value;
                         },
                         cursorColor: Colors.black,
                         maxLength: 100,
