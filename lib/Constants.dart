@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geopoint/geopoint.dart';
+import 'package:wastetastic/entity/CarPark.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:latlong/latlong.dart';
@@ -90,23 +91,50 @@ List<WastePOI> kFav_POI_list = [
   kSample5
 ];
 
-/*[
-                    POI_card(
-                      name: 'POI1',
-                      address: 'address',
-                      postalcode: 310204,
-                      description: 'description',
-                    ),
-                    POI_card(
-                      name: 'POI2',
-                      address: 'address',
-                      postalcode: 321045,
-                      description: 'description',
-                    ),
-                    POI_card(
-                      name: 'POI3',
-                      address: 'address',
-                      postalcode: 321045,
-                      description: 'description',
-                    ),
-                  ],*/
+CarPark cp1 = CarPark(
+  carParkNum: '1',
+  carParkType: 'Surface Car Park',
+  parkingType: 'electronic',
+  address: "BLK 215 ANG MO KIO STREET 22",
+  freeParking: 'weekend',
+);
+
+CarPark cp2 = CarPark(
+  carParkNum: '2',
+  carParkType: 'Multi Story Car Park',
+  parkingType: 'electronic',
+  address: "BLK 215 ANG MO KIO STREET 22",
+  freeParking: 'weekend',
+);
+
+CarPark cp3 = CarPark(
+  carParkNum: '3',
+  carParkType: 'Surface Car Park',
+  parkingType: 'electronic',
+  address: "Sample Address 3",
+  freeParking: 'weekend',
+);
+
+CarPark cp4 = CarPark(
+  carParkNum: '4',
+  carParkType: 'Surface Car Park',
+  parkingType: 'coupon',
+  address: "Sample Address 4",
+  freeParking: 'weekend',
+);
+
+CarPark cp5 = CarPark(
+  carParkNum: '5',
+  carParkType: 'Surface Car Park',
+  parkingType: 'coupon',
+  address: "Sample Address 5",
+  freeParking: 'weekend',
+);
+
+List<CarPark> kcarpark_list = [
+  cp1,
+  cp2,
+  cp3,
+  cp4,
+  cp5,
+];
