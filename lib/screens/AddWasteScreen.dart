@@ -6,8 +6,8 @@ import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 
 final _formKey = GlobalKey<FormState>();
-String selectedTime;
-String selectedDate;
+String selectedTime = '12:00';
+String selectedDate = DateTime.now().toString();
 String enteredWeight;
 String selectedCategory = 'NORMAL WASTE';
 
@@ -35,7 +35,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     DateTimePicker(
-                      initialValue: DateTime.now().toString(),
+                      initialValue: selectedDate,
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2100),
                       dateLabelText: 'Date',
@@ -46,7 +46,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                         }
                         return null;
                       },
-                      onChanged: (val){
+                      onChanged: (val) {
                         selectedDate = val;
                       },
                     ),
@@ -55,7 +55,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                     ),
                     DateTimePicker(
                       type: DateTimePickerType.time,
-                      initialValue: '12:00',
+                      initialValue: selectedTime,
                       timeLabelText: "Time",
                       icon: Icon(Icons.access_time),
                       validator: (val) {
@@ -64,7 +64,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                         }
                         return null;
                       },
-                      onChanged: (val){
+                      onChanged: (val) {
                         selectedTime = val;
                       },
                     ),
@@ -84,7 +84,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                         }
                         return null;
                       },
-                      onChanged: (value){
+                      onChanged: (value) {
                         enteredWeight = value;
                       },
                     ),
@@ -132,8 +132,8 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                               print(
                                   'date: ${selectedDate.substring(0, 10)} \n time: $selectedTime \n'
                                   'weight: $enteredWeight \n category: $selectedCategory');
-                              Scaffold.of(context).showSnackBar(
-                                  SnackBar(content: Text('Processing Data')));
+                              /* Scaffold.of(context).showSnackBar(
+                                  SnackBar(content: Text('Processing Data')));*/
                               //@todo code to add details to user waste records
                               print(selectedCategory.replaceAll(' ', '_'));
                               WasteRecordMgr.addNewRecord(

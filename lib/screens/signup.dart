@@ -83,6 +83,7 @@ class _signupState extends State<signup> {
                         margin:
                             EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                         child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value.isEmpty) return "Enter Email";
                             final bool isValid = EmailValidator.validate(value);

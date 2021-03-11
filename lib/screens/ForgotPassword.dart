@@ -50,6 +50,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     Container(
                       margin: EdgeInsets.all(25),
                       child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value.isEmpty) return "Enter Email";
                           final bool isValid = EmailValidator.validate(value);

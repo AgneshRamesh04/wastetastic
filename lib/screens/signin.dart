@@ -132,10 +132,11 @@ class _signinState extends State<signin> {
                       onPress: () async {
                         //print(enteredPassword);
                         //print(enteredUsername);
-                        var k = await LoginMgr.loginToSystem(
-                            enteredUsername, enteredPassword);
-                        if (_formKey.currentState.validate() && k) {
-                          Navigator.pushNamed(context, MainScreen.id);
+
+                        if (_formKey.currentState.validate()) {
+                          var k = await LoginMgr.loginToSystem(
+                              enteredUsername, enteredPassword);
+                          if (k) Navigator.pushNamed(context, MainScreen.id);
                         }
                       },
                     ),
