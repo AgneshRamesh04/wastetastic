@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wastetastic/control/CatalogMgr.dart';
+import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/POICard.dart';
+import 'package:wastetastic/control/NearYouMgr.dart';
+import 'package:geopoint/geopoint.dart' as gp;
 
 import 'package:wastetastic/Constants.dart';
 import 'POIDetailsScreen.dart';
@@ -14,14 +18,17 @@ class NearYouScreen extends StatefulWidget {
 }
 
 class _NearYouScreenState extends State<NearYouScreen> {
+  List<WastePOI> WastePOIs;
   @override
   Widget build(BuildContext context) {
-    final String title = ModalRoute.of(context).settings.arguments;
+    final Map arguments = ModalRoute.of(context).settings.arguments as Map;
+    final String title = arguments['title'];
+    final gp.GeoPoint location = arguments['location'];
 
-    List<POI_card> build_nearby_cards() {
+    List<POI_card> build_nearby_cards(List<WastePOI> nearbyWastePOI) {
       //List<WastePOI> WastePOIs = CatalogMgr.readAllWastePOI();
       List<POI_card> nearbyPOI = [];
-      for (WastePOI w in kWastePOI_List) {
+      for (WastePOI w in nearbyWastePOI) {
         String POICategory = w.wasteCategory.toString().split('.').last;
         POICategory = POICategory.replaceAll('_', ' ');
         if (POICategory == title.toUpperCase()) //&& w.location <= 20km
@@ -74,9 +81,29 @@ class _NearYouScreenState extends State<NearYouScreen> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: build_nearby_cards(), //POI_cards
+                child: StreamBuilder(
+                  stream: CatalogMgr.getWastePOISnapshotsByCategory(
+                    WasteCategory.values.firstWhere((element) =>
+                        element.toString() ==
+                        ('WasteCategory.' +
+                            title.toUpperCase().replaceAll(' ', '_'))),
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final List<DocumentSnapshot> documents =
+                          snapshot.data.docs;
+                      print('Inside builder $snapshot');
+                      WastePOIs = NearYouMgr.retrieveNearbyWastePOI(
+                          documents, location);
+                      return Column(
+                        children: build_nearby_cards(WastePOIs),
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
                 ),
               ),
             ),
@@ -86,3 +113,8 @@ class _NearYouScreenState extends State<NearYouScreen> {
     );
   }
 }
+
+//Column(
+//mainAxisAlignment: MainAxisAlignment.center,
+//children: build_nearby_cards(), //POI_cards
+//),

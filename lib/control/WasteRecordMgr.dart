@@ -7,14 +7,12 @@ class WasteRecordMgr {
   static addNewRecord(String username, DateTime dateTime, double weight,
       WasteCategory category) {
     WasteRecord wasteRecord = WasteRecord(
-      username: username,
       dateTime: dateTime,
       weight: weight,
       category: category,
     );
     wasteRecord.printDetails();
     _firestore.collection('WasteRecord').doc('$username').set({
-      'username': username,
       'dateTime': Timestamp.fromDate(dateTime),
       'weight': weight,
       'category': category.toString(),
