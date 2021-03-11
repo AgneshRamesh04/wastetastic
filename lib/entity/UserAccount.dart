@@ -26,4 +26,28 @@ class UserAccount {
   List<WastePOI> get favorites => _favorites;
   List<WasteRecord> get waste_records => _waste_records;
   int get points => _points;
+
+  set username(String username) {
+    _username = username;
+  }
+
+  set email(String email) {
+    _email = email;
+  }
+
+  set name(String name) {
+    _name = name;
+  }
+
+  set favorites(List<WastePOI> favorites) {
+    _favorites = favorites;
+  }
+
+  set waste_records(List<WasteRecord> waste_records) {
+    _waste_records = waste_records;
+  }
+
+  set points(int points) {
+    _points = points;
+  }
 }
