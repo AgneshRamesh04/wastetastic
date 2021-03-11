@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wastetastic/control/OTPMgr.dart';
+import 'package:wastetastic/screens/ForgotPassword.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/screens/ResetPasword.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
+import 'package:wastetastic/screens/signup.dart';
 
 TextEditingController emailController = new TextEditingController();
 
@@ -19,7 +21,10 @@ class OTPScreen extends StatefulWidget {
 class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
-    final String email = ModalRoute.of(context).settings.arguments;
+    final Map args = ModalRoute.of(context).settings.arguments;
+    String email = args['email'];
+    bool SignUp = args['SignUp'];
+    int attempts = 3;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -76,10 +81,44 @@ class _OTPScreenState extends State<OTPScreen> {
                     content: 'Submit',
                     onPress: () {
                       if (_formKey.currentState.validate()) {
-                        if (OTPMgr.verifyOTP(email, enteredOTP))
-                          Navigator.pushNamed(context, ResetPassword.id);
-                        else
+                        if (OTPMgr.verifyOTP(email, enteredOTP)) {
+                          SignUp
+                              ? Navigator.pushNamed(context, MainScreen.id)
+                              : Navigator.pushNamed(context, ResetPassword.id);
+                        } else {
                           print('Wrong otp entered, retry');
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext dialogContext) {
+                              return AlertDialog(
+                                title: Center(
+                                  child: Text('Wrong OTP'),
+                                ),
+                                content: Text(
+                                  'You have entered a wrong OTP.\n $attempts'
+                                  ' attempts left.',
+                                ),
+                                actions: <Widget>[
+                                  new FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    textColor: Colors.grey,
+                                    child: const Text('Retry'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          attempts--;
+                          if (attempts == 0) {
+                            SignUp
+                                ? Navigator.popUntil(
+                                    context, ModalRoute.withName(signup.id))
+                                : Navigator.popUntil(context,
+                                    ModalRoute.withName(ForgotPassword.id));
+                          }
+                        }
                       }
                     },
                   ),

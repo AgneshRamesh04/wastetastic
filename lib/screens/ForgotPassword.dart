@@ -22,10 +22,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        /*leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),*/
         elevation: 0.0,
       ),
       body: Center(
@@ -79,12 +75,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     SimpleButton(
                       content: 'Request OTP',
                       onPress: () {
+                        Map args = {
+                          'email': enteredEmail,
+                          'SignUp': false,
+                        };
                         if (_formKey.currentState.validate()) {
                           OTPMgr.sendOTP(enteredEmail);
                           Navigator.pushNamed(
                             context,
                             OTPScreen.id,
-                            arguments: enteredEmail,
+                            arguments: args,
                           );
                         }
                       },

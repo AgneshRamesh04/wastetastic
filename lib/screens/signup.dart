@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:wastetastic/screens/MainScreen.dart';
+import 'package:wastetastic/control/OTPMgr.dart';
+import 'package:wastetastic/screens/OtpScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -13,7 +14,7 @@ String enteredPassword;
 String enteredConfirmPassword;
 
 class signup extends StatefulWidget {
-  static String id = 'signin_page';
+  static String id = 'signup_page';
   @override
   _signupState createState() => _signupState();
 }
@@ -216,8 +217,17 @@ class _signupState extends State<signup> {
                       SimpleButton(
                         content: 'Sign Up',
                         onPress: () {
-                          if (_formKey.currentState.validate())
-                            Navigator.pushNamed(context, MainScreen.id);
+                          if (_formKey.currentState.validate()) {
+                            OTPMgr.sendOTP(enteredEmail);
+                            Navigator.pushNamed(
+                              context,
+                              OTPScreen.id,
+                              arguments: {
+                                'email': enteredEmail,
+                                'SignUp': true,
+                              },
+                            );
+                          }
                         },
                       ),
                     ],

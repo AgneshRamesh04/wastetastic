@@ -15,7 +15,8 @@ class LoginMgr {
       } else {
         return false;
       }
-    }
+    } else
+      return false;
   }
 
   static dynamic loginToSystem(String username, String password) async {

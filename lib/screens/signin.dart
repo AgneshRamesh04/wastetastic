@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:wastetastic/screens/ForgotPassword.dart';
-import 'package:wastetastic/screens/HomeScreen.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:wastetastic/control/LoginMgr.dart';
@@ -136,7 +135,33 @@ class _signinState extends State<signin> {
                         if (_formKey.currentState.validate()) {
                           var k = await LoginMgr.loginToSystem(
                               enteredUsername, enteredPassword);
-                          if (k) Navigator.pushNamed(context, MainScreen.id);
+                          if (k)
+                            Navigator.pushNamed(context, MainScreen.id);
+                          else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext dialogContext) {
+                                return AlertDialog(
+                                  title: Center(
+                                    child: Text('Wrong Username or Password'),
+                                  ),
+                                  content: Text(
+                                    'You have entered a wrong username or password, '
+                                    'please re-entered',
+                                  ),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      textColor: Colors.grey,
+                                      child: const Text('Continue'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         }
                       },
                     ),

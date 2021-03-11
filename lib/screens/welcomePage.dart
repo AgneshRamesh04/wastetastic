@@ -65,9 +65,9 @@ class _welcomePageState extends State<welcomePage> {
                   SimpleButton(
                     content: 'Sign Up',
                     onPress: () {
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(builder: (context) => signup()),
+                        signup.id,
                       );
                     },
                   ),
