@@ -223,7 +223,10 @@ class _signupState extends State<signup> {
                               context,
                               OTPScreen.id,
                               arguments: {
+                                'name': enteredName,
+                                'username': enteredUsername,
                                 'email': enteredEmail,
+                                'password': enteredPassword,
                                 'SignUp': true,
                               },
                             );
