@@ -14,7 +14,9 @@ class NearYouMgr {
   static Future<gp.GeoPoint> getCurrentLocation() async {
     try {
       Position position = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+      print(position.latitude);
+      print(position.longitude);
       return gp.GeoPoint.fromLatLng(
           point: LatLng(position.latitude, position.longitude));
     } catch (e) {
@@ -22,10 +24,8 @@ class NearYouMgr {
     }
   }
 
-  static Future<List<WastePOI>> retrieveNearbyWastePOI(
-      List<DocumentSnapshot> documents) async {
-    gp.GeoPoint location;
-    location = await getCurrentLocation();
+  static retrieveNearbyWastePOI(
+      List<DocumentSnapshot> documents, gp.GeoPoint location) {
     int count = 0;
     final Distance distance = Distance();
     var distances = SortedMap(Ordering.byValue());
@@ -44,7 +44,7 @@ class NearYouMgr {
       nearbyCarParks = [];
       for (String carParkNum in documents[index]['nearbyCarPark']) {
         nearbyCarParks.add(carParkNum);
-        print(carParkNum);
+        //print(carParkNum);
       }
       nearbyWastePOI.add(WastePOI(
         name: documents[index]['name'],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wastetastic/control/NearYouMgr.dart';
 import 'package:wastetastic/screens/NearYouScreen.dart';
+import 'package:geopoint/geopoint.dart' as gp;
 
 class LoadingScreen extends StatefulWidget {
   static String id = "Loading Page";
@@ -12,19 +14,22 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-
-    nearyouFunction();
+    retrieveLocation();
   }
 
-  void nearyouFunction() {
+  void retrieveLocation() async {
     //@todo add code for near by POI logic
-    Future.delayed(const Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(
-        context,
-        NearYouScreen.id,
-        arguments: title,
-      );
-    });
+    gp.GeoPoint location = await NearYouMgr.getCurrentLocation();
+    print(location.latitude);
+    print(location.longitude);
+    Navigator.pushReplacementNamed(
+      context,
+      NearYouScreen.id,
+      arguments: {
+        'title': title,
+        'location': location,
+      },
+    );
   }
 
   @override
