@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wastetastic/control/OTPMgr.dart';
+import 'package:wastetastic/control/RegistrationMgr.dart';
 import 'package:wastetastic/screens/ForgotPassword.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/screens/ResetPasword.dart';
@@ -22,7 +23,10 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context).settings.arguments;
+    String name = args['name'];
+    String username = args['username'];
     String email = args['email'];
+    String password = args['password'];
     bool SignUp = args['SignUp'];
     int attempts = 3;
 
@@ -82,6 +86,9 @@ class _OTPScreenState extends State<OTPScreen> {
                     onPress: () {
                       if (_formKey.currentState.validate()) {
                         if (OTPMgr.verifyOTP(email, enteredOTP)) {
+                          if (SignUp)
+                            RegistrationMgr.registerUserAccount(
+                                name, email, password, username);
                           SignUp
                               ? Navigator.pushNamed(context, MainScreen.id)
                               : Navigator.pushNamed(context, ResetPassword.id);
