@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wastetastic/control/CatalogMgr.dart';
+import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/POICard.dart';
+import 'package:wastetastic/control/NearYouMgr.dart';
 
 import 'package:wastetastic/Constants.dart';
 import 'POIDetailsScreen.dart';
@@ -14,6 +17,7 @@ class NearYouScreen extends StatefulWidget {
 }
 
 class _NearYouScreenState extends State<NearYouScreen> {
+  List<WastePOI> WastePOIs;
   @override
   Widget build(BuildContext context) {
     final String title = ModalRoute.of(context).settings.arguments;
@@ -74,9 +78,28 @@ class _NearYouScreenState extends State<NearYouScreen> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: build_nearby_cards(), //POI_cards
+                child: StreamBuilder(
+                  stream: CatalogMgr.getWastePOISnapshotsByCategory(
+                    WasteCategory.values.firstWhere((element) =>
+                        element.toString() ==
+                        ('WasteCategory.' +
+                            title.toUpperCase().replaceAll(' ', '_'))),
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final List<DocumentSnapshot> documents =
+                          snapshot.data.docs;
+                      print('Inside builder $snapshot');
+                      //WastePOIs = NearYouMgr.retrieveNearbyWastePOI(documents);
+                      return Column(
+                          //children: build_cat_cards(WastePOIs),
+                          );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
                 ),
               ),
             ),
@@ -86,3 +109,8 @@ class _NearYouScreenState extends State<NearYouScreen> {
     );
   }
 }
+
+//Column(
+//mainAxisAlignment: MainAxisAlignment.center,
+//children: build_nearby_cards(), //POI_cards
+//),
