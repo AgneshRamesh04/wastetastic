@@ -15,7 +15,7 @@ class LoginMgr {
     if (userAccount.exists) {
       Map<String, dynamic> user = userAccount.data();
       if (enteredPassword == user['password']) {
-        UserAccount userDetails = await UserAccountMgr.readUserDetails(username);
+        await UserAccountMgr.readUserDetails(username);
         return true;
       } else {
         return false;
