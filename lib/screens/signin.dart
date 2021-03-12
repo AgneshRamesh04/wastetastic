@@ -17,9 +17,12 @@ String enteredPassword = "";
 String enteredUsername = "";
 
 class _signinState extends State<signin> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -96,13 +99,12 @@ class _signinState extends State<signin> {
                       onChanged: (value) {
                         enteredPassword = value;
                       },
-                      obscureText: true,
+                      obscureText: _obscureText,
                       cursorColor: Colors.teal[900],
                       maxLength: 30,
                       decoration: InputDecoration(
                         icon: Icon(Icons.vpn_key_rounded,
                             color: Colors.teal[900]),
-
                         labelText: 'Password',
                         labelStyle:
                             TextStyle(color: Colors.teal[900], fontSize: 20),
@@ -114,6 +116,18 @@ class _signinState extends State<signin> {
                         //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.teal[900]),
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.teal[900]),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
                         ),
                       ),
                     ),
@@ -138,7 +152,7 @@ class _signinState extends State<signin> {
                           if (k)
                             Navigator.pushNamed(context, MainScreen.id);
                           else {
-                            showDialog(
+                            /*showDialog(
                               context: context,
                               builder: (BuildContext dialogContext) {
                                 return AlertDialog(
@@ -160,6 +174,16 @@ class _signinState extends State<signin> {
                                   ],
                                 );
                               },
+                            );*/
+                            _scaffoldKey.currentState.showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'You have entered a wrong username or password, '
+                                  'please re-entered',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                duration: Duration(seconds: 3),
+                              ),
                             );
                           }
                         }

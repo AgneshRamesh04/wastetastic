@@ -12,6 +12,7 @@ class SimpleButton extends StatelessWidget {
       width: 270,
       height: 60,
       child: RaisedButton(
+        highlightColor: Colors.grey[500],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),

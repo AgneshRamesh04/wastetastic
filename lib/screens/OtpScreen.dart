@@ -28,7 +28,6 @@ class _OTPScreenState extends State<OTPScreen> {
     String email = args['email'];
     String password = args['password'];
     bool SignUp = args['SignUp'];
-    int attempts = 3;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -102,8 +101,9 @@ class _OTPScreenState extends State<OTPScreen> {
                                   child: Text('Wrong OTP'),
                                 ),
                                 content: Text(
-                                  'You have entered a wrong OTP.\n $attempts'
-                                  ' attempts left.',
+                                  'You have entered a wrong OTP.\n' +
+                                      OTPMgr.numAttempts.toString() +
+                                      ' attempts left.',
                                 ),
                                 actions: <Widget>[
                                   new FlatButton(
@@ -117,8 +117,8 @@ class _OTPScreenState extends State<OTPScreen> {
                               );
                             },
                           );
-                          attempts--;
-                          if (attempts == 0) {
+
+                          if (OTPMgr.maxTries()) {
                             SignUp
                                 ? Navigator.popUntil(
                                     context, ModalRoute.withName(signup.id))

@@ -20,6 +20,8 @@ class signup extends StatefulWidget {
 }
 
 class _signupState extends State<signup> {
+  bool _obscureConfirmText = true;
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,7 +157,7 @@ class _signupState extends State<signup> {
                           },
                           cursorColor: Colors.teal[900],
                           maxLength: 30,
-                          obscureText: true,
+                          obscureText: _obscureText,
                           decoration: InputDecoration(
                             icon: Icon(Icons.vpn_key_rounded,
                                 color: Colors.teal[900]),
@@ -171,6 +173,18 @@ class _signupState extends State<signup> {
                             //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.teal[900]),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                  _obscureText
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.teal[900]),
+                              onPressed: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
                             ),
                           ),
                         ),
@@ -190,7 +204,7 @@ class _signupState extends State<signup> {
                           },
                           cursorColor: Colors.teal[900],
                           maxLength: 30,
-                          obscureText: true,
+                          obscureText: _obscureConfirmText,
                           decoration: InputDecoration(
                             icon: Icon(Icons.vpn_key_outlined,
                                 color: Colors.teal[900]),
@@ -207,6 +221,18 @@ class _signupState extends State<signup> {
                             //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.teal[900]),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                  _obscureConfirmText
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.teal[900]),
+                              onPressed: () {
+                                setState(() {
+                                  _obscureConfirmText = !_obscureConfirmText;
+                                });
+                              },
                             ),
                           ),
                         ),

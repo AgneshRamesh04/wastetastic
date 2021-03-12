@@ -20,6 +20,7 @@ const kContainerElevation = [
   ),
 ];
 
+
 WastePOI kSample = WastePOI(
   name: "WastePOI sample",
   category: WasteCategory.LIGHTING_WASTE,
