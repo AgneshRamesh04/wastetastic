@@ -1,0 +1,84 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:wastetastic/entity/WasteCategory.dart';
+import 'package:wastetastic/entity/WastePOI.dart';
+import 'package:wastetastic/entity/UserAccount.dart';
+
+import '../entity/UserAccount.dart';
+import '../entity/WasteRecord.dart';
+import '../entity/WastePOI.dart';
+import 'package:geopoint/geopoint.dart' as gp;
+import 'package:latlong/latlong.dart';
+
+class UserAccountMgr {
+  static final _firestore = FirebaseFirestore.instance;
+  static UserAccount userDetails = new UserAccount();
+  static readUserDetails(String username) async {
+    //UserAccount userDetails = new UserAccount();
+
+    var userAccount = await _firestore.collection('UserAccounts').doc(username).get(); //getting the username snapshot. Now what does this snapshot comprise of??
+    Map<String, dynamic> user = userAccount.data();
+
+    userDetails.username = username;
+    userDetails.email = user['email'];
+    userDetails.name = user['name'];
+    userDetails.points = user['points'];
+
+    List<WastePOI> WastePOIs = List<WastePOI>();
+    try {
+      for (var waste_POI_name in user['favorites']) {
+        var w = await _firestore.collection('WastePOI')
+            .doc(waste_POI_name)
+            .get();
+        List<String> nearbyCarParks = List<String>();
+
+        nearbyCarParks = [];
+        for (String carParkNum in w['nearbyCarPark']) {
+          nearbyCarParks.add(carParkNum);
+        }
+
+        WastePOIs.add(WastePOI(
+          name: w['name'],
+          category: WasteCategory.values
+              .firstWhere((element) => element.toString() == w['category']),
+          location: gp.GeoPoint.fromLatLng(
+              point: LatLng(w['location'].latitude, w['location'].longitude)),
+          address: w['address'],
+          POI_postalcode: w['POI_postalcode'],
+          nearbyCarPark: nearbyCarParks,
+          POI_description: w['POI_description'],
+          POI_inc_crc: w['POI_inc_crc'],
+          POI_feml_upd_d: w['POI_feml_upd_d'],
+        ));
+      }
+    }
+    catch(e){
+      //print(e);
+      WastePOIs = [];
+    }
+    userDetails.favorites = WastePOIs;
+
+    List<WasteRecord> WasteRecords = List<WasteRecord>();
+
+    await for (var snapshot in _firestore.collection('UserAccounts').doc(username).collection('WasteRecords').snapshots()) {
+      var docs = snapshot.docs;
+      if(docs.isNotEmpty) {
+        for (var Doc in docs) {
+          var x = Doc['category'].toString();
+          var y = x.substring(14,);
+          //print(y);
+          WasteRecords.add(WasteRecord(
+            dateTime: Doc['dateTime'].toDate(),
+            weight: Doc['weight'].toDouble(),
+            category: WasteCategory.NORMAL_WASTE,
+          ));
+        }
+      }
+      else{
+        WasteRecords = [];
+      }
+      break;
+    }
+    userDetails.waste_records = WasteRecords;
+    //print(userDetails.waste_records.first.weight);
+  }
+}
