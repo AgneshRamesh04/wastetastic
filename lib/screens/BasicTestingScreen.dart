@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wastetastic/control/CarParkMgr.dart';
 import 'package:wastetastic/control/DatabaseCreator.dart';
 import 'package:wastetastic/control/CatalogMgr.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
@@ -23,6 +24,8 @@ class _BasicTestingScreenState extends State<BasicTestingScreen> {
             //DatabaseCreator.createDatabaseForGeneralWasteCollectors();
             //DatabaseCreator.createDatabaseForCarPark();
             //CatalogMgr.readWastePOIByCategory(WasteCategory.LIGHTING_WASTE);
+            //CarParkMgr.retrieveNearbyCarParkInfo(
+            //['T7', 'T8', 'T1', 'T7A', 'T3']);
           },
         ),
       ),
