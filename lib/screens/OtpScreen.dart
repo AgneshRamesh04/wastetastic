@@ -14,7 +14,7 @@ final _formKey = GlobalKey<FormState>();
 String enteredOTP;
 
 class OTPScreen extends StatefulWidget {
-  static String id = 'OPT_Screen';
+  static String id = 'OTP_Screen';
   @override
   _OTPScreenState createState() => _OTPScreenState();
 }
@@ -89,8 +89,15 @@ class _OTPScreenState extends State<OTPScreen> {
                             RegistrationMgr.registerUserAccount(
                                 name, email, password, username);
                           SignUp
-                              ? Navigator.pushNamed(context, MainScreen.id)
-                              : Navigator.pushNamed(context, ResetPassword.id);
+                              ? Navigator.pushNamed(
+                                  context,
+                                  MainScreen.id,
+                                )
+                              : Navigator.pushNamed(
+                                  context,
+                                  ResetPassword.id,
+                                  arguments: {'email': args['email']},
+                                );
                         } else {
                           print('Wrong otp entered, retry');
                           showDialog(

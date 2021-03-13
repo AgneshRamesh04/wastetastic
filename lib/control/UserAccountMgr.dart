@@ -87,7 +87,7 @@ class UserAccountMgr {
       break;
     }
     userDetails.waste_records = WasteRecords;
-    userDetails.printUserDetails();
+    //userDetails.printUserDetails();
     //print(userDetails.waste_records.first.weight);
   }
 
@@ -110,10 +110,17 @@ class UserAccountMgr {
     //@todo add function to favourite/un-favourite POI in the database
     List<String> WastePOI_ids = List<String>();
     for (WastePOI w in userDetails.favorites) WastePOI_ids.add(w.id);
-    await _firestore
-        .collection('UserAccounts')
-        .doc(userDetails.username)
-        .update({'favorites': WastePOI_ids});
+    try {
+      await _firestore
+          .collection('UserAccounts')
+          .doc(userDetails.username)
+          .update({'favorites': WastePOI_ids});
+    } catch (e) {
+      await _firestore
+          .collection('UserAccounts')
+          .doc(userDetails.username)
+          .set({'favorites': WastePOI_ids});
+    }
     return;
   }
 
@@ -126,5 +133,19 @@ class UserAccountMgr {
       }
     }
     return;
+  }
+
+  static updateUserPassword(String email, String newPassword) async {
+    String username = (await _firestore
+            .collection('UserAccounts')
+            .where('email', isEqualTo: email)
+            .get())
+        .docs[0]
+        .id;
+    await _firestore
+        .collection('UserAccounts')
+        .doc(username)
+        .update({'password': newPassword});
+    await readUserDetails(username);
   }
 }

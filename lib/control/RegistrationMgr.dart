@@ -31,10 +31,12 @@ class RegistrationMgr {
 //          bool result = OTPMgr.verifyOTP(userEmail, r.otp);
 //          if (result) {
 //            print("verified");
-        _firestore
-            .collection('UserAccounts')
-            .doc('$username')
-            .set({'name': name, 'email': userEmail, 'password': password});
+        await _firestore.collection('UserAccounts').doc('$username').set({
+          'name': name,
+          'email': userEmail,
+          'password': password,
+          'points': 0
+        });
         //add navigation here to the home screen
 //            break;
 //          } else {

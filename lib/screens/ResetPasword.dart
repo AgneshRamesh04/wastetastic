@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/screens/signin.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
@@ -19,6 +20,8 @@ class ResetPassword extends StatefulWidget {
 class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
+    final Map args = ModalRoute.of(context).settings.arguments;
+    final String email = args['email'];
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -53,7 +56,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                           EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                       child: TextFormField(
                         validator: (value) =>
-                        value.isEmpty ? "Enter Password" : null,
+                            value.isEmpty ? "Enter Password" : null,
                         onChanged: (value) {
                           newPassword = value;
                         },
@@ -83,8 +86,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                             return "Passwords Dont Match";
                           return null;
                         },
-                        onChanged: (value){
-                          confirmPassword=value;
+                        onChanged: (value) {
+                          confirmPassword = value;
                         },
                         cursorColor: Colors.black,
                         maxLength: 100,
@@ -108,6 +111,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     SimpleButton(
                       content: 'Reset Password',
                       onPress: () {
+                        UserAccountMgr.updateUserPassword(email, newPassword);
                         if (_formKey.currentState.validate()) {
                           showDialog(
                             context: context,
