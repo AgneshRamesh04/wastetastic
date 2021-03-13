@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/entity/WasteRecord.dart';
 
@@ -22,5 +23,7 @@ class WasteRecordMgr {
       'weight': weight,
       'category': category.toString(),
     });
+    UserAccountMgr.readUserDetails(username);
+    UserAccountMgr.userDetails.printUserDetails();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/LoadingScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/CategoryButton.dart';
@@ -10,6 +11,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    UserAccountMgr.userDetails.printUserDetails();
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
