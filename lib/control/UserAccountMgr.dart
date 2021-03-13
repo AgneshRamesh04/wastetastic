@@ -15,7 +15,10 @@ class UserAccountMgr {
   static readUserDetails(String username) async {
     //UserAccount userDetails = new UserAccount();
 
-    var userAccount = await _firestore.collection('UserAccounts').doc(username).get(); //getting the username snapshot. Now what does this snapshot comprise of??
+    var userAccount = await _firestore
+        .collection('UserAccounts')
+        .doc(username)
+        .get(); //getting the username snapshot. Now what does this snapshot comprise of??
     Map<String, dynamic> user = userAccount.data();
 
     userDetails.username = username;
@@ -26,9 +29,8 @@ class UserAccountMgr {
     List<WastePOI> WastePOIs = List<WastePOI>();
     try {
       for (var waste_POI_name in user['favorites']) {
-        var w = await _firestore.collection('WastePOI')
-            .doc(waste_POI_name)
-            .get();
+        var w =
+            await _firestore.collection('WastePOI').doc(waste_POI_name).get();
         List<String> nearbyCarParks = List<String>();
 
         nearbyCarParks = [];
@@ -50,8 +52,7 @@ class UserAccountMgr {
           POI_feml_upd_d: w['POI_feml_upd_d'],
         ));
       }
-    }
-    catch(e){
+    } catch (e) {
       //print(e);
       WastePOIs = [];
     }
@@ -59,26 +60,36 @@ class UserAccountMgr {
 
     List<WasteRecord> WasteRecords = List<WasteRecord>();
 
-    await for (var snapshot in _firestore.collection('UserAccounts').doc(username).collection('WasteRecords').snapshots()) {
+    await for (var snapshot in _firestore
+        .collection('UserAccounts')
+        .doc(username)
+        .collection('WasteRecords')
+        .snapshots()) {
       var docs = snapshot.docs;
-      if(docs.isNotEmpty) {
+      if (docs.isNotEmpty) {
+        print(docs.length);
         for (var Doc in docs) {
           var x = Doc['category'].toString();
-          var y = x.substring(14,);
+          var y = x.substring(
+            14,
+          );
           //print(y);
+          //print('Hello There!');
+          print('Doc id' + Doc.id);
           WasteRecords.add(WasteRecord(
-            dateTime: Doc['dateTime'].toDate(),
+            dateTime: DateTime.fromMillisecondsSinceEpoch(int.parse(Doc.id)),
             weight: Doc['weight'].toDouble(),
-            category: WasteCategory.NORMAL_WASTE,
+            category: WasteCategory.values
+                .firstWhere((element) => element.toString() == Doc['category']),
           ));
         }
-      }
-      else{
+      } else {
         WasteRecords = [];
       }
       break;
     }
     userDetails.waste_records = WasteRecords;
+    userDetails.printUserDetails();
     //print(userDetails.waste_records.first.weight);
   }
 }

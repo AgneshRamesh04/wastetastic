@@ -50,4 +50,18 @@ class UserAccount {
   set points(int points) {
     _points = points;
   }
+
+  void printUserDetails() {
+    print("Username: " + _username);
+    print("Email: " + _email);
+    print("Name: " + _name);
+    print("Favorites: ");
+    for (WastePOI fav in _favorites) {
+      fav.printDetails();
+    }
+    print("Waste Records: ");
+    for (WasteRecord wr in _waste_records) {
+      wr.printDetails();
+    }
+  }
 }

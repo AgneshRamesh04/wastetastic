@@ -12,8 +12,13 @@ class WasteRecordMgr {
       category: category,
     );
     wasteRecord.printDetails();
-    _firestore.collection('WasteRecord').doc('$username').set({
-      'dateTime': Timestamp.fromDate(dateTime),
+    print(dateTime.millisecondsSinceEpoch.toString());
+    _firestore
+        .collection('UserAccounts')
+        .doc('$username')
+        .collection('WasteRecords')
+        .doc(dateTime.millisecondsSinceEpoch.toInt().toString())
+        .set({
       'weight': weight,
       'category': category.toString(),
     });
