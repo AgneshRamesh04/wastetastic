@@ -12,6 +12,7 @@ import 'package:latlong/latlong.dart';
 class UserAccountMgr {
   static final _firestore = FirebaseFirestore.instance;
   static UserAccount userDetails = new UserAccount();
+
   static readUserDetails(String username) async {
     //UserAccount userDetails = new UserAccount();
 
@@ -87,5 +88,31 @@ class UserAccountMgr {
     userDetails.waste_records = WasteRecords;
     userDetails.printUserDetails();
     //print(userDetails.waste_records.first.weight);
+  }
+
+  static bool isFav(WastePOI wp) {
+    for (WastePOI w in userDetails.favorites) {
+      if (wp.POI_name == w.POI_name && wp.address == w.address) return true;
+    }
+    return false;
+  }
+
+  static bool editFav(WastePOI wp) {
+    if (UserAccountMgr.isFav(wp))
+      return UserAccountMgr.removeFav(wp);
+    else
+      userDetails.favorites.add(wp);
+    return true;
+    //@todo add function to favourite/un-favourite POI in the database
+  }
+
+  static bool removeFav(WastePOI wp) {
+    for (WastePOI w in userDetails.favorites) {
+      if (wp.POI_name == w.POI_name && wp.address == w.address) {
+        userDetails.favorites.remove(w);
+        return true;
+      }
+    }
+    return false;
   }
 }

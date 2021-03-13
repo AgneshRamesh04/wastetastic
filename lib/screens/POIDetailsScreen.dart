@@ -4,6 +4,7 @@ import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:flutter/material.dart';
 import 'package:wastetastic/screens/CarParkScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 
 class POI_DetialScreen extends StatefulWidget {
   static const String id = 'POI_detail_screen';
@@ -12,8 +13,9 @@ class POI_DetialScreen extends StatefulWidget {
 }
 
 class _POI_DetialScreenState extends State<POI_DetialScreen> {
-  @override
   bool changed = false;
+
+  @override
   Widget build(BuildContext context) {
     final WastePOI POI = ModalRoute.of(context).settings.arguments;
 
@@ -52,19 +54,14 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                         RaisedButton.icon(
                           onPressed: () {
                             setState(() {
-                              if (kFav_POI_list.contains(POI))
-                                kFav_POI_list.remove(POI);
-                              else
-                                kFav_POI_list.add(POI);
-                              //@todo add function to favourite/un-favourite POI in the database
-                              //@todo logic to refresh catalog and favourites screen
+                              bool suc = UserAccountMgr.editFav(POI);
                               changed = !changed;
                             });
                           },
                           label: Text('Favourite'),
                           icon: Icon(
                             Icons.star,
-                            color: kFav_POI_list.contains(POI)
+                            color: UserAccountMgr.isFav(POI)
                                 ? Colors.yellow
                                 : Colors.white,
                           ),

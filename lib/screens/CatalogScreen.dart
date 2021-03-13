@@ -8,6 +8,7 @@ import 'package:wastetastic/Constants.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'POIDetailsScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 
 class CatalogScreen extends StatefulWidget {
   @override
@@ -22,46 +23,37 @@ class _CatalogScreenState extends State<CatalogScreen> {
 //    return CatalogMgr.readAllWastePOI();
 //  }
 
-//  void initState() {
-//    super.initState();
-//    WastePOIs = CatalogMgr.readAllWastePOI();
-//  }
-
   Widget build(BuildContext context) {
-    List<POI_card> build_cat_cards(List<WastePOI> WastePOIs) {
+    List<POI_card> build_cat_cards(List<WastePOI> POIs) {
       List<POI_card> catalog_Cat = [];
-      for (WastePOI w in WastePOIs) {
-        String POICategory = w.wasteCategory.toString().split('.').last;
+      for (WastePOI wPOI in POIs) {
+        /*String POICategory = w.wasteCategory.toString().split('.').last;
         POICategory = POICategory.replaceAll('_', ' ');
         if (POICategory == selectedCategory)
-          catalog_Cat.add(
-            POI_card(
-              name: w.POI_name,
-              address: w.address,
-              postalcode: w.POI_postalcode,
-              description: w.POI_description,
-              wasteCategory: POICategory,
-              fav: kFav_POI_list.contains(w),
-              TO_POI_page: () async {
-                var changed = await Navigator.pushNamed(
-                  context,
-                  POI_DetialScreen.id,
-                  arguments: w,
-                );
-                if (changed) setState(() {});
-              },
-              FavFunct: () {
-                setState(() async {
-                  if (kFav_POI_list.contains(w))
-                    kFav_POI_list.remove(w);
-                  else
-                    kFav_POI_list.add(w);
-
-                  //@todo add function to favourite/un-favourite POI in the database
-                });
-              },
-            ),
-          );
+          */
+        catalog_Cat.add(
+          POI_card(
+            name: wPOI.POI_name,
+            address: wPOI.address,
+            postalcode: wPOI.POI_postalcode,
+            description: wPOI.POI_description,
+            wasteCategory: selectedCategory,
+            fav: UserAccountMgr.isFav(wPOI),
+            TO_POI_page: () async {
+              var changed = await Navigator.pushNamed(
+                context,
+                POI_DetialScreen.id,
+                arguments: wPOI,
+              );
+              if (changed) setState(() {});
+            },
+            FavFunct: () {
+              setState(() {
+                bool suc = UserAccountMgr.editFav(wPOI);
+              });
+            },
+          ),
+        );
       }
       return catalog_Cat;
     }
