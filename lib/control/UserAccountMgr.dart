@@ -69,13 +69,9 @@ class UserAccountMgr {
       if (docs.isNotEmpty) {
         print(docs.length);
         for (var Doc in docs) {
-          var x = Doc['category'].toString();
-          var y = x.substring(
-            14,
-          );
           //print(y);
           //print('Hello There!');
-          print('Doc id' + Doc.id);
+          //print('Doc id' + Doc.id);
           WasteRecords.add(WasteRecord(
             dateTime: DateTime.fromMillisecondsSinceEpoch(int.parse(Doc.id)),
             weight: Doc['weight'].toDouble(),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:wastetastic/Constants.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/control/WasteRecordMgr.dart';
+import 'package:wastetastic/entity/UserAccount.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 
@@ -17,7 +19,14 @@ class AddWasteScreen extends StatefulWidget {
 }
 
 class _AddWasteScreenState extends State<AddWasteScreen> {
+  static UserAccount _loggedInUser;
+
   @override
+  void initState() {
+    super.initState();
+    _loggedInUser = UserAccountMgr.userDetails;
+  }
+
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -137,7 +146,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                               //@todo code to add details to user waste records
                               print(selectedCategory.replaceAll(' ', '_'));
                               WasteRecordMgr.addNewRecord(
-                                'sdidt',
+                                _loggedInUser.username,
                                 DateTime.parse(selectedDate.substring(0, 10) +
                                     " " +
                                     selectedTime),

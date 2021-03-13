@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wastetastic/Constants.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
+import 'package:wastetastic/entity/UserAccount.dart';
 import 'package:wastetastic/screens/ResetPasword.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -9,7 +12,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  static UserAccount _loggedInUser;
+
   @override
+  void initState() {
+    super.initState();
+    _loggedInUser = UserAccountMgr.userDetails;
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
@@ -42,14 +52,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Column(
                           children: [
                             Text(
-                              'Username',
+                              _loggedInUser.username,
                               style: TextStyle(fontSize: 19),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             Text(
-                              'Email',
+                              _loggedInUser.email,
                               style: TextStyle(fontSize: 19),
                             ),
                             RaisedButton(
