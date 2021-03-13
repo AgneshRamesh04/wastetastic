@@ -54,7 +54,7 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                         RaisedButton.icon(
                           onPressed: () {
                             setState(() {
-                              bool suc = UserAccountMgr.editFav(POI);
+                              UserAccountMgr.editFav(POI);
                               changed = !changed;
                             });
                           },

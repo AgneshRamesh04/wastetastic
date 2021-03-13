@@ -49,7 +49,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
             },
             FavFunct: () {
               setState(() {
-                bool suc = UserAccountMgr.editFav(wPOI);
+                UserAccountMgr.editFav(wPOI);
               });
             },
           ),

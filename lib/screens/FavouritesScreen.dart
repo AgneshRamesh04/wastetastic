@@ -41,7 +41,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
             },
             FavFunct: () {
               setState(() {
-                bool suc = UserAccountMgr.editFav(w);
+                UserAccountMgr.editFav(w);
               });
             },
           ),

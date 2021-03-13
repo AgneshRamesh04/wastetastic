@@ -38,6 +38,7 @@ class CatalogMgr {
         }
         count++;
         WastePOIs.add(WastePOI(
+          id: waste_POI.id,
           name: w['name'],
           category: WasteCategory.values
               .firstWhere((element) => element.toString() == w['category']),
@@ -73,6 +74,7 @@ class CatalogMgr {
         print(carParkNum);
       }
       WastePOIs.add(WastePOI(
+        id: w.id,
         name: w['name'],
         category: WasteCategory.values
             .firstWhere((element) => element.toString() == w['category']),
@@ -131,6 +133,7 @@ class CatalogMgr {
         }
         count++;
         WastePOIs.add(WastePOI(
+          id: waste_POI.id,
           name: w['name'],
           category: WasteCategory.values
               .firstWhere((element) => element.toString() == w['category']),

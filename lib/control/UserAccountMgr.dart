@@ -40,6 +40,7 @@ class UserAccountMgr {
         }
 
         WastePOIs.add(WastePOI(
+          id: waste_POI_name,
           name: w['name'],
           category: WasteCategory.values
               .firstWhere((element) => element.toString() == w['category']),
@@ -92,27 +93,38 @@ class UserAccountMgr {
 
   static bool isFav(WastePOI wp) {
     for (WastePOI w in userDetails.favorites) {
-      if (wp.POI_name == w.POI_name && wp.address == w.address) return true;
-    }
-    return false;
-  }
-
-  static bool editFav(WastePOI wp) {
-    if (UserAccountMgr.isFav(wp))
-      return UserAccountMgr.removeFav(wp);
-    else
-      userDetails.favorites.add(wp);
-    return true;
-    //@todo add function to favourite/un-favourite POI in the database
-  }
-
-  static bool removeFav(WastePOI wp) {
-    for (WastePOI w in userDetails.favorites) {
-      if (wp.POI_name == w.POI_name && wp.address == w.address) {
-        userDetails.favorites.remove(w);
+      if (wp.id == w.id) {
         return true;
       }
     }
     return false;
+  }
+
+  static Future<void> editFav(WastePOI wp) async {
+    if (UserAccountMgr.isFav(wp)) {
+      print('Found! in editFav');
+      UserAccountMgr.removeFav(wp);
+    } else
+      userDetails.favorites.add(wp);
+    print(userDetails.favorites);
+    //@todo add function to favourite/un-favourite POI in the database
+    List<String> WastePOI_ids = List<String>();
+    for (WastePOI w in userDetails.favorites) WastePOI_ids.add(w.id);
+    await _firestore
+        .collection('UserAccounts')
+        .doc(userDetails.username)
+        .update({'favorites': WastePOI_ids});
+    return;
+  }
+
+  static void removeFav(WastePOI wp) {
+    for (WastePOI w in userDetails.favorites) {
+      if (wp.id == w.id) {
+        print('Found! in removeFav');
+        userDetails.favorites.remove(w);
+        return;
+      }
+    }
+    return;
   }
 }

@@ -20,8 +20,8 @@ const kContainerElevation = [
   ),
 ];
 
-
 WastePOI kSample = WastePOI(
+  id: "SAMPLE_0",
   name: "WastePOI sample",
   category: WasteCategory.LIGHTING_WASTE,
   location: GeoPoint.fromLatLng(name: "Position", point: LatLng(51.0, 0.0)),
@@ -31,6 +31,7 @@ WastePOI kSample = WastePOI(
 );
 
 WastePOI kSample2 = WastePOI(
+  id: "SAMPLE_1",
   name: "WastePOI sample2",
   category: WasteCategory.E_WASTE,
   location: GeoPoint.fromLatLng(name: "Position", point: LatLng(51.0, 0.0)),
@@ -40,6 +41,7 @@ WastePOI kSample2 = WastePOI(
 );
 
 WastePOI kSample3 = WastePOI(
+  id: "SAMPLE_2",
   name: "WastePOI sample3",
   category: WasteCategory.NORMAL_WASTE,
   location: GeoPoint.fromLatLng(name: "Position", point: LatLng(51.0, 0.0)),
@@ -49,6 +51,7 @@ WastePOI kSample3 = WastePOI(
 );
 
 WastePOI kSample4 = WastePOI(
+  id: "SAMPLE_3",
   name: "WastePOI sample4",
   category: WasteCategory.WASTE_TREATMENT,
   location: GeoPoint.fromLatLng(name: "Position", point: LatLng(51.0, 0.0)),
@@ -58,6 +61,7 @@ WastePOI kSample4 = WastePOI(
 );
 
 WastePOI kSample5 = WastePOI(
+  id: "SAMPLE_4",
   name: "WastePOI sample5",
   category: WasteCategory.CASH_FOR_TRASH,
   location: GeoPoint.fromLatLng(name: "Position", point: LatLng(51.0, 0.0)),
@@ -67,6 +71,7 @@ WastePOI kSample5 = WastePOI(
 );
 
 WastePOI kSample6 = WastePOI(
+  id: "SAMPLE_5",
   name: "WastePOI sample6",
   category: WasteCategory.CASH_FOR_TRASH,
   location: GeoPoint.fromLatLng(name: "Position", point: LatLng(51.0, 0.0)),

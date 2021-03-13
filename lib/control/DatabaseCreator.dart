@@ -85,6 +85,7 @@ class DatabaseCreator {
       location = feature.geometry.geoPoint;
       List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
+        id: 'E_WASTE_$count',
         name: name,
         category: category,
         location: location,
@@ -144,6 +145,7 @@ class DatabaseCreator {
       print('Count: $count');
       List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
+        id: 'LIGHTING_WASTE_$count',
         name: name,
         category: category,
         location: location,
@@ -201,6 +203,7 @@ class DatabaseCreator {
       location = feature.geometry.geoPoint;
       List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
+          id: 'WASTE_TREATMENT_$count',
           name: name,
           category: category,
           address: address,
@@ -251,6 +254,7 @@ class DatabaseCreator {
       location = feature.geometry.geoPoint;
       List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
+          id: 'CASH_FOR_TRASH_$count',
           name: name,
           category: category,
           address: address,
@@ -307,6 +311,7 @@ class DatabaseCreator {
           point: LatLng(coordinates.latitude, coordinates.longitude));
       List<String> nearbyCarPark = await getTop5CarPark(location);
       WastePOI w = WastePOI(
+        id: 'NORMAL_WASTE_$count',
         name: name,
         category: category,
         POI_postalcode: postalCode,

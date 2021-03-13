@@ -47,6 +47,7 @@ class NearYouMgr {
         //print(carParkNum);
       }
       nearbyWastePOI.add(WastePOI(
+        id: documents[index].id,
         name: documents[index]['name'],
         category: WasteCategory.values.firstWhere(
             (element) => element.toString() == documents[index]['category']),

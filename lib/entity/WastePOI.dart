@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:geopoint/geopoint.dart';
 import 'package:wastetastic/entity/CarPark.dart';
 
 class WastePOI {
+  String _id;
   String _POI_name;
   WasteCategory _wasteCategory;
   GeoPoint _location;
@@ -16,6 +18,7 @@ class WastePOI {
   double _POI_Y;
 
   WastePOI({
+    @required String id,
     String name,
     WasteCategory category,
     GeoPoint location,
@@ -25,7 +28,8 @@ class WastePOI {
     String POI_description: 'Normal Waste Disposal',
     String POI_inc_crc: 'No inc_crc',
     String POI_feml_upd_d: 'No feml_upd_d',
-  })  : _POI_name = name,
+  })  : _id = id,
+        _POI_name = name,
         _wasteCategory = category,
         _location = location,
         _address = address,
@@ -35,6 +39,7 @@ class WastePOI {
         _POI_inc_crc = POI_inc_crc,
         _POI_feml_upd_d = POI_feml_upd_d;
 
+  String get id => _id;
   WasteCategory get wasteCategory => _wasteCategory;
   GeoPoint get location => _location;
   List<String> get nearbyCarPark => _nearbyCarPark;
