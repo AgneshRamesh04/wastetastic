@@ -16,77 +16,97 @@ class UserAccountMgr {
   static readUserDetails(String username) async {
     //UserAccount userDetails = new UserAccount();
 
-    var userAccount = await _firestore
-        .collection('UserAccounts')
-        .doc(username)
-        .get(); //getting the username snapshot. Now what does this snapshot comprise of??
-    Map<String, dynamic> user = userAccount.data();
-
-    userDetails.username = username;
-    userDetails.email = user['email'];
-    userDetails.name = user['name'];
-    userDetails.points = user['points'];
-
-    List<WastePOI> WastePOIs = List<WastePOI>();
-    try {
-      for (var waste_POI_name in user['favorites']) {
-        var w =
-            await _firestore.collection('WastePOI').doc(waste_POI_name).get();
-        List<String> nearbyCarParks = List<String>();
-
-        nearbyCarParks = [];
-        for (String carParkNum in w['nearbyCarPark']) {
-          nearbyCarParks.add(carParkNum);
-        }
-
-        WastePOIs.add(WastePOI(
-          id: waste_POI_name,
-          name: w['name'],
-          category: WasteCategory.values
-              .firstWhere((element) => element.toString() == w['category']),
-          location: gp.GeoPoint.fromLatLng(
-              point: LatLng(w['location'].latitude, w['location'].longitude)),
-          address: w['address'],
-          POI_postalcode: w['POI_postalcode'],
-          nearbyCarPark: nearbyCarParks,
-          POI_description: w['POI_description'],
-          POI_inc_crc: w['POI_inc_crc'],
-          POI_feml_upd_d: w['POI_feml_upd_d'],
-        ));
-      }
-    } catch (e) {
-      //print(e);
-      WastePOIs = [];
-    }
-    userDetails.favorites = WastePOIs;
-
-    List<WasteRecord> WasteRecords = List<WasteRecord>();
-
     await for (var snapshot in _firestore
         .collection('UserAccounts')
-        .doc(username)
-        .collection('WasteRecords')
+        //.where('username', isEqualTo: username)
         .snapshots()) {
-      var docs = snapshot.docs;
-      if (docs.isNotEmpty) {
-        print(docs.length);
-        for (var Doc in docs) {
-          //print(y);
-          //print('Hello There!');
-          //print('Doc id' + Doc.id);
-          WasteRecords.add(WasteRecord(
-            dateTime: DateTime.fromMillisecondsSinceEpoch(int.parse(Doc.id)),
-            weight: Doc['weight'].toDouble(),
-            category: WasteCategory.values
-                .firstWhere((element) => element.toString() == Doc['category']),
-          ));
+      var documents = snapshot.docs;
+      if (documents.isNotEmpty) {
+        //print(docs.length);
+        for (var Documents in documents) {
+          if (Documents.id == username) {
+            //print(y);
+            //print('Hello There!');
+            //print('Doc id' + Doc.id);
+            userDetails.username = username;
+            userDetails.email = Documents['email'];
+            userDetails.name = Documents['name'];
+            userDetails.points = Documents['points'];
+
+            List<WastePOI> WastePOIs = List<WastePOI>();
+            try {
+              for (var waste_POI_name in Documents['favorites']) {
+                var w =
+                await _firestore
+                    .collection('WastePOI')
+                    .doc(waste_POI_name)
+                    .get();
+                List<String> nearbyCarParks = List<String>();
+
+                nearbyCarParks = [];
+                for (String carParkNum in w['nearbyCarPark']) {
+                  nearbyCarParks.add(carParkNum);
+                }
+
+                WastePOIs.add(WastePOI(
+                  id: waste_POI_name,
+                  name: w['name'],
+                  category: WasteCategory.values
+                      .firstWhere((element) =>
+                  element.toString() == w['category']),
+                  location: gp.GeoPoint.fromLatLng(
+                      point: LatLng(
+                          w['location'].latitude, w['location'].longitude)),
+                  address: w['address'],
+                  POI_postalcode: w['POI_postalcode'],
+                  nearbyCarPark: nearbyCarParks,
+                  POI_description: w['POI_description'],
+                  POI_inc_crc: w['POI_inc_crc'],
+                  POI_feml_upd_d: w['POI_feml_upd_d'],
+                ));
+              }
+            } catch (e) {
+              //print(e);
+              WastePOIs = [];
+            }
+            userDetails.favorites = WastePOIs;
+
+            List<WasteRecord> WasteRecords = List<WasteRecord>();
+
+            await for (var snapshot in _firestore
+                .collection('UserAccounts')
+                .doc(username)
+                .collection('WasteRecords')
+                .snapshots()) {
+              var docs = snapshot.docs;
+              if (docs.isNotEmpty) {
+                print(docs.length);
+                for (var Doc in docs) {
+                  //print(y);
+                  print('Hello There!');
+                  print('Doc id' + Doc.id);
+                  WasteRecords.add(WasteRecord(
+                    dateTime: DateTime.fromMillisecondsSinceEpoch(
+                        int.parse(Doc.id)),
+                    weight: Doc['weight'].toDouble(),
+                    category: WasteCategory.values
+                        .firstWhere((element) =>
+                    element.toString() == Doc['category']),
+                  ));
+                }
+              } else {
+                WasteRecords = [];
+              }
+              break;
+            }
+            userDetails.waste_records = WasteRecords;
+          }
+
         }
-      } else {
-        WasteRecords = [];
       }
       break;
     }
-    userDetails.waste_records = WasteRecords;
+
     //userDetails.printUserDetails();
     //print(userDetails.waste_records.first.weight);
   }
@@ -136,12 +156,25 @@ class UserAccountMgr {
   }
 
   static updateUserPassword(String email, String newPassword) async {
-    String username = (await _firestore
-            .collection('UserAccounts')
-            .where('email', isEqualTo: email)
-            .get())
-        .docs[0]
-        .id;
+    String username;
+    await for (var snapshot in _firestore
+        .collection('UserAccounts')
+        .where('email', isEqualTo: email)
+        .snapshots()){
+      var docs = snapshot.docs;
+      if (docs.isNotEmpty) {
+        for (var Doc in docs) {
+          if(Doc['email']==email){
+            username=Doc.id;
+            print(username);
+          }
+        }
+      }
+      else {
+        print("No user has this email id registered!"); // figure out how to fix this, maybe check email id in ForgotPassword when the user initially enters an email id
+      }
+      break;
+    }
     await _firestore
         .collection('UserAccounts')
         .doc(username)
