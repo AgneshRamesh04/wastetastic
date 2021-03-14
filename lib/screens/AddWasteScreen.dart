@@ -141,9 +141,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                               print(
                                   'date: ${selectedDate.substring(0, 10)} \n time: $selectedTime \n'
                                   'weight: $enteredWeight \n category: $selectedCategory');
-                              Scaffold.of(context).showSnackBar(
-                                  SnackBar(content: Text('Processing Data')));
-                              //@todo code to add details to user waste records
+
                               print(selectedCategory.replaceAll(' ', '_'));
                               WasteRecordMgr.addNewRecord(
                                 _loggedInUser.username,

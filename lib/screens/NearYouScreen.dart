@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wastetastic/control/CatalogMgr.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
@@ -26,7 +27,6 @@ class _NearYouScreenState extends State<NearYouScreen> {
     final gp.GeoPoint location = arguments['location'];
 
     List<POI_card> build_nearby_cards(List<WastePOI> nearbyWastePOI) {
-      //List<WastePOI> WastePOIs = CatalogMgr.readAllWastePOI();
       List<POI_card> nearbyPOI = [];
       for (WastePOI w in nearbyWastePOI) {
         String POICategory = w.wasteCategory.toString().split('.').last;
@@ -39,7 +39,7 @@ class _NearYouScreenState extends State<NearYouScreen> {
               postalcode: w.POI_postalcode,
               description: w.POI_description,
               wasteCategory: POICategory,
-              fav: kFav_POI_list.contains(w),
+              fav: UserAccountMgr.isFav(w),
               TO_POI_page: () {
                 Navigator.pushNamed(
                   context,
@@ -49,12 +49,7 @@ class _NearYouScreenState extends State<NearYouScreen> {
               },
               FavFunct: () {
                 setState(() {
-                  if (kFav_POI_list.contains(w))
-                    kFav_POI_list.remove(w);
-                  else
-                    kFav_POI_list.add(w);
-
-                  //@todo add function to favourite/un-favourite POI in the database
+                  UserAccountMgr.editFav(w);
                 });
               },
             ),
