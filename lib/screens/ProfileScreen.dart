@@ -67,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 borderRadius: BorderRadius.circular(18.0),
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(context, ResetPassword.id);
+                                Navigator.pushNamed(context, ResetPassword.id, arguments: {'email': _loggedInUser.email});
                               },
                               child: Text('   Reset Password   '),
                             )
