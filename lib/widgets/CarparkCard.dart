@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wastetastic/Constants.dart';
 
@@ -26,33 +27,47 @@ class Carpark_card extends StatelessWidget {
         color: Colors.grey[900],
         boxShadow: kContainerElevation,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Flexible(
-            child: Text(
-              "$address. "
-              "\nCar Park Type: $carParkType \nParking Type: $parkingType"
-              "\nFree Parking: $freeParking",
-              overflow: TextOverflow.ellipsis,
+          Text(
+            "$address. ",
+            style: TextStyle(
+              height: 2.0,
+              letterSpacing: 1.25,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          VerticalDivider(
-            width: 10.0,
-            thickness: 10.0,
-            color: Colors.red,
-          ),
-          Column(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Vacant:',
-                style: TextStyle(fontSize: 15),
-              ),
-              Text(
-                avail_slots.toString(),
-                style: TextStyle(
-                  fontSize: 50,
+              Flexible(
+                child: Text(
+                  "Car Park Type: $carParkType\nParking Type: $parkingType"
+                  "\nFree Parking: $freeParking",
+                  overflow: TextOverflow.fade,
+                  style: TextStyle(
+                    height: 1.5,
+                  ),
                 ),
+              ),
+              VerticalDivider(
+                width: 10.0,
+                thickness: 10.0,
+                color: Colors.red,
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Vacant:',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    avail_slots.toString(),
+                    style: TextStyle(
+                      fontSize: 50,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

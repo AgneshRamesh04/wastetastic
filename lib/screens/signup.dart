@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:wastetastic/control/OTPMgr.dart';
+import 'package:wastetastic/control/RegistrationMgr.dart';
 import 'package:wastetastic/screens/OtpScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:email_validator/email_validator.dart';
 
 final _formKey = GlobalKey<FormState>();
+final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 String enteredName;
 String enteredUsername;
@@ -25,6 +27,7 @@ class _signupState extends State<signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -242,20 +245,46 @@ class _signupState extends State<signup> {
                       ),
                       SimpleButton(
                         content: 'Sign Up',
-                        onPress: () {
+                        onPress: () async {
                           if (_formKey.currentState.validate()) {
-                            OTPMgr.sendOTP(enteredEmail);
-                            Navigator.pushNamed(
-                              context,
-                              OTPScreen.id,
-                              arguments: {
-                                'name': enteredName,
-                                'username': enteredUsername,
-                                'email': enteredEmail,
-                                'password': enteredPassword,
-                                'SignUp': true,
-                              },
-                            );
+                            /* var  =
+                                await RegistrationMgr.validateUsername_Email(
+                                    enteredUsername, enteredEmail);
+                            */
+                            var username_emailExist =
+                                await RegistrationMgr.validateUsername_Email(
+                                    enteredUsername, enteredEmail);
+                            print(username_emailExist);
+                            if (username_emailExist == null) {
+                              OTPMgr.sendOTP(enteredEmail);
+                              Navigator.pushNamed(
+                                context,
+                                OTPScreen.id,
+                                arguments: {
+                                  'name': enteredName,
+                                  'username': enteredUsername,
+                                  'email': enteredEmail,
+                                  'password': enteredPassword,
+                                  'SignUp': true,
+                                },
+                              );
+                            } else {
+                              _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Entered ' +
+                                        username_emailExist +
+                                        ' already exist.',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  duration: Duration(seconds: 3),
+                                ),
+                              );
+                            }
                           }
                         },
                       ),

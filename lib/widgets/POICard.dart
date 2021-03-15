@@ -38,9 +38,14 @@ class POI_card extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                "$name \n$address. Singapore $postalcode "
+                "$name\n$address. Singapore $postalcode "
                 "\nCategory: $wasteCategory \n$description",
-                overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.fade,
+                softWrap: false,
+                style: TextStyle(
+                  height: 1.2,
+                  letterSpacing: 1,
+                ),
               ),
             ),
             VerticalDivider(

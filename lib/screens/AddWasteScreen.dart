@@ -8,10 +8,6 @@ import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 
 final _formKey = GlobalKey<FormState>();
-String selectedTime = '12:00';
-String selectedDate = DateTime.now().toString();
-String enteredWeight;
-String selectedCategory = 'NORMAL WASTE';
 
 class AddWasteScreen extends StatefulWidget {
   @override
@@ -28,6 +24,10 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
   }
 
   Widget build(BuildContext context) {
+    String selectedTime = '12:00';
+    String selectedDate = DateTime.now().toString();
+    String enteredWeight;
+    String selectedCategory = 'NORMAL WASTE';
     return Column(
       children: [
         header_card(

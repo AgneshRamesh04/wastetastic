@@ -53,4 +53,21 @@ class RegistrationMgr {
       print(e);
     }
   }
+
+  static Future<String> validateUsername_Email(
+      String username, String email) async {
+    await for (var snapshot
+        in _firestore.collection('UserAccounts').snapshots()) {
+      var documents = snapshot.docs;
+      if (documents.isNotEmpty) {
+        //print(docs.length);
+        for (var Documents in documents) {
+          if (Documents.id == username) return "Username";
+          if (Documents['email'] == email) return "Email";
+        }
+      }
+      return null;
+    }
+    return null;
+  }
 }
