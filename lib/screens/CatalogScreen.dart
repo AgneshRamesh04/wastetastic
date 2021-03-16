@@ -9,6 +9,7 @@ import 'package:wastetastic/entity/WastePOI.dart';
 import 'POIDetailsScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
+import 'package:wastetastic/screens/Map.dart';
 
 class CatalogScreen extends StatefulWidget {
   @override
@@ -58,71 +59,93 @@ class _CatalogScreenState extends State<CatalogScreen> {
       return catalog_Cat;
     }
 
-    return Column(
-      children: [
-        header_card(
-          title: 'Catalog',
-        ),
-        SafeArea(
-          child: Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
-            child: DropdownButtonFormField<String>(
-              value: selectedCategory,
-              icon: Icon(Icons.arrow_drop_down),
-              decoration: InputDecoration(
-                icon: Icon(Icons.receipt_long),
-                prefix: Text("Filter by Waste Category: "),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              header_card(
+                title: 'Catalog',
               ),
-              iconSize: 24,
-              elevation: 20,
-              style: TextStyle(color: Colors.white),
-              onChanged: (String newValue) {
-                setState(() {
-                  selectedCategory = newValue;
-                });
+              SafeArea(
+                child: Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 15,
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    value: selectedCategory,
+                    icon: Icon(Icons.arrow_drop_down),
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.receipt_long),
+                      prefix: Text("Filter by Waste Category: "),
+                    ),
+                    iconSize: 24,
+                    elevation: 20,
+                    style: TextStyle(color: Colors.white),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        selectedCategory = newValue;
+                      });
+                    },
+                    dropdownColor: Colors.grey[900],
+                    items:
+                    kWasteCategory.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: StreamBuilder(
+                    stream: CatalogMgr.getWastePOISnapshotsByCategory(
+                      WasteCategory.values.firstWhere((element) =>
+                      element.toString() ==
+                          ('WasteCategory.' + selectedCategory.replaceAll(' ', '_'))),
+                    ),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final List<DocumentSnapshot> documents = snapshot.data.docs;
+                        print('Inside builder $snapshot');
+                        WastePOIs = CatalogMgr.getWastePOIFromSnapshots(documents);
+
+                        return Column(
+                          children: build_cat_cards(WastePOIs),
+                        );
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+
+                  ),
+                ),
+
+              ),
+            ],
+          ),
+          Positioned(
+            top: 570.0,
+            right: 16.0,
+            child: new FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                    context, Map.id);
+                // Add your onPressed code here!
               },
-              dropdownColor: Colors.grey[900],
-              items:
-                  kWasteCategory.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
+              child: const Icon(Icons.map),
+              backgroundColor: Colors.limeAccent.shade700,
             ),
           ),
-        ),
-        SizedBox(
-          height: 20.0,
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: StreamBuilder(
-              stream: CatalogMgr.getWastePOISnapshotsByCategory(
-                WasteCategory.values.firstWhere((element) =>
-                    element.toString() ==
-                    ('WasteCategory.' + selectedCategory.replaceAll(' ', '_'))),
-              ),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final List<DocumentSnapshot> documents = snapshot.data.docs;
-                  print('Inside builder $snapshot');
-                  WastePOIs = CatalogMgr.getWastePOIFromSnapshots(documents);
-                  return Column(
-                    children: build_cat_cards(WastePOIs),
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-          ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }

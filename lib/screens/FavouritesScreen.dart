@@ -5,6 +5,7 @@ import 'POIDetailsScreen.dart';
 import 'package:wastetastic/Constants.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
+import 'package:wastetastic/screens/Map.dart';
 
 class FavouritesScreen extends StatefulWidget {
   @override
@@ -50,19 +51,38 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
       return fav_card_list;
     }
 
-    return Column(
-      children: [
-        header_card(
-          title: 'Favourites',
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: build_fav_cards(),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              header_card(
+                title: 'Favourites',
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: build_fav_cards(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 570.0,
+            right: 16.0,
+            child: new FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                    context, Map.id);
+              // Add your onPressed code here!
+              },
+              child: const Icon(Icons.map),
+              backgroundColor: Colors.limeAccent.shade700,
             ),
           ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }
