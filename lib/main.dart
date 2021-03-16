@@ -12,6 +12,7 @@ import 'package:wastetastic/screens/ResetPasword.dart';
 import 'package:wastetastic/screens/signin.dart';
 import 'package:wastetastic/screens/signup.dart';
 import 'package:wastetastic/screens/welcomePage.dart';
+import 'package:wastetastic/screens/Map.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         BasicTestingScreen.id: (context) => BasicTestingScreen(),
         MainScreen.id: (context) => MainScreen(),
+        Map.id: (context) => Map(),
         POI_DetialScreen.id: (context) => POI_DetialScreen(),
         NearYouScreen.id: (context) => NearYouScreen(),
         CarParkScreen.id: (context) => CarParkScreen(),
