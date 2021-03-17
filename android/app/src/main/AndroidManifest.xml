@@ -11,6 +11,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="wastetastic"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyASEKJkBMPtFyNlLEzUTNIiug8U53G_sGs"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

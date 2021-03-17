@@ -96,7 +96,10 @@ class _OTPScreenState extends State<OTPScreen> {
                               : Navigator.pushNamed(
                                   context,
                                   ResetPassword.id,
-                                  arguments: {'email': args['email']},
+                                  arguments: {
+                                    'email': args['email'],
+                                    'forgot_password': true,
+                                  },
                                 );
                         } else {
                           print('Wrong otp entered, retry');

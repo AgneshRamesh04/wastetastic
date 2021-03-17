@@ -94,9 +94,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                   onPressed: () {
                                     Navigator.pushNamed(
-                                        context, ResetPassword.id, arguments: {
-                                      'email': _loggedInUser.email
-                                    });
+                                        context, ResetPassword.id,
+                                        arguments: {
+                                          'email': _loggedInUser.email,
+                                          'forgot_password': false,
+                                        });
                                   },
                                   child: Text('   Reset Password   '),
                                 )

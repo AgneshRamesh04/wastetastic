@@ -4,6 +4,7 @@ import 'package:wastetastic/control/DatabaseCreator.dart';
 import 'package:wastetastic/control/CatalogMgr.dart';
 import 'package:wastetastic/control/WasteRecordMgr.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
+import 'package:wastetastic/screens/MapTestingScreen.dart';
 
 class BasicTestingScreen extends StatefulWidget {
   static const String id = 'basic_testing_screen';
@@ -29,6 +30,7 @@ class _BasicTestingScreenState extends State<BasicTestingScreen> {
             //['T7', 'T8', 'T1', 'T7A', 'T3']);
             //WasteRecordMgr.addNewRecord(
             //'rachel', DateTime.now(), 15, WasteCategory.E_WASTE);
+            Navigator.pushNamed(context, MapTestingScreen.id);
           },
         ),
       ),

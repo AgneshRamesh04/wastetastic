@@ -6,6 +6,7 @@ import 'package:wastetastic/screens/LoadingScreen.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/screens/NearYouScreen.dart';
 import 'package:wastetastic/screens/OtpScreen.dart';
+import 'package:wastetastic/screens/MapTestingScreen.dart';
 import 'package:wastetastic/screens/POIDetailsScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:wastetastic/screens/ResetPasword.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         signin.id: (context) => signin(),
         signup.id: (context) => signup(),
         LoadingScreen.id: (context) => LoadingScreen(),
+        MapTestingScreen.id: (context) => MapTestingScreen(),
       },
     );
   }
