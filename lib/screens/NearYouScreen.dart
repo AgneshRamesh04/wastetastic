@@ -115,7 +115,8 @@ class _NearYouScreenState extends State<NearYouScreen> {
                     MapScreen.id,
                     arguments: {
                       'title': title + ' WastePOI Near You',
-                      'WastePOI': WastePOIs
+                      'WastePOI': WastePOIs,
+                      'location': location,
                     },
                   );
                   // Add your onPressed code here!

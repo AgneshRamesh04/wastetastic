@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:custom_info_window/custom_info_window.dart';
+import 'package:geopoint/geopoint.dart' as gp;
 
 class MapScreen extends StatefulWidget {
   static const String id = 'Map';
@@ -95,6 +96,12 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context).settings.arguments;
     final String title = args['title'];
+    final gp.GeoPoint location = args['location'];
+    LatLng targetLocation = LatLng(1.3521, 103.8198);
+    print('Map:' + location.latitude.toString());
+    print('Map:' + location.longitude.toString());
+    if (location != null)
+      targetLocation = LatLng(location.latitude, location.longitude);
     buildMarkerList(args['WastePOI']);
     return SafeArea(
       child: Scaffold(
@@ -120,7 +127,7 @@ class _MapScreenState extends State<MapScreen> {
                 _customInfoWindowController.googleMapController = controller;
               },
               initialCameraPosition:
-                  CameraPosition(target: LatLng(1.3521, 103.8198), zoom: 12.0),
+                  CameraPosition(target: targetLocation, zoom: 12.0),
               markers: Set.from(markerList),
             ),
             CustomInfoWindow(
