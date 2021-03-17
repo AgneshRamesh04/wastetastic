@@ -98,8 +98,8 @@ class _MapScreenState extends State<MapScreen> {
     final String title = args['title'];
     final gp.GeoPoint location = args['location'];
     LatLng targetLocation = LatLng(1.3521, 103.8198);
-    print('Map:' + location.latitude.toString());
-    print('Map:' + location.longitude.toString());
+//    print('Map:' + location.latitude.toString());
+//    print('Map:' + location.longitude.toString());
     if (location != null)
       targetLocation = LatLng(location.latitude, location.longitude);
     buildMarkerList(args['WastePOI']);
