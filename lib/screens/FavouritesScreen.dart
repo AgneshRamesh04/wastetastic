@@ -5,7 +5,7 @@ import 'POIDetailsScreen.dart';
 import 'package:wastetastic/Constants.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
-import 'package:wastetastic/screens/Map.dart';
+import 'package:wastetastic/screens/MapScreen.dart';
 
 class FavouritesScreen extends StatefulWidget {
   @override
@@ -74,8 +74,14 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
             child: new FloatingActionButton(
               onPressed: () {
                 Navigator.pushNamed(
-                    context, Map.id);
-              // Add your onPressed code here!
+                  context,
+                  MapScreen.id,
+                  arguments: {
+                    'WastePOI': Fav_WastePOI_List,
+                    'title': 'Favorites',
+                  },
+                );
+                // Add your onPressed code here!
               },
               child: const Icon(Icons.map),
               backgroundColor: Colors.limeAccent.shade700,

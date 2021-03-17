@@ -9,7 +9,7 @@ import 'package:wastetastic/entity/WastePOI.dart';
 import 'POIDetailsScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
-import 'package:wastetastic/screens/Map.dart';
+import 'package:wastetastic/screens/MapScreen.dart';
 
 class CatalogScreen extends StatefulWidget {
   @override
@@ -88,8 +88,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       });
                     },
                     dropdownColor: Colors.grey[900],
-                    items:
-                    kWasteCategory.map<DropdownMenuItem<String>>((String value) {
+                    items: kWasteCategory
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -106,14 +106,17 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   child: StreamBuilder(
                     stream: CatalogMgr.getWastePOISnapshotsByCategory(
                       WasteCategory.values.firstWhere((element) =>
-                      element.toString() ==
-                          ('WasteCategory.' + selectedCategory.replaceAll(' ', '_'))),
+                          element.toString() ==
+                          ('WasteCategory.' +
+                              selectedCategory.replaceAll(' ', '_'))),
                     ),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        final List<DocumentSnapshot> documents = snapshot.data.docs;
+                        final List<DocumentSnapshot> documents =
+                            snapshot.data.docs;
                         print('Inside builder $snapshot');
-                        WastePOIs = CatalogMgr.getWastePOIFromSnapshots(documents);
+                        WastePOIs =
+                            CatalogMgr.getWastePOIFromSnapshots(documents);
 
                         return Column(
                           children: build_cat_cards(WastePOIs),
@@ -124,10 +127,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         );
                       }
                     },
-
                   ),
                 ),
-
               ),
             ],
           ),
@@ -137,7 +138,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
             child: new FloatingActionButton(
               onPressed: () {
                 Navigator.pushNamed(
-                    context, Map.id);
+                  context,
+                  MapScreen.id,
+                  arguments: {
+                    'title': selectedCategory + ' Catalog',
+                    'WastePOI': WastePOIs
+                  },
+                );
                 // Add your onPressed code here!
               },
               child: const Icon(Icons.map),

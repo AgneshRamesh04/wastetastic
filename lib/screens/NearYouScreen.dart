@@ -10,6 +10,7 @@ import 'package:wastetastic/control/NearYouMgr.dart';
 import 'package:geopoint/geopoint.dart' as gp;
 
 import 'package:wastetastic/Constants.dart';
+import 'MapScreen.dart';
 import 'POIDetailsScreen.dart';
 
 class NearYouScreen extends StatefulWidget {
@@ -65,44 +66,65 @@ class _NearYouScreenState extends State<NearYouScreen> {
           title: Text('Wastetastic'),
           centerTitle: true,
         ),
-        body: Container(
-          child: Column(children: [
-            header_card(
-              title: title,
-            ),
-            Text('Nearby Locations:'),
-            SizedBox(
-              height: 5,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: StreamBuilder(
-                  stream: CatalogMgr.getWastePOISnapshotsByCategory(
-                    WasteCategory.values.firstWhere((element) =>
-                        element.toString() ==
-                        ('WasteCategory.' +
-                            title.toUpperCase().replaceAll(' ', '_'))),
+        body: Stack(
+          children: [
+            Column(children: [
+              header_card(
+                title: title,
+              ),
+              Text('Nearby Locations:'),
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: StreamBuilder(
+                    stream: CatalogMgr.getWastePOISnapshotsByCategory(
+                      WasteCategory.values.firstWhere((element) =>
+                          element.toString() ==
+                          ('WasteCategory.' +
+                              title.toUpperCase().replaceAll(' ', '_'))),
+                    ),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final List<DocumentSnapshot> documents =
+                            snapshot.data.docs;
+                        print('Inside builder $snapshot');
+                        WastePOIs = NearYouMgr.retrieveNearbyWastePOI(
+                            documents, location);
+                        return Column(
+                          children: build_nearby_cards(WastePOIs),
+                        );
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
                   ),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final List<DocumentSnapshot> documents =
-                          snapshot.data.docs;
-                      print('Inside builder $snapshot');
-                      WastePOIs = NearYouMgr.retrieveNearbyWastePOI(
-                          documents, location);
-                      return Column(
-                        children: build_nearby_cards(WastePOIs),
-                      );
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
                 ),
               ),
+            ]),
+            Positioned(
+              top: 570.0,
+              right: 16.0,
+              child: new FloatingActionButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    MapScreen.id,
+                    arguments: {
+                      'title': title + ' WastePOI Near You',
+                      'WastePOI': WastePOIs
+                    },
+                  );
+                  // Add your onPressed code here!
+                },
+                child: const Icon(Icons.map),
+                backgroundColor: Colors.limeAccent.shade700,
+              ),
             ),
-          ]),
+          ],
         ),
       ),
     );

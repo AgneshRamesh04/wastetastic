@@ -57,7 +57,7 @@ class _MapTestingScreenState extends State<MapTestingScreen> {
                           Flexible(
                             child: Text(
                               "Recycle your old lightbulbs and florescent tubes.Opens Mon 11:30am to 7:30pm, Tue to Sun 11:30am to 8pm. #01-06, Three Cubes, 55 Siglap Road",
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.fade,
 //                            style:
 //                                Theme.of(context).textTheme.headline6.copyWith(
 //                                      color: Colors.white,
