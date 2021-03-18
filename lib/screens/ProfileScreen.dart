@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wastetastic/Constants.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/entity/UserAccount.dart';
-import 'package:wastetastic/screens/ResetPasword.dart';
+import 'package:wastetastic/screens/ResetPaswordScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/entity/WasteRecord.dart';
 import 'package:wastetastic/widgets/WasteRecordCard.dart';
@@ -94,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                   onPressed: () {
                                     Navigator.pushNamed(
-                                        context, ResetPassword.id,
+                                        context, ResetPasswordScreen.id,
                                         arguments: {
                                           'email': _loggedInUser.email,
                                           'forgot_password': false,

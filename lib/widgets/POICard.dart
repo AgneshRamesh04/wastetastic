@@ -43,7 +43,7 @@ class POI_card extends StatelessWidget {
                 overflow: TextOverflow.fade,
                 softWrap: false,
                 style: TextStyle(
-                  height: 1.2,
+                  height: 1.5,
                   letterSpacing: 1,
                 ),
               ),

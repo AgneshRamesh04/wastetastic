@@ -8,6 +8,7 @@ import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/screens/MapScreen.dart';
 
 class FavouritesScreen extends StatefulWidget {
+  static bool FavChanged = false;
   @override
   _FavouritesScreenState createState() => _FavouritesScreenState();
 }
@@ -27,18 +28,21 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         fav_card_list.add(
           POI_card(
             name: w.POI_name,
-            address: w.address,
+            address: w.address.trim(),
             postalcode: w.POI_postalcode,
             description: w.POI_description,
             wasteCategory: POICategory,
             fav: true,
             TO_POI_page: () async {
-              var favoriteChanged = await Navigator.pushNamed(
+              await Navigator.pushNamed(
                 context,
                 POI_DetialScreen.id,
-                arguments: w,
+                arguments: {
+                  'POI': w,
+                  'screen': 'Favourite',
+                },
               );
-              if (favoriteChanged == true) setState(() {});
+              if (FavouritesScreen.FavChanged == true) setState(() {});
             },
             FavFunct: () {
               setState(() {
@@ -68,24 +72,33 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
               ),
             ],
           ),
-          Positioned(
-            top: 570.0,
-            right: 16.0,
-            child: new FloatingActionButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  MapScreen.id,
-                  arguments: {
-                    'WastePOI': Fav_WastePOI_List,
-                    'title': 'Favorites',
-                  },
-                );
-                // Add your onPressed code here!
-              },
-              child: const Icon(Icons.map),
-              backgroundColor: Colors.limeAccent.shade700,
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          MapScreen.id,
+                          arguments: {
+                            'WastePOI': Fav_WastePOI_List,
+                            'title': 'Favorites',
+                          },
+                        );
+                        // Add your onPressed code here!
+                      },
+                      child: const Icon(Icons.map),
+                      backgroundColor: Colors.limeAccent.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),

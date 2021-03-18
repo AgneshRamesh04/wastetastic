@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
-import 'signin.dart';
-import 'signup.dart';
+import 'SignInScreen.dart';
+import 'SignUpScreen.dart';
 
-class welcomePage extends StatefulWidget {
+class WelcomeScreen extends StatefulWidget {
   static String id = 'welcome_page';
   @override
-  _welcomePageState createState() => _welcomePageState();
+  _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _welcomePageState extends State<welcomePage> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -67,7 +67,7 @@ class _welcomePageState extends State<welcomePage> {
                     onPress: () {
                       Navigator.pushNamed(
                         context,
-                        signup.id,
+                        SignUpScreen.id,
                       );
                     },
                   ),
@@ -79,7 +79,7 @@ class _welcomePageState extends State<welcomePage> {
                     onPress: () {
                       Navigator.pushNamed(
                         context,
-                        signin.id,
+                        SignInScreen.id,
                       );
                     },
                   )

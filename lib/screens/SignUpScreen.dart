@@ -15,13 +15,13 @@ String enteredEmail;
 String enteredPassword;
 String enteredConfirmPassword;
 
-class signup extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   static String id = 'signup_page';
   @override
-  _signupState createState() => _signupState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _signupState extends State<signup> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool _obscureConfirmText = true;
   bool _obscureText = true;
   @override

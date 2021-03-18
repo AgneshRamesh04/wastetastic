@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:wastetastic/screens/ForgotPassword.dart';
+import 'package:wastetastic/screens/ForgotPasswordScreen.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:wastetastic/control/LoginMgr.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-class signin extends StatefulWidget {
+class SignInScreen extends StatefulWidget {
   static String id = 'sigin_page';
   @override
-  _signinState createState() => _signinState();
+  _SignInScreenState createState() => _SignInScreenState();
 }
 
 String enteredPassword = "";
 String enteredUsername = "";
 
-class _signinState extends State<signin> {
+class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _obscureText = true;
   @override
@@ -133,7 +133,7 @@ class _signinState extends State<signin> {
                     ),
                     FlatButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, ForgotPassword.id);
+                        Navigator.pushNamed(context, ForgotPasswordScreen.id);
                       },
                       child: Text(
                         'Forgot Password?',
@@ -180,7 +180,11 @@ class _signinState extends State<signin> {
                                 content: Text(
                                   'You have entered a wrong username or password, '
                                   'please re-entered',
-                                  style: TextStyle(fontSize: 15),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
                                 duration: Duration(seconds: 3),
                               ),

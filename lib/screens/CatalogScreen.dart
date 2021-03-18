@@ -12,6 +12,7 @@ import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/MapScreen.dart';
 
 class CatalogScreen extends StatefulWidget {
+  static bool FavChanged = false;
   @override
   _CatalogScreenState createState() => _CatalogScreenState();
 }
@@ -35,18 +36,21 @@ class _CatalogScreenState extends State<CatalogScreen> {
         catalog_Cat.add(
           POI_card(
             name: wPOI.POI_name,
-            address: wPOI.address,
+            address: wPOI.address.trim(),
             postalcode: wPOI.POI_postalcode,
             description: wPOI.POI_description,
             wasteCategory: selectedCategory,
             fav: UserAccountMgr.isFav(wPOI),
             TO_POI_page: () async {
-              var changed = await Navigator.pushNamed(
+              await Navigator.pushNamed(
                 context,
                 POI_DetialScreen.id,
-                arguments: wPOI,
+                arguments: {
+                  'POI': wPOI,
+                  'screen': 'Catalog',
+                },
               );
-              if (changed) setState(() {});
+              if (CatalogScreen.FavChanged == true) setState(() {});
             },
             FavFunct: () {
               setState(() {
@@ -132,24 +136,33 @@ class _CatalogScreenState extends State<CatalogScreen> {
               ),
             ],
           ),
-          Positioned(
-            top: 570.0,
-            right: 16.0,
-            child: new FloatingActionButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  MapScreen.id,
-                  arguments: {
-                    'title': selectedCategory + ' Catalog',
-                    'WastePOI': WastePOIs
-                  },
-                );
-                // Add your onPressed code here!
-              },
-              child: const Icon(Icons.map),
-              backgroundColor: Colors.limeAccent.shade700,
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          MapScreen.id,
+                          arguments: {
+                            'title': selectedCategory + ' Catalog',
+                            'WastePOI': WastePOIs
+                          },
+                        );
+                        // Add your onPressed code here!
+                      },
+                      child: const Icon(Icons.map),
+                      backgroundColor: Colors.limeAccent.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),

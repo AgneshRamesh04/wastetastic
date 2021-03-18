@@ -30,7 +30,7 @@ class Carpark_card extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "$address. ",
+            "$address ",
             style: TextStyle(
               height: 2.0,
               letterSpacing: 1.25,

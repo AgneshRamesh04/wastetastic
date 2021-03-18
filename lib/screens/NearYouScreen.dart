@@ -15,6 +15,8 @@ import 'POIDetailsScreen.dart';
 
 class NearYouScreen extends StatefulWidget {
   static const String id = 'Near_You_Screen';
+  static bool FavChanged = false;
+
   @override
   _NearYouScreenState createState() => _NearYouScreenState();
 }
@@ -36,17 +38,21 @@ class _NearYouScreenState extends State<NearYouScreen> {
           nearbyPOI.add(
             POI_card(
               name: w.POI_name,
-              address: w.address,
+              address: w.address.trim(),
               postalcode: w.POI_postalcode,
               description: w.POI_description,
               wasteCategory: POICategory,
               fav: UserAccountMgr.isFav(w),
-              TO_POI_page: () {
-                Navigator.pushNamed(
+              TO_POI_page: () async {
+                await Navigator.pushNamed(
                   context,
                   POI_DetialScreen.id,
-                  arguments: w,
+                  arguments: {
+                    'POI': w,
+                    'screen': 'NearYou',
+                  },
                 );
+                if (NearYouScreen.FavChanged == true) setState(() {});
               },
               FavFunct: () {
                 setState(() {
@@ -105,25 +111,34 @@ class _NearYouScreenState extends State<NearYouScreen> {
                 ),
               ),
             ]),
-            Positioned(
-              top: 570.0,
-              right: 16.0,
-              child: new FloatingActionButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    MapScreen.id,
-                    arguments: {
-                      'title': title + ' WastePOI Near You',
-                      'WastePOI': WastePOIs,
-                      'location': location,
-                    },
-                  );
-                  // Add your onPressed code here!
-                },
-                child: const Icon(Icons.map),
-                backgroundColor: Colors.limeAccent.shade700,
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            MapScreen.id,
+                            arguments: {
+                              'title': title + ' WastePOI Near You',
+                              'WastePOI': WastePOIs,
+                              'location': location,
+                            },
+                          );
+                          // Add your onPressed code here!
+                        },
+                        child: const Icon(Icons.map),
+                        backgroundColor: Colors.limeAccent.shade700,
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
           ],
         ),

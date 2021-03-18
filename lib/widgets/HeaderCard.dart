@@ -17,6 +17,7 @@ class header_card extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(fontSize: 20),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         Divider(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wastetastic/screens/BasicTestingScreen.dart';
 import 'package:wastetastic/screens/CarParkScreen.dart';
-import 'package:wastetastic/screens/ForgotPassword.dart';
+import 'package:wastetastic/screens/ForgotPasswordScreen.dart';
 import 'package:wastetastic/screens/LoadingScreen.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/screens/NearYouScreen.dart';
@@ -9,10 +9,10 @@ import 'package:wastetastic/screens/OtpScreen.dart';
 import 'package:wastetastic/screens/MapTestingScreen.dart';
 import 'package:wastetastic/screens/POIDetailsScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:wastetastic/screens/ResetPasword.dart';
-import 'package:wastetastic/screens/signin.dart';
-import 'package:wastetastic/screens/signup.dart';
-import 'package:wastetastic/screens/welcomePage.dart';
+import 'package:wastetastic/screens/ResetPaswordScreen.dart';
+import 'package:wastetastic/screens/SignInScreen.dart';
+import 'package:wastetastic/screens/SignUpScreen.dart';
+import 'package:wastetastic/screens/WelcomeScreen.dart';
 import 'package:wastetastic/screens/MapScreen.dart';
 
 void main() async {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Wastetastic',
       theme: ThemeData.dark(),
-      initialRoute: welcomePage.id,
+      initialRoute: WelcomeScreen.id,
       routes: {
         BasicTestingScreen.id: (context) => BasicTestingScreen(),
         MainScreen.id: (context) => MainScreen(),
@@ -36,12 +36,12 @@ class MyApp extends StatelessWidget {
         POI_DetialScreen.id: (context) => POI_DetialScreen(),
         NearYouScreen.id: (context) => NearYouScreen(),
         CarParkScreen.id: (context) => CarParkScreen(),
-        ForgotPassword.id: (context) => ForgotPassword(),
-        ResetPassword.id: (context) => ResetPassword(),
+        ForgotPasswordScreen.id: (context) => ForgotPasswordScreen(),
+        ResetPasswordScreen.id: (context) => ResetPasswordScreen(),
         OTPScreen.id: (context) => OTPScreen(),
-        welcomePage.id: (context) => welcomePage(),
-        signin.id: (context) => signin(),
-        signup.id: (context) => signup(),
+        WelcomeScreen.id: (context) => WelcomeScreen(),
+        SignInScreen.id: (context) => SignInScreen(),
+        SignUpScreen.id: (context) => SignUpScreen(),
         LoadingScreen.id: (context) => LoadingScreen(),
         MapTestingScreen.id: (context) => MapTestingScreen(),
       },

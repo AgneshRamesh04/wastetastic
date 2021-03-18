@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wastetastic/control/OTPMgr.dart';
 import 'package:wastetastic/control/RegistrationMgr.dart';
-import 'package:wastetastic/screens/ForgotPassword.dart';
+import 'package:wastetastic/screens/ForgotPasswordScreen.dart';
 import 'package:wastetastic/screens/MainScreen.dart';
-import 'package:wastetastic/screens/ResetPasword.dart';
+import 'package:wastetastic/screens/ResetPaswordScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
-import 'package:wastetastic/screens/signup.dart';
+import 'package:wastetastic/screens/SignUpScreen.dart';
 
 TextEditingController emailController = new TextEditingController();
 
@@ -95,7 +95,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                 )
                               : Navigator.pushNamed(
                                   context,
-                                  ResetPassword.id,
+                                  ResetPasswordScreen.id,
                                   arguments: {
                                     'email': args['email'],
                                     'forgot_password': true,
@@ -130,10 +130,12 @@ class _OTPScreenState extends State<OTPScreen> {
 
                           if (OTPMgr.maxTries()) {
                             SignUp
-                                ? Navigator.popUntil(
-                                    context, ModalRoute.withName(signup.id))
-                                : Navigator.popUntil(context,
-                                    ModalRoute.withName(ForgotPassword.id));
+                                ? Navigator.popUntil(context,
+                                    ModalRoute.withName(SignUpScreen.id))
+                                : Navigator.popUntil(
+                                    context,
+                                    ModalRoute.withName(
+                                        ForgotPasswordScreen.id));
                           }
                         }
                       }

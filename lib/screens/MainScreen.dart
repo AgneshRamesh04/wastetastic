@@ -6,7 +6,7 @@ import 'AddWasteScreen.dart';
 import 'BasicTestingScreen.dart';
 import 'CatalogScreen.dart';
 import 'ProfileScreen.dart';
-import 'RecyleInfo.dart';
+import 'RecyleInfoScreen.dart';
 
 class MainScreen extends StatefulWidget {
   static const String id = 'MainScreen';
@@ -46,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
                   showDialog(
                     context: context,
                     builder: (BuildContext dialogContext) {
-                      return RecycleInfo();
+                      return RecycleInfoScreen();
                     },
                   );
                 },

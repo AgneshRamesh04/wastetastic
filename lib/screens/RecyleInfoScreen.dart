@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class RecycleInfo extends StatelessWidget {
+class RecycleInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
