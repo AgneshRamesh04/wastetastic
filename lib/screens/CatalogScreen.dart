@@ -12,7 +12,6 @@ import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/MapScreen.dart';
 
 class CatalogScreen extends StatefulWidget {
-  static bool FavChanged = false;
   @override
   _CatalogScreenState createState() => _CatalogScreenState();
 }
@@ -45,12 +44,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
               await Navigator.pushNamed(
                 context,
                 POI_DetialScreen.id,
-                arguments: {
-                  'POI': wPOI,
-                  'screen': 'Catalog',
-                },
+                arguments: wPOI,
               );
-              if (CatalogScreen.FavChanged == true) setState(() {});
+              if (POI_DetialScreen.favChanged) setState(() {});
             },
             FavFunct: () {
               setState(() {

@@ -15,7 +15,6 @@ import 'POIDetailsScreen.dart';
 
 class NearYouScreen extends StatefulWidget {
   static const String id = 'Near_You_Screen';
-  static bool FavChanged = false;
 
   @override
   _NearYouScreenState createState() => _NearYouScreenState();
@@ -47,12 +46,9 @@ class _NearYouScreenState extends State<NearYouScreen> {
                 await Navigator.pushNamed(
                   context,
                   POI_DetialScreen.id,
-                  arguments: {
-                    'POI': w,
-                    'screen': 'NearYou',
-                  },
+                  arguments: w,
                 );
-                if (NearYouScreen.FavChanged == true) setState(() {});
+                if (POI_DetialScreen.favChanged) setState(() {});
               },
               FavFunct: () {
                 setState(() {

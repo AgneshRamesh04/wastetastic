@@ -9,19 +9,22 @@ import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
 
 class POI_DetialScreen extends StatefulWidget {
+  static bool favChanged = false;
   static const String id = 'POI_detail_screen';
   @override
   _POI_DetialScreenState createState() => _POI_DetialScreenState();
 }
 
 class _POI_DetialScreenState extends State<POI_DetialScreen> {
-  bool changed = false;
+  @override
+  void initState() {
+    POI_DetialScreen.favChanged = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final Map arg = ModalRoute.of(context).settings.arguments;
-    WastePOI POI = arg['POI'];
-    String screen = arg['screen'];
+    final WastePOI POI = ModalRoute.of(context).settings.arguments;
 
     return SafeArea(
       child: Scaffold(
@@ -142,15 +145,8 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                       onPressed: () {
                         setState(() {
                           UserAccountMgr.editFav(POI);
-                          if (screen == 'Favourite')
-                            FavouritesScreen.FavChanged =
-                                !FavouritesScreen.FavChanged;
-                          else if (screen == 'Catalog')
-                            CatalogScreen.FavChanged =
-                                !CatalogScreen.FavChanged;
-                          else if (screen == 'NearYou')
-                            NearYouScreen.FavChanged =
-                                !NearYouScreen.FavChanged;
+                          POI_DetialScreen.favChanged =
+                              !POI_DetialScreen.favChanged;
                         });
                       },
                       label: Text('Favourite'),

@@ -8,7 +8,6 @@ import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/screens/MapScreen.dart';
 
 class FavouritesScreen extends StatefulWidget {
-  static bool FavChanged = false;
   @override
   _FavouritesScreenState createState() => _FavouritesScreenState();
 }
@@ -37,12 +36,9 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
               await Navigator.pushNamed(
                 context,
                 POI_DetialScreen.id,
-                arguments: {
-                  'POI': w,
-                  'screen': 'Favourite',
-                },
+                arguments: w,
               );
-              if (FavouritesScreen.FavChanged == true) setState(() {});
+              if (POI_DetialScreen.favChanged) setState(() {});
             },
             FavFunct: () {
               setState(() {
