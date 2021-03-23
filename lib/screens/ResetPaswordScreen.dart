@@ -45,32 +45,43 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             child: SingleChildScrollView(
               child: Form(
                 key: _formKey,
+                child: Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Column(
                   children: <Widget>[
+                    CircleAvatar(
+                      radius: 60.0,
+                      //backgroundImage: AssetImage('')
+                      backgroundColor: Colors.transparent,
+                      backgroundImage:
+                      AssetImage('assets/images/wastetastic_1.png'),
+                    ),
                     SizedBox(height: 20),
                     Text('Reset Password',
-                        style: TextStyle(color: Colors.black, fontSize: 18)),
+                        style: TextStyle(
+                            fontSize: 35.0, fontFamily: "Source Sans Pro")),
+                        //style: TextStyle(color: Colors.white, fontSize: 18)),
                     Container(
                       margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       child: TextFormField(
                         validator: (value) =>
                             value.isEmpty ? "Enter Password" : null,
                         onChanged: (value) {
                           newPassword = value;
                         },
-                        cursorColor: Colors.black,
-                        maxLength: 100,
+                        cursorColor: Colors.teal[900],
+                        maxLength: 30,
                         obscureText: _obscureText,
                         decoration: InputDecoration(
-                          icon: Icon(Icons.lock, color: Colors.black),
+                          icon: Icon(Icons.lock, color: Colors.teal[900]),
                           labelText: 'New Password',
                           labelStyle: TextStyle(
-                            color: Colors.black,
+                              color: Colors.teal[900], fontSize: 20,
                           ),
-                          helperText: 'Number of characters',
+                          //helperText: 'Number of characters',
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide: BorderSide(color: Colors.teal[900]),
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -89,7 +100,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                     Container(
                       margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       child: TextFormField(
                         validator: (value) {
                           if (value.isEmpty) return "Enter Password";
@@ -100,18 +111,18 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         onChanged: (value) {
                           confirmPassword = value;
                         },
-                        cursorColor: Colors.black,
-                        maxLength: 100,
+                        cursorColor: Colors.teal[900],
+                        maxLength: 30,
                         obscureText: _obscureConfirmText,
                         decoration: InputDecoration(
-                          icon: Icon(Icons.lock, color: Colors.black),
+                          icon: Icon(Icons.lock, color: Colors.teal[900]),
                           labelText: 'Confirm Password',
                           labelStyle: TextStyle(
-                            color: Colors.black,
+                            color: Colors.teal[900], fontSize: 20,
                           ),
-                          helperText: 'Number of characters',
+                          //helperText: 'Number of characters',
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide: BorderSide(color: Colors.teal[900]),
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -142,7 +153,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               return AlertDialog(
                                 title: Center(child: Text('Password Changed')),
                                 content: Text(
-                                    'You have successfully changed your account Password!!'),
+                                    'You have successfully changed your account Password!'),
                                 actions: <Widget>[
                                   new FlatButton(
                                     onPressed: () {
@@ -173,6 +184,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
         ),
       ),
-    );
+    )
+  );
   }
 }

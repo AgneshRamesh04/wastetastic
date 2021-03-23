@@ -141,7 +141,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     SimpleButton(
-                      content: 'LogIn',
+                      content: 'Login',
                       onPress: () async {
                         //print(enteredPassword);
                         //print(enteredUsername);

@@ -48,13 +48,24 @@ class _OTPScreenState extends State<OTPScreen> {
           child: SingleChildScrollView(
             child: Form(
               key: _formKey,
+              child: Padding(
+              padding: EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 150),
-                  Text('OTP Screen',
-                      style: TextStyle(color: Colors.black, fontSize: 18)),
+                  CircleAvatar(
+                    radius: 60.0,
+                    //backgroundImage: AssetImage('')
+                    backgroundColor: Colors.transparent,
+                    backgroundImage:
+                    AssetImage('assets/images/wastetastic_1.png'),
+                  ),
+                  SizedBox(height: 20),
+                  Text('Enter OTP',
+                      style: TextStyle(
+                          fontSize: 35.0, fontFamily: "Source Sans Pro")),
                   Container(
-                    margin: EdgeInsets.all(25),
+                    margin:
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       validator: (value) {
@@ -64,21 +75,24 @@ class _OTPScreenState extends State<OTPScreen> {
                       onChanged: (value) {
                         enteredOTP = value;
                       },
-                      cursorColor: Colors.black,
+                      cursorColor: Colors.teal[900],
                       maxLength: 6,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.lock, color: Colors.black),
+                        icon: Icon(Icons.lock, color: Colors.teal[900]),
                         labelText: 'OTP',
                         labelStyle: TextStyle(
-                          color: Colors.black,
+                          color: Colors.teal[900], fontSize: 20,
                         ),
-                        helperText: 'Number of digits',
+                        //helperText: 'Number of digits',
                         //suffixIcon: Icon(Icons.check_circle, color: Colors.black),
                         enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                          borderSide: BorderSide(color: Colors.teal[900]),
                         ),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   SimpleButton(
                     content: 'Submit',
@@ -147,6 +161,7 @@ class _OTPScreenState extends State<OTPScreen> {
           ),
         ),
       ),
+    )
     );
   }
 }

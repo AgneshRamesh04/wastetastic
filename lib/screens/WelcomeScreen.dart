@@ -75,7 +75,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     padding: EdgeInsets.all(10.0),
                   ),
                   SimpleButton(
-                    content: 'LogIn',
+                    content: 'Login',
                     onPress: () {
                       Navigator.pushNamed(
                         context,

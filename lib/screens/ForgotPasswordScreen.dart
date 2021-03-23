@@ -38,13 +38,23 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             child: SingleChildScrollView(
               child: Form(
                 key: _formKey,
+                child: Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 100),
+                    CircleAvatar(
+                      radius: 60.0,
+                      //backgroundImage: AssetImage('')
+                      backgroundColor: Colors.transparent,
+                      backgroundImage:
+                      AssetImage('assets/images/wastetastic_1.png'),
+                    ),
+                    SizedBox(height: 20),
                     Text('Forgot Password?',
-                        style: TextStyle(color: Colors.black, fontSize: 18)),
+                        style: TextStyle(
+                            fontSize: 35.0, fontFamily: "Source Sans Pro")),
                     Container(
-                      margin: EdgeInsets.all(25),
+                      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       child: TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
@@ -56,21 +66,24 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         onChanged: (value) {
                           enteredEmail = value;
                         },
-                        cursorColor: Colors.black,
-                        maxLength: 100,
+                        cursorColor: Colors.teal[900],
+                        maxLength: 50,
                         decoration: InputDecoration(
-                          icon: Icon(Icons.email, color: Colors.black),
+                          icon: Icon(Icons.email, color: Colors.teal[900]),
                           labelText: 'Email',
                           labelStyle: TextStyle(
-                            color: Colors.black,
+                            color: Colors.teal[900], fontSize: 20,
                           ),
                           //helperText: 'Number of characters',
                           //suffixIcon: Icon(Icons.check_circle, color: Colors.black),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide: BorderSide(color: Colors.teal[900]),
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 20,
                     ),
                     SimpleButton(
                       content: 'Request OTP',
@@ -96,6 +109,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           ),
         ),
       ),
+    )
     );
   }
 }
