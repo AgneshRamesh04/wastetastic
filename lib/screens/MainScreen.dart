@@ -38,7 +38,18 @@ class _MainScreenState extends State<MainScreen> {
         appBar: PreferredSize(
           preferredSize: Size.square(75),  //fromHeight(80.0),
           child:AppBar(
-          backgroundColor: Colors.teal[800],
+           flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: <Color>[
+                        Colors.green.shade700,
+                        Colors.teal.shade700,
+                      ])
+              ),
+            ),
+          //backgroundColor: Colors.teal[800],
           automaticallyImplyLeading: false,
           title:
               Column(
@@ -67,6 +78,7 @@ class _MainScreenState extends State<MainScreen> {
                       Text('Wastetastic',
                           style: TextStyle(
                               fontSize: 35.0, fontFamily: "Source Sans Pro")),
+
                       Icon(Icons.pending_actions_rounded)
                     ],
                   ),
@@ -79,7 +91,9 @@ class _MainScreenState extends State<MainScreen> {
         body: _widgetOptions.elementAt(_selectedPageIndex),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
+
             BottomNavigationBarItem(
+              //backgroundColor: Colors.green.shade700,
               icon: Icon(Icons.home),
               label: 'Home',
             ),
@@ -104,9 +118,16 @@ class _MainScreenState extends State<MainScreen> {
               label: 'Test Screen',
             ),
           ],
+
+
+
+          backgroundColor: Colors.green.shade700,
+          //fixedColor: Colors.green.shade700,
           currentIndex: _selectedPageIndex,
-          selectedItemColor: Colors.lightGreenAccent,
-          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.teal.shade700,
+          //fixedColor: Colors.yellowAccent,
+          type: BottomNavigationBarType.fixed,
+          unselectedItemColor: Colors.grey           ,
           onTap: _onItemTapped,
         ),
       ),

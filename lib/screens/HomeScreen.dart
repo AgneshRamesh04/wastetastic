@@ -17,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget build(BuildContext context) {
-    //UserAccountMgr.userDetails.printUserDetails();
     return SafeArea(
       child: Column(
         children: [

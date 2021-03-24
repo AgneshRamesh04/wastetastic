@@ -28,6 +28,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
   }
 
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         header_card(

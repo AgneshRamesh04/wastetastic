@@ -59,7 +59,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     SizedBox(height: 20),
                     Text('Reset Password',
                         style: TextStyle(
-                            fontSize: 35.0, fontFamily: "Source Sans Pro")),
+                            fontSize: 35.0, color: Colors.white, fontFamily: "Source Sans Pro")),
                         //style: TextStyle(color: Colors.white, fontSize: 18)),
                     SizedBox(height: 7.5),
                     Container(

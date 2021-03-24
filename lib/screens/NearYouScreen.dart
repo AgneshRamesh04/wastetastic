@@ -131,7 +131,7 @@ class _NearYouScreenState extends State<NearYouScreen> {
                           // Add your onPressed code here!
                         },
                         child: const Icon(Icons.map),
-                        backgroundColor: Colors.limeAccent.shade700,
+                        backgroundColor: Colors.green.shade700,
                       ),
                     ),
                   ],

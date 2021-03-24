@@ -52,7 +52,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     SizedBox(height: 20),
                     Text('Forgot Password?',
                         style: TextStyle(
-                            fontSize: 35.0, fontFamily: "Source Sans Pro")),
+                            fontSize: 35.0, color: Colors.white, fontFamily: "Source Sans Pro")),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       child: TextFormField(
