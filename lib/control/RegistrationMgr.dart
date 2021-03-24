@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 
 class RegistrationMgr {
 //  int num_attempts;
@@ -37,6 +38,7 @@ class RegistrationMgr {
           'password': password,
           'points': 0
         });
+        UserAccountMgr.readUserDetails(username);
         //add navigation here to the home screen
 //            break;
 //          } else {

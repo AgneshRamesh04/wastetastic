@@ -12,7 +12,7 @@
         android:label="wastetastic"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="THE API KEY"/>
+            android:value="AIzaSyDkohdEIM87Mtq6ViT8tJ_ljN5pUNAV1Jc"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
