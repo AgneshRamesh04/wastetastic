@@ -52,6 +52,7 @@ class UserAccount {
   }
 
   void printUserDetails() {
+    print('Reached printUserDetails');
     print("Username: " + _username);
     print("Email: " + _email);
     print("Name: " + _name);
