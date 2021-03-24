@@ -35,27 +35,46 @@ class _MainScreenState extends State<MainScreen> {
     ];
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
+        appBar: PreferredSize(
+          preferredSize: Size.square(75),  //fromHeight(80.0),
+          child:AppBar(
+          backgroundColor: Colors.teal[800],
           automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                child: Icon(Icons.restore_from_trash),
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext dialogContext) {
-                      return RecycleInfoScreen();
-                    },
-                  );
-                },
+          title:
+              Column(
+                children:[
+                    SizedBox(height: 15),
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        child: CircleAvatar(
+                          radius: 25.0,
+                            //backgroundImage: AssetImage('')
+                            backgroundColor: Colors.transparent,
+                            backgroundImage:
+                            AssetImage('assets/images/wastetastic_1.png'),
+                          ),
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext dialogContext) {
+                              return RecycleInfoScreen();
+                            },
+                          );
+                        },
+                      ),
+                      Text('Wastetastic',
+                          style: TextStyle(
+                              fontSize: 35.0, fontFamily: "Source Sans Pro")),
+                      Icon(Icons.pending_actions_rounded)
+                    ],
+                  ),
+                ],
               ),
-              Text('Wastetastic'),
-              Icon(Icons.pending_actions_rounded)
-            ],
-          ),
           centerTitle: true,
+
+          ),
         ),
         body: _widgetOptions.elementAt(_selectedPageIndex),
         bottomNavigationBar: BottomNavigationBar(

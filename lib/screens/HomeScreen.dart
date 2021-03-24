@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: [
           header_card(
-            title: 'Choose to Check NearBy Vendors',
+            title: 'Check Nearby Vendors',
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
