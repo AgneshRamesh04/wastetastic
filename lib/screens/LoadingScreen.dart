@@ -40,12 +40,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+
           SizedBox(
             height: 10,
           ),
           SizedBox(
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.lime),
             ),
             height: 125.0,
             width: 125.0,

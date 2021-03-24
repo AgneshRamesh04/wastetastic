@@ -18,7 +18,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
   static UserAccount _loggedInUser;
   String selectedTime = '12:00';
   String selectedDate = DateTime.now().toString();
-  String enteredWeight;
+  String enteredWeight = '7';
   String selectedCategory = 'NORMAL WASTE';
 
   @override
@@ -31,20 +31,29 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
 
     return Column(
       children: [
+
         header_card(
-          title: "Add New Record",
+          title: "Add Waste",
+        ),
+        Container(
+          child: Text('Record details of recent waste disposal:',
+              style: TextStyle(
+                  fontSize: 23.0, fontFamily: 'DancingScript')),),
+        SizedBox(
+          height: 20,
         ),
         Expanded(
           child: SingleChildScrollView(
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 50.0),
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 35.0),
               child: Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     DateTimePicker(
+
                       initialValue: selectedDate,
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2100),
@@ -84,9 +93,11 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: 'Enter Weight',
+
                         suffixText: 'Kg',
                         icon: Icon(Icons.shopping_cart_rounded),
                       ),
+                      initialValue: enteredWeight,
                       keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value.isEmpty) {
@@ -109,7 +120,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                           icon: Icon(Icons.receipt_long)),
                       iconSize: 24,
                       elevation: 20,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                       onChanged: (String newValue) {
                         setState(
                           () {
@@ -117,7 +128,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                           },
                         );
                       },
-                      dropdownColor: Colors.grey[900],
+                      dropdownColor: Colors.lime,
                       items: kWasteCategory
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
@@ -133,6 +144,14 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Center(
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(30.0),
+                              ),
+                              primary: Colors.lime,
+
+                              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                              ),
                           onPressed: () {
                             // Validate returns true if the form is valid, or false
                             // otherwise.
@@ -163,7 +182,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                                     title:
                                         Center(child: Text('New Record Added')),
                                     content: Text(
-                                      "Yaaay!! You have added a new Waste Record to "
+                                      "Yipee! You have added a new Waste Record to "
                                       "your account",
                                     ),
                                     actions: <Widget>[
@@ -180,7 +199,11 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                               );
                             }
                           },
-                          child: Text('Add Record'),
+                          child: Text('Add Record',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.teal.shade900,
+                                fontWeight: FontWeight.bold,)),
                         ),
                       ),
                     ),

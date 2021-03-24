@@ -21,25 +21,30 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: [
           header_card(
-            title: 'Check Nearby Vendors',
+            title: 'Recycle Nearby',
           ),
+
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black,
-                width: 4,
-              ),
-              borderRadius: BorderRadius.circular(32),
-            ),
+            child: Text('Choose waste category for nearby vendors:',
+                style: TextStyle(
+                    fontSize: 23.0, fontFamily: 'DancingScript')),),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal:20),
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+            // decoration: BoxDecoration(
+            //   border: Border.all(
+            //     color: Colors.black,
+            //     width: 4,
+            //   ),
+            //   borderRadius: BorderRadius.circular(32),
+            // ),
             child: Column(
               children: [
                 SizedBox(
-                  height: 60,
+                  height: 10,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CategoryButton(
                       icon: Icons.restore_from_trash,
@@ -52,8 +57,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                     ),
+
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    //SizedBox(width: ),
+                    //Container(width: 1),
                     CategoryButton(
-                      icon: Icons.phone_android_sharp,
+                      icon: Icons.phone_android,
                       category: 'E Waste',
                       redirect: () {
                         Navigator.pushNamed(
@@ -64,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     CategoryButton(
-                      icon: Icons.lightbulb_outline,
+                      icon: Icons.emoji_objects_outlined,//lightbulb_outline,
                       category: 'Lighting Waste',
                       redirect: () {
                         Navigator.pushNamed(
@@ -77,13 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CategoryButton(
-                      icon: Icons.fire_extinguisher_outlined,
+                      icon: Icons.local_fire_department,//flare,//fireplace_outlined,//bubble_chart,//warning_rounded,
                       category: 'Waste Treatment',
                       redirect: () {
                         Navigator.pushNamed(
@@ -93,8 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                     ),
+
                     CategoryButton(
-                      icon: Icons.attach_money_sharp,
+                      icon: Icons.attach_money_rounded,
                       category: 'Cash For Trash',
                       redirect: () {
                         Navigator.pushNamed(
@@ -104,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                     ),
+
                   ],
                 ),
                 SizedBox(

@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.square(75),  //fromHeight(80.0),
+          preferredSize: Size.square(70),  //fromHeight(80.0),
           child:AppBar(
            flexibleSpace: Container(
               decoration: BoxDecoration(
@@ -54,14 +54,13 @@ class _MainScreenState extends State<MainScreen> {
           title:
               Column(
                 children:[
-                    SizedBox(height: 15),
+                    SizedBox(height: 14),
                     Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
                         child: CircleAvatar(
-                          radius: 25.0,
-                            //backgroundImage: AssetImage('')
+                          radius: 27.0,
                             backgroundColor: Colors.transparent,
                             backgroundImage:
                             AssetImage('assets/images/wastetastic_1.png'),
@@ -75,10 +74,11 @@ class _MainScreenState extends State<MainScreen> {
                           );
                         },
                       ),
+                      SizedBox(width:67),
                       Text('Wastetastic',
                           style: TextStyle(
-                              fontSize: 35.0, fontFamily: "Source Sans Pro")),
-
+                              fontSize: 30.0, fontFamily: "DancingScript")),
+                      SizedBox(width:80),
                       Icon(Icons.pending_actions_rounded)
                     ],
                   ),
@@ -89,47 +89,55 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         body: _widgetOptions.elementAt(_selectedPageIndex),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                    Colors.green.shade700,
+                    Colors.teal.shade700,
+                  ]),
 
-            BottomNavigationBarItem(
-              //backgroundColor: Colors.green.shade700,
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: 'Catalog',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add),
-              label: 'Add Waste',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.star),
-              label: 'Favourite',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              label: 'Profile',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.build),
-              label: 'Test Screen',
-            ),
-          ],
-
-
-
-          backgroundColor: Colors.green.shade700,
-          //fixedColor: Colors.green.shade700,
-          currentIndex: _selectedPageIndex,
-          selectedItemColor: Colors.teal.shade700,
-          //fixedColor: Colors.yellowAccent,
-          type: BottomNavigationBarType.fixed,
-          unselectedItemColor: Colors.grey           ,
-          onTap: _onItemTapped,
+          ),
+          child: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                //backgroundColor: Colors.green.shade700,
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: 'Catalog',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.add),
+                label: 'Add Waste',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.star),
+                label: 'Favourite',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle),
+                label: 'Profile',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.build),
+                label: 'Test Screen',
+              ),
+            ],
+            backgroundColor: Colors.transparent,
+            elevation: 0,//Colors.green.shade700,
+            currentIndex: _selectedPageIndex,
+            selectedItemColor: Colors.lime,
+            type: BottomNavigationBarType.fixed,
+            unselectedItemColor: Colors.white,
+            onTap: _onItemTapped,
+          ),
         ),
+
       ),
     );
   }

@@ -39,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
           gradient: LinearGradient(
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
-            colors: [Colors.green[700], Colors.lime[200]],
+            colors: [Colors.lightGreen.shade700, Colors.lime.shade400,],//Colors.green[700], Colors.lime[200]],
             //center: Alignment(0.0, 0.0),
           ),
         ),

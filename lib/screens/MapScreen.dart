@@ -105,21 +105,51 @@ class _MapScreenState extends State<MapScreen> {
     buildMarkerList(args['WastePOI']);
     return SafeArea(
       child: Scaffold(
+          // appBar: PreferredSize(
+          //   preferredSize: Size.square(75),
+          //   child: AppBar(
+          //     backgroundColor: Colors.teal[800],
+          //     title: Text(
+          //       title,
+          //       style: TextStyle(fontSize: 35.0, fontFamily: "Source Sans Pro"),
+          //     ),
+          //     centerTitle: true,
+          //     leading: IconButton(
+          //       icon: Icon(Icons.arrow_back),
+          //       onPressed: () {
+          //         Navigator.pop(context, changed);
+          //       },
+          //     ),
+          //   ),
+          // ),
           appBar: PreferredSize(
-            preferredSize: Size.square(75),
-            child: AppBar(
-              backgroundColor: Colors.teal[800],
-              title: Text(
-                title,
-                style: TextStyle(fontSize: 35.0, fontFamily: "Source Sans Pro"),
+            preferredSize: Size.square(70),  //fromHeight(80.0),
+            child:AppBar(
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: <Color>[
+                          Colors.green.shade700,
+                          Colors.teal.shade700,
+                        ])
+                ),
+              ),
+              title: Column(
+                children:[
+                  SizedBox(height: 14),
+                  Row(
+                    children: [
+                      //SizedBox(width: 60),
+                      Text(title,
+                          style: TextStyle(
+                              fontSize: 20.0, fontFamily: "Source Sans Pro")),
+                    ],
+                  ),
+                ],
               ),
               centerTitle: true,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context, changed);
-                },
-              ),
             ),
           ),
           body: Stack(children: <Widget>[

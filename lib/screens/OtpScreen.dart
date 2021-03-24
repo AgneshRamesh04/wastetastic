@@ -41,7 +41,7 @@ class _OTPScreenState extends State<OTPScreen> {
           gradient: LinearGradient(
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
-            colors: [Colors.green[700], Colors.lime[200]],
+            colors: [Colors.lightGreen.shade700, Colors.lime.shade400,],
           ),
         ),
         child: SafeArea(

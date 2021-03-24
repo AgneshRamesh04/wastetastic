@@ -59,6 +59,13 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
               header_card(
                 title: 'Favourites',
               ),
+              Container(
+                child: Text('A list of favourite recycling vendors:',
+                    style: TextStyle(
+                        fontSize: 23.0, fontFamily: 'DancingScript')),),
+              SizedBox(
+                height: 20,
+              ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -89,7 +96,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                         // Add your onPressed code here!
                       },
                       child: const Icon(Icons.map),
-                      backgroundColor: Colors.green.shade700,
+                      backgroundColor: Colors.teal.shade700,
                     ),
                   ),
                 ],

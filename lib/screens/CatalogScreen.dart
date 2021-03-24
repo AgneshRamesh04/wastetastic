@@ -60,39 +60,61 @@ class _CatalogScreenState extends State<CatalogScreen> {
               header_card(
                 title: 'Catalog',
               ),
+              Container(
+                child: Text('Choose by Waste Category:',
+                    style: TextStyle(
+                        fontSize: 23.0, fontFamily: 'DancingScript')),),
+              SizedBox(
+                height: 8,
+              ),
               SafeArea(
                 child: Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 15,
+                  decoration: BoxDecoration(
+                      color: Colors.lime,
+                      border: Border.all(
+                        color: Colors.teal.shade900,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(30))
                   ),
+                  //color: Colors.lime,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 100,
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
                   child: DropdownButtonFormField<String>(
-                    value: selectedCategory,
-                    icon: Icon(Icons.arrow_drop_down),
                     decoration: InputDecoration(
-                      icon: Icon(Icons.receipt_long),
-                      prefix: Text("Filter by Waste Category: "),
-                    ),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent))),
+                    value: selectedCategory,
+                    icon: Icon(Icons.arrow_drop_down, color: Colors.teal.shade900,),
+                    // decoration: InputDecoration(
+                    //
+                    //   //icon: Icon(Icons.receipt_long),
+                    //   prefix: Text("Filter by waste category: "),
+                    // ),
                     iconSize: 24,
                     elevation: 20,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.teal.shade900),
                     onChanged: (String newValue) {
                       setState(() {
                         selectedCategory = newValue;
                       });
                     },
-                    dropdownColor: Colors.grey[900],
+                    dropdownColor: Colors.lime.shade400,
                     items: kWasteCategory
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value),
+                        child: Text(value,
+                          style: TextStyle(fontWeight: FontWeight.bold),),
+
                       );
                     }).toList(),
                   ),
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 10.0,
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -146,7 +168,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         // Add your onPressed code here!
                       },
                       child: const Icon(Icons.map),
-                      backgroundColor: Colors.green.shade700,
+                      backgroundColor: Colors.teal.shade700,
                     ),
                   ),
                 ],
