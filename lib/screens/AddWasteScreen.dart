@@ -16,6 +16,10 @@ class AddWasteScreen extends StatefulWidget {
 
 class _AddWasteScreenState extends State<AddWasteScreen> {
   static UserAccount _loggedInUser;
+  String selectedTime = '12:00';
+  String selectedDate = DateTime.now().toString();
+  String enteredWeight;
+  String selectedCategory = 'NORMAL WASTE';
 
   @override
   void initState() {
@@ -24,10 +28,6 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
   }
 
   Widget build(BuildContext context) {
-    String selectedTime = '12:00';
-    String selectedDate = DateTime.now().toString();
-    String enteredWeight;
-    String selectedCategory = 'NORMAL WASTE';
     return Column(
       children: [
         header_card(
