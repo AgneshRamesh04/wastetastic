@@ -61,9 +61,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         style: TextStyle(
                             fontSize: 35.0, fontFamily: "Source Sans Pro")),
                         //style: TextStyle(color: Colors.white, fontSize: 18)),
+                    SizedBox(height: 7.5),
                     Container(
                       margin:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                          EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
                       child: TextFormField(
                         validator: (value) =>
                             value.isEmpty ? "Enter Password" : null,
@@ -100,7 +101,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                     Container(
                       margin:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                          EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
                       child: TextFormField(
                         validator: (value) {
                           if (value.isEmpty) return "Enter Password";

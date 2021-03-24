@@ -48,13 +48,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Form(
                 key: _formKey,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(0.0),
                   child: Column(
                     children: <Widget>[
-                      Image.asset(
-                        'assets/images/wastetastic_1.png',
-                        fit: BoxFit.contain,
-                        height: 70,
+                      CircleAvatar(
+                        radius: 60.0,
+                        //backgroundImage: AssetImage('')
+                        backgroundColor: Colors.transparent,
+                        backgroundImage:
+                        AssetImage('assets/images/wastetastic_1.png'),
+                      ),
+                      SizedBox(
+                        width: 150.0,
+                        child: TypewriterAnimatedTextKit(
+                          text: [
+                            "Sign Up",
+                          ],
+                          textStyle: TextStyle(
+                              fontSize: 35.0, fontFamily: "Source Sans Pro"),
+                          textAlign: TextAlign.start,
+                        ),
                       ),
                       Container(
                         margin:
@@ -162,7 +175,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           maxLength: 30,
                           obscureText: _obscureText,
                           decoration: InputDecoration(
-                            icon: Icon(Icons.vpn_key_rounded,
+                            icon: Icon(Icons.lock,
                                 color: Colors.teal[900]),
 
                             labelText: 'Password',
@@ -199,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: (value) {
                             if (value.isEmpty) return "Confirm Password";
                             if (value != enteredPassword)
-                              return "Passwords Dont Match";
+                              return "Passwords Don't Match";
                             return null;
                           },
                           onChanged: (value) {
@@ -209,7 +222,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           maxLength: 30,
                           obscureText: _obscureConfirmText,
                           decoration: InputDecoration(
-                            icon: Icon(Icons.vpn_key_outlined,
+                            icon: Icon(Icons.lock,
                                 color: Colors.teal[900]),
 
                             labelText: 'Confirm Password',
@@ -240,8 +253,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.all(10.0),
+
+                      SizedBox(
+                        height: 20,
                       ),
                       SimpleButton(
                         content: 'Sign Up',

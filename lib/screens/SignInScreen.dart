@@ -48,7 +48,7 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Form(
               key: _formKey,
               child: Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: EdgeInsets.all(10.0),
                 child: Column(
                   children: <Widget>[
                     CircleAvatar(
@@ -58,18 +58,23 @@ class _SignInScreenState extends State<SignInScreen> {
                       backgroundImage:
                           AssetImage('assets/images/wastetastic_1.png'),
                     ),
+                    SizedBox(height: 20),
                     SizedBox(
-                      width: 120.0,
+                      width: 110.0,
                       child: TypewriterAnimatedTextKit(
                         text: [
                           "Login",
                         ],
                         textStyle: TextStyle(
-                            fontSize: 40.0, fontFamily: "Source Sans Pro"),
+                            fontSize: 35.0, fontFamily: "Source Sans Pro"),
                         textAlign: TextAlign.start,
                       ),
                     ),
-                    TextFormField(
+                    SizedBox(height: 7.5),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
+                    child: TextFormField(
+
                       validator: (value) =>
                           value.isEmpty ? "Enter Username" : null,
                       onChanged: (value) {
@@ -93,7 +98,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                     ),
-                    TextFormField(
+              ),
+                    Container(
+                        margin: EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
+                    child:TextFormField(
                       validator: (value) =>
                           value.isEmpty ? "Enter Password" : null,
                       onChanged: (value) {
@@ -103,7 +111,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       cursorColor: Colors.teal[900],
                       maxLength: 30,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.vpn_key_rounded,
+                        icon: Icon(Icons.lock,
                             color: Colors.teal[900]),
                         labelText: 'Password',
                         labelStyle:
@@ -130,7 +138,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           },
                         ),
                       ),
-                    ),
+                    )
+                  ),
                     FlatButton(
                       onPressed: () {
                         Navigator.pushNamed(context, ForgotPasswordScreen.id);
@@ -139,6 +148,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         'Forgot Password?',
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     SimpleButton(
                       content: 'Login',
