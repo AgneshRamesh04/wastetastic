@@ -70,6 +70,7 @@ class POI_card extends StatelessWidget {
             ),
             IconButton(
               onPressed: FavFunct,
+              iconSize: 30,
               icon: Icon(
                 Icons.star,
                 color: fav ? Colors.yellow.shade600 : Colors.white,

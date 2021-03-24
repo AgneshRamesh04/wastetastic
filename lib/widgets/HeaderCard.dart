@@ -8,10 +8,12 @@ class header_card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      //color: Colors.lime,
       children: [
+
         Padding(
           padding: const EdgeInsets.only(
-            top: 30.0,
+            top: 20.0,
             bottom: 10.0,
           ),
           child: Text(
@@ -30,7 +32,7 @@ class header_card extends StatelessWidget {
           color: Colors.lime,
         ),
         SizedBox(
-          height: 20.0,
+          height: 25.0,
         ),
       ],
     );

@@ -11,20 +11,25 @@ class CategoryButton extends StatelessWidget {
     return Column(
       children: [
         RawMaterialButton(
-          elevation: 40,
+          elevation: 10,
           onPressed: redirect,
           child: Icon(
             icon,
-            size: 70,
+            size: 60,
+            color: Colors.teal.shade900,
           ),
           shape: CircleBorder(),
-          fillColor: Colors.grey[900],
+          fillColor: Colors.lime,
           padding: EdgeInsets.all(15.0),
         ),
         SizedBox(
           height: 5,
         ),
-        Text(category),
+        Text(category,
+        style: TextStyle(
+          fontFamily: "DancingScript",
+          fontSize: 20,
+        ),),
       ],
     );
   }
