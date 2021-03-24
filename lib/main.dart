@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Wastetastic',
-      theme: ThemeData.dark(),
+      theme: ThemeData.light(),
       initialRoute: WelcomeScreen.id,
       routes: {
         BasicTestingScreen.id: (context) => BasicTestingScreen(),
