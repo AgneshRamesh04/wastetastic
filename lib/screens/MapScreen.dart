@@ -105,14 +105,21 @@ class _MapScreenState extends State<MapScreen> {
     buildMarkerList(args['WastePOI']);
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            title: Text(title),
-            centerTitle: true,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context, changed);
-              },
+          appBar: PreferredSize(
+            preferredSize: Size.square(75),
+            child: AppBar(
+              backgroundColor: Colors.teal[800],
+              title: Text(
+                title,
+                style: TextStyle(fontSize: 35.0, fontFamily: "Source Sans Pro"),
+              ),
+              centerTitle: true,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context, changed);
+                },
+              ),
             ),
           ),
           body: Stack(children: <Widget>[

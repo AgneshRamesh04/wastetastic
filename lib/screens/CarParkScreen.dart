@@ -13,29 +13,30 @@ class CarParkScreen extends StatefulWidget {
 }
 
 class _CarParkScreenState extends State<CarParkScreen> {
+  WastePOI POI;
+  List<Widget> build_carpark_cards(List<List> carParkList) {
+    //List<WastePOI> favorites = retrieveFavoritesFromDatabase(username)
+    List<Widget> carpark_card_list = [
+      Center(child: Text('Near ' + POI.POI_name)),
+      SizedBox(
+        height: 5,
+      )
+    ];
+    for (List cp in carParkList) {
+      carpark_card_list.add(Carpark_card(
+        address: cp[0].address,
+        freeParking: cp[0].freeParking,
+        carParkType: cp[0].carParkType,
+        parkingType: cp[0].parkingType,
+        avail_slots: int.parse(cp[1]),
+      ));
+    }
+    return carpark_card_list;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final WastePOI POI = ModalRoute.of(context).settings.arguments;
-
-    List<Widget> build_carpark_cards(List<List> carParkList) {
-      //List<WastePOI> favorites = retrieveFavoritesFromDatabase(username)
-      List<Widget> carpark_card_list = [
-        Center(child: Text('Near ' + POI.POI_name)),
-        SizedBox(
-          height: 5,
-        )
-      ];
-      for (List cp in carParkList) {
-        carpark_card_list.add(Carpark_card(
-          address: cp[0].address,
-          freeParking: cp[0].freeParking,
-          carParkType: cp[0].carParkType,
-          parkingType: cp[0].parkingType,
-          avail_slots: int.parse(cp[1]),
-        ));
-      }
-      return carpark_card_list;
-    }
+    POI = ModalRoute.of(context).settings.arguments;
 
     return SafeArea(
       child: Scaffold(

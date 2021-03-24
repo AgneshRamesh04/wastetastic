@@ -22,44 +22,46 @@ class NearYouScreen extends StatefulWidget {
 
 class _NearYouScreenState extends State<NearYouScreen> {
   List<WastePOI> WastePOIs;
+  String title;
+
+  List<POI_card> build_nearby_cards(List<WastePOI> nearbyWastePOI) {
+    List<POI_card> nearbyPOI = [];
+    for (WastePOI w in nearbyWastePOI) {
+      String POICategory = w.wasteCategory.toString().split('.').last;
+      POICategory = POICategory.replaceAll('_', ' ');
+      if (POICategory == title.toUpperCase()) //&& w.location <= 20km
+        nearbyPOI.add(
+          POI_card(
+            name: w.POI_name,
+            address: w.address.trim(),
+            postalcode: w.POI_postalcode,
+            description: w.POI_description,
+            wasteCategory: POICategory,
+            fav: UserAccountMgr.isFav(w),
+            TO_POI_page: () async {
+              await Navigator.pushNamed(
+                context,
+                POI_DetialScreen.id,
+                arguments: w,
+              );
+              if (POI_DetialScreen.favChanged) setState(() {});
+            },
+            FavFunct: () {
+              setState(() {
+                UserAccountMgr.editFav(w);
+              });
+            },
+          ),
+        );
+    }
+    return nearbyPOI;
+  }
+
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context).settings.arguments as Map;
-    final String title = arguments['title'];
     final gp.GeoPoint location = arguments['location'];
-
-    List<POI_card> build_nearby_cards(List<WastePOI> nearbyWastePOI) {
-      List<POI_card> nearbyPOI = [];
-      for (WastePOI w in nearbyWastePOI) {
-        String POICategory = w.wasteCategory.toString().split('.').last;
-        POICategory = POICategory.replaceAll('_', ' ');
-        if (POICategory == title.toUpperCase()) //&& w.location <= 20km
-          nearbyPOI.add(
-            POI_card(
-              name: w.POI_name,
-              address: w.address.trim(),
-              postalcode: w.POI_postalcode,
-              description: w.POI_description,
-              wasteCategory: POICategory,
-              fav: UserAccountMgr.isFav(w),
-              TO_POI_page: () async {
-                await Navigator.pushNamed(
-                  context,
-                  POI_DetialScreen.id,
-                  arguments: w,
-                );
-                if (POI_DetialScreen.favChanged) setState(() {});
-              },
-              FavFunct: () {
-                setState(() {
-                  UserAccountMgr.editFav(w);
-                });
-              },
-            ),
-          );
-      }
-      return nearbyPOI;
-    }
+    title = arguments['title'];
 
     //@todo get user location and filter nearby locations
     return SafeArea(

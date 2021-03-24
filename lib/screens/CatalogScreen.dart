@@ -19,46 +19,39 @@ class CatalogScreen extends StatefulWidget {
 class _CatalogScreenState extends State<CatalogScreen> {
   String selectedCategory = 'LIGHTING WASTE';
   List<WastePOI> WastePOIs;
-  @override
-//  List<WastePOI> getAllWastePOI() {
-//    return CatalogMgr.readAllWastePOI();
-//  }
 
-  Widget build(BuildContext context) {
-    List<POI_card> build_cat_cards(List<WastePOI> POIs) {
-      List<POI_card> catalog_Cat = [];
-      for (WastePOI wPOI in POIs) {
-        /*String POICategory = w.wasteCategory.toString().split('.').last;
-        POICategory = POICategory.replaceAll('_', ' ');
-        if (POICategory == selectedCategory)
-          */
-        catalog_Cat.add(
-          POI_card(
-            name: wPOI.POI_name,
-            address: wPOI.address.trim(),
-            postalcode: wPOI.POI_postalcode,
-            description: wPOI.POI_description,
-            wasteCategory: selectedCategory,
-            fav: UserAccountMgr.isFav(wPOI),
-            TO_POI_page: () async {
-              await Navigator.pushNamed(
-                context,
-                POI_DetialScreen.id,
-                arguments: wPOI,
-              );
-              if (POI_DetialScreen.favChanged) setState(() {});
-            },
-            FavFunct: () {
-              setState(() {
-                UserAccountMgr.editFav(wPOI);
-              });
-            },
-          ),
-        );
-      }
-      return catalog_Cat;
+  List<POI_card> build_cat_cards(List<WastePOI> POIs) {
+    List<POI_card> catalog_Cat = [];
+    for (WastePOI wPOI in POIs) {
+      catalog_Cat.add(
+        POI_card(
+          name: wPOI.POI_name,
+          address: wPOI.address.trim(),
+          postalcode: wPOI.POI_postalcode,
+          description: wPOI.POI_description,
+          wasteCategory: selectedCategory,
+          fav: UserAccountMgr.isFav(wPOI),
+          TO_POI_page: () async {
+            await Navigator.pushNamed(
+              context,
+              POI_DetialScreen.id,
+              arguments: wPOI,
+            );
+            if (POI_DetialScreen.favChanged) setState(() {});
+          },
+          FavFunct: () {
+            setState(() {
+              UserAccountMgr.editFav(wPOI);
+            });
+          },
+        ),
+      );
     }
+    return catalog_Cat;
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
