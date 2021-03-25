@@ -31,74 +31,70 @@ class _MainScreenState extends State<MainScreen> {
       AddWasteScreen(),
       FavouritesScreen(),
       ProfileScreen(),
-      BasicTestingScreen(),
+      //BasicTestingScreen(),
     ];
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.square(70),  //fromHeight(80.0),
-          child:AppBar(
-           flexibleSpace: Container(
+          preferredSize: Size.square(70), //fromHeight(80.0),
+          child: AppBar(
+            flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: <Color>[
-                        Colors.green.shade700,
-                        Colors.teal.shade700,
-                      ])
-              ),
+                    Colors.green.shade700,
+                    Colors.teal.shade700,
+                  ])),
             ),
-          //backgroundColor: Colors.teal[800],
-          automaticallyImplyLeading: false,
-          title:
-              Column(
-                children:[
-                    SizedBox(height: 14),
-                    Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        child: CircleAvatar(
-                          radius: 27.0,
-                            backgroundColor: Colors.transparent,
-                            backgroundImage:
+            //backgroundColor: Colors.teal[800],
+            automaticallyImplyLeading: false,
+            title: Column(
+              children: [
+                SizedBox(height: 14),
+                Row(
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      child: CircleAvatar(
+                        radius: 27.0,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage:
                             AssetImage('assets/images/wastetastic_1.png'),
-                          ),
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext dialogContext) {
-                              return RecycleInfoScreen();
-                            },
-                          );
-                        },
                       ),
-                      SizedBox(width:67),
-                      Text('Wastetastic',
-                          style: TextStyle(
-                              fontSize: 30.0, fontFamily: "DancingScript")),
-                      SizedBox(width:80),
-                      Icon(Icons.pending_actions_rounded)
-                    ],
-                  ),
-                ],
-              ),
-          centerTitle: true,
-
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext dialogContext) {
+                            return RecycleInfoScreen();
+                          },
+                        );
+                      },
+                    ),
+                    SizedBox(width: 67),
+                    Text('Wastetastic',
+                        style: TextStyle(
+                            fontSize: 30.0, fontFamily: "DancingScript")),
+                    SizedBox(width: 80),
+                    Icon(Icons.pending_actions_rounded)
+                  ],
+                ),
+              ],
+            ),
+            centerTitle: true,
           ),
         ),
         body: _widgetOptions.elementAt(_selectedPageIndex),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[
-                    Colors.green.shade700,
-                    Colors.teal.shade700,
-                  ]),
-
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+                  Colors.green.shade700,
+                  Colors.teal.shade700,
+                ]),
           ),
           child: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
@@ -123,13 +119,13 @@ class _MainScreenState extends State<MainScreen> {
                 icon: Icon(Icons.account_circle),
                 label: 'Profile',
               ),
-              BottomNavigationBarItem(
+              /*BottomNavigationBarItem(
                 icon: Icon(Icons.build),
                 label: 'Test Screen',
-              ),
+              ),*/
             ],
             backgroundColor: Colors.transparent,
-            elevation: 0,//Colors.green.shade700,
+            elevation: 0, //Colors.green.shade700,
             currentIndex: _selectedPageIndex,
             selectedItemColor: Colors.lime,
             type: BottomNavigationBarType.fixed,
@@ -137,7 +133,6 @@ class _MainScreenState extends State<MainScreen> {
             onTap: _onItemTapped,
           ),
         ),
-
       ),
     );
   }

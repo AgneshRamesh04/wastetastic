@@ -17,10 +17,11 @@ class _CarParkScreenState extends State<CarParkScreen> {
   List<Widget> build_carpark_cards(List<List> carParkList) {
     //List<WastePOI> favorites = retrieveFavoritesFromDatabase(username)
     List<Widget> carpark_card_list = [
-      Center(child: Text(('Near ' + POI.POI_name+':'),
-          style: TextStyle(
-              fontSize: 20.0, fontFamily: 'DancingScript')),),
-          //child: Text('Near ' + POI.POI_name)),
+      Center(
+        child: Text(('Near ' + POI.POI_name + ':'),
+            style: TextStyle(fontSize: 20.0, fontFamily: 'DancingScript')),
+      ),
+      //child: Text('Near ' + POI.POI_name)),
       SizedBox(
         height: 5,
       )
@@ -48,21 +49,20 @@ class _CarParkScreenState extends State<CarParkScreen> {
         //   centerTitle: true,
         // ),
         appBar: PreferredSize(
-          preferredSize: Size.square(70),  //fromHeight(80.0),
-          child:AppBar(
+          preferredSize: Size.square(70), //fromHeight(80.0),
+          child: AppBar(
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: <Color>[
-                        Colors.green.shade700,
-                        Colors.teal.shade700,
-                      ])
-              ),
+                    Colors.green.shade700,
+                    Colors.teal.shade700,
+                  ])),
             ),
             title: Column(
-              children:[
+              children: [
                 SizedBox(height: 14),
                 Row(
                   children: [
@@ -82,7 +82,6 @@ class _CarParkScreenState extends State<CarParkScreen> {
             header_card(
               title: 'Car Parking Facilities',
             ),
-
             Expanded(
                 child: FutureBuilder(
                     future:
@@ -99,7 +98,10 @@ class _CarParkScreenState extends State<CarParkScreen> {
                         );
                       } else {
                         return Center(
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(
+                            valueColor:
+                                new AlwaysStoppedAnimation<Color>(Colors.lime),
+                          ),
                         );
                       }
                     })),

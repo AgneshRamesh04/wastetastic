@@ -66,9 +66,38 @@ class _NearYouScreenState extends State<NearYouScreen> {
     //@todo get user location and filter nearby locations
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Wastetastic'),
-          centerTitle: true,
+        // appBar: AppBar(
+        //   title: Text('Wastetastic'),
+        //   centerTitle: true,
+        // ),
+        appBar: PreferredSize(
+          preferredSize: Size.square(70), //fromHeight(80.0),
+          child: AppBar(
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: <Color>[
+                    Colors.green.shade700,
+                    Colors.teal.shade700,
+                  ])),
+            ),
+            title: Column(
+              children: [
+                SizedBox(height: 14),
+                Row(
+                  children: [
+                    SizedBox(width: 60),
+                    Text('Wastetastic',
+                        style: TextStyle(
+                            fontSize: 30.0, fontFamily: "DancingScript")),
+                  ],
+                ),
+              ],
+            ),
+            centerTitle: true,
+          ),
         ),
         body: Stack(
           children: [
@@ -76,7 +105,10 @@ class _NearYouScreenState extends State<NearYouScreen> {
               header_card(
                 title: title,
               ),
-              Text('Nearby Locations:'),
+              Text(
+                'Nearby vendors for recycling:',
+                style: TextStyle(fontSize: 23.0, fontFamily: 'DancingScript'),
+              ),
               SizedBox(
                 height: 5,
               ),
@@ -123,7 +155,7 @@ class _NearYouScreenState extends State<NearYouScreen> {
                             context,
                             MapScreen.id,
                             arguments: {
-                              'title': title + ' WastePOI Near You',
+                              'title': title,
                               'WastePOI': WastePOIs,
                               'location': location,
                             },

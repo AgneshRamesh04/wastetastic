@@ -18,6 +18,7 @@ class CatalogScreen extends StatefulWidget {
 
 class _CatalogScreenState extends State<CatalogScreen> {
   String selectedCategory = 'LIGHTING WASTE';
+  bool loading = true;
   List<WastePOI> WastePOIs;
 
   List<POI_card> build_cat_cards(List<WastePOI> POIs) {
@@ -62,8 +63,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
               ),
               Container(
                 child: Text('Choose by Waste Category:',
-                    style: TextStyle(
-                        fontSize: 23.0, fontFamily: 'DancingScript')),),
+                    style:
+                        TextStyle(fontSize: 23.0, fontFamily: 'DancingScript')),
+              ),
               SizedBox(
                 height: 8,
               ),
@@ -74,8 +76,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       border: Border.all(
                         color: Colors.teal.shade900,
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(30))
-                  ),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
                   //color: Colors.lime,
                   margin: EdgeInsets.symmetric(
                     horizontal: 100,
@@ -86,7 +87,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent))),
                     value: selectedCategory,
-                    icon: Icon(Icons.arrow_drop_down, color: Colors.teal.shade900,),
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.teal.shade900,
+                    ),
                     // decoration: InputDecoration(
                     //
                     //   //icon: Icon(Icons.receipt_long),
@@ -98,6 +102,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     onChanged: (String newValue) {
                       setState(() {
                         selectedCategory = newValue;
+                        loading = true;
                       });
                     },
                     dropdownColor: Colors.lime.shade400,
@@ -105,9 +110,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value,
-                          style: TextStyle(fontWeight: FontWeight.bold),),
-
+                        child: Text(
+                          value,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       );
                     }).toList(),
                   ),
@@ -126,19 +132,22 @@ class _CatalogScreenState extends State<CatalogScreen> {
                               selectedCategory.replaceAll(' ', '_'))),
                     ),
                     builder: (context, snapshot) {
-                      if (snapshot.hasData) {
+                      if (snapshot.hasData && !loading) {
                         final List<DocumentSnapshot> documents =
                             snapshot.data.docs;
                         print('Inside builder $snapshot');
                         WastePOIs =
                             CatalogMgr.getWastePOIFromSnapshots(documents);
-
                         return Column(
                           children: build_cat_cards(WastePOIs),
                         );
                       } else {
+                        loading = false;
                         return Center(
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(
+                            valueColor:
+                                new AlwaysStoppedAnimation<Color>(Colors.lime),
+                          ),
                         );
                       }
                     },
@@ -161,8 +170,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
                           context,
                           MapScreen.id,
                           arguments: {
-                            'title': selectedCategory + ' Catalog',
-                            'WastePOI': WastePOIs
+                            'title': selectedCategory[0] +
+                                selectedCategory.toLowerCase().substring(1),
+                            'WastePOI': WastePOIs,
                           },
                         );
                         // Add your onPressed code here!

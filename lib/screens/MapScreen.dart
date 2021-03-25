@@ -123,28 +123,33 @@ class _MapScreenState extends State<MapScreen> {
           //   ),
           // ),
           appBar: PreferredSize(
-            preferredSize: Size.square(70),  //fromHeight(80.0),
-            child:AppBar(
+            preferredSize: Size.square(70), //fromHeight(80.0),
+            child: AppBar(
               flexibleSpace: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: <Color>[
-                          Colors.green.shade700,
-                          Colors.teal.shade700,
-                        ])
-                ),
+                      Colors.green.shade700,
+                      Colors.teal.shade700,
+                    ])),
               ),
               title: Column(
-                children:[
+                children: [
                   SizedBox(height: 14),
                   Row(
                     children: [
-                      //SizedBox(width: 60),
-                      Text(title,
-                          style: TextStyle(
-                              fontSize: 20.0, fontFamily: "Source Sans Pro")),
+                      Flexible(
+                        child:
+                            //SizedBox(width: 60),
+
+                            Text(title,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: "Source Sans Pro")),
+                      ),
                     ],
                   ),
                 ],
