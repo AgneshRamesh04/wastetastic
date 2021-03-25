@@ -17,7 +17,7 @@ class RegistrationMgr {
 //    r.num_attempts++;
 //  }
 
-  static void registerUserAccount(
+  static Future<void> registerUserAccount(
       String name, String email, String password, String username) async {
     final auth = FirebaseAuth.instance;
 
