@@ -55,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.grey[850],
+                            color: Colors.lightGreen.shade400,
                             boxShadow: kContainerElevation),
                         child: Row(
                           children: [
@@ -69,24 +69,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  _loggedInUser.username,
-                                  style: TextStyle(fontSize: 19),
-                                ),
                                 SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                  width: 250.0,
+                                  width: 225,
                                   child: Text(
-                                    _loggedInUser.email,
-                                    style: TextStyle(fontSize: 19),
+                                    '${_loggedInUser.username}\n${_loggedInUser.email}',
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      height: 2,
+                                    ),
                                     overflow: TextOverflow.fade,
                                     softWrap: false,
+                                    textAlign: TextAlign.center,
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5,
                                 ),
                                 RaisedButton(
                                   shape: RoundedRectangleBorder(
@@ -114,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         thickness: 5,
                       ),
                       header_card(
-                        title: 'Waste Disposal Data Analysis',
+                        title: 'Waste Disposal Data',
                       ),
                     ] +
                     buildWasteRecordCards(),

@@ -18,7 +18,15 @@ class WasteRecord_card extends StatelessWidget {
       margin: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: Colors.grey[900],
+        //color: Colors.teal[900],
+        gradient: LinearGradient(
+          //begin: Alignment.topRight,
+          //end: Alignment.bottomLeft,
+          colors: [
+            Colors.lime.shade400,
+            Colors.lightGreen.shade400,
+          ],
+        ),
         boxShadow: kContainerElevation,
       ),
       child: Row(
@@ -26,9 +34,13 @@ class WasteRecord_card extends StatelessWidget {
         children: [
           Flexible(
             child: Text(
-              '$category\n\n$date - $time',
+              '  $category\n  $date - $time',
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                height: 2,
+              ),
             ),
           ),
           VerticalDivider(
