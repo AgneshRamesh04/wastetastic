@@ -19,30 +19,45 @@ class Carpark_card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String cpt= carParkType.toLowerCase();
+    String cptt= cpt[0].toUpperCase()+cpt.substring(1);
+    String pt= parkingType.toLowerCase();
+    String ptt= pt[0].toUpperCase()+pt.substring(1);
     return Container(
       padding: EdgeInsets.all(20.0),
       margin: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: Colors.grey[900],
+        gradient: LinearGradient(
+          //begin: Alignment.topRight,
+          //end: Alignment.bottomLeft,
+          colors: [
+            Colors.lime.shade400,
+            Colors.lightGreen.shade400,
+          ],
+        ),
         boxShadow: kContainerElevation,
       ),
       child: Column(
         children: [
           Text(
-            "$address ",
+            "$address",
             style: TextStyle(
-              height: 2.0,
+              height: 1.0,
+              color: Colors.teal.shade900,
               letterSpacing: 1.25,
+              fontSize: 15,
+              //fontFamily: "DancingScript",
               fontWeight: FontWeight.bold,
             ),
           ),
+          SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
                 child: Text(
-                  "Car Park Type: $carParkType\nParking Type: $parkingType"
+                  "Car Park Type: $cptt\nParking Type: $ptt"
                   "\nFree Parking: $freeParking",
                   overflow: TextOverflow.fade,
                   style: TextStyle(
@@ -59,12 +74,12 @@ class Carpark_card extends StatelessWidget {
                 children: [
                   Text(
                     'Vacant:',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 15, color: Colors.teal.shade900),
                   ),
                   Text(
                     avail_slots.toString(),
                     style: TextStyle(
-                      fontSize: 50,
+                      fontSize: 50,color: Colors.teal.shade900
                     ),
                   ),
                 ],
