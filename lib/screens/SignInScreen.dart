@@ -72,74 +72,73 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     SizedBox(height: 7.5),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
-                    child: TextFormField(
-
-                      validator: (value) =>
-                          value.isEmpty ? "Enter Username" : null,
-                      onChanged: (value) {
-                        enteredUsername = value;
-                      },
-                      cursorColor: Colors.teal[900],
-                      maxLength: 30,
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.person, color: Colors.teal[900]),
-                        labelText: 'Username',
-                        labelStyle:
-                            TextStyle(color: Colors.teal[900], fontSize: 20),
-                        // helperText: 'Number of characters',
-                        // helperStyle: TextStyle(
-                        //     color: Colors.teal[900],
-                        //     fontSize: 14
-                        // ),
-                        //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.teal[900]),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
+                      child: TextFormField(
+                        validator: (value) =>
+                            value.isEmpty ? "Enter Username" : null,
+                        onChanged: (value) {
+                          enteredUsername = value;
+                        },
+                        cursorColor: Colors.teal[900],
+                        maxLength: 30,
+                        decoration: InputDecoration(
+                          icon: Icon(Icons.person, color: Colors.teal[900]),
+                          labelText: 'Username',
+                          labelStyle:
+                              TextStyle(color: Colors.teal[900], fontSize: 20),
+                          // helperText: 'Number of characters',
+                          // helperStyle: TextStyle(
+                          //     color: Colors.teal[900],
+                          //     fontSize: 14
+                          // ),
+                          //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.teal[900]),
+                          ),
                         ),
                       ),
                     ),
-              ),
                     Container(
-                        margin: EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
-                    child:TextFormField(
-                      validator: (value) =>
-                          value.isEmpty ? "Enter Password" : null,
-                      onChanged: (value) {
-                        enteredPassword = value;
-                      },
-                      obscureText: _obscureText,
-                      cursorColor: Colors.teal[900],
-                      maxLength: 30,
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.lock,
-                            color: Colors.teal[900]),
-                        labelText: 'Password',
-                        labelStyle:
-                            TextStyle(color: Colors.teal[900], fontSize: 20),
-                        // helperText: 'Number of characters',
-                        // helperStyle: TextStyle(
-                        //     color: Colors.teal[900],
-                        //     fontSize: 14
-                        // ),
-                        //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.teal[900]),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                              _obscureText
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Colors.teal[900]),
-                          onPressed: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
+                        margin:
+                            EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
+                        child: TextFormField(
+                          validator: (value) =>
+                              value.isEmpty ? "Enter Password" : null,
+                          onChanged: (value) {
+                            enteredPassword = value;
                           },
-                        ),
-                      ),
-                    )
-                  ),
+                          obscureText: _obscureText,
+                          cursorColor: Colors.teal[900],
+                          maxLength: 30,
+                          decoration: InputDecoration(
+                            icon: Icon(Icons.lock, color: Colors.teal[900]),
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                                color: Colors.teal[900], fontSize: 20),
+                            // helperText: 'Number of characters',
+                            // helperStyle: TextStyle(
+                            //     color: Colors.teal[900],
+                            //     fontSize: 14
+                            // ),
+                            //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.teal[900]),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                  _obscureText
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.teal[900]),
+                              onPressed: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
+                            ),
+                          ),
+                        )),
                     FlatButton(
                       onPressed: () {
                         Navigator.pushNamed(context, ForgotPasswordScreen.id);
@@ -191,7 +190,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               SnackBar(
                                 content: Text(
                                   'You have entered a wrong username or password, '
-                                  'please re-entered',
+                                  'please re-enter.',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
