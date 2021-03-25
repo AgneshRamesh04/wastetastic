@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Column(
         children: [
           header_card(
-            title: 'Profile',
+            title: 'My Profile',
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -51,17 +51,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
+                      Container(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text('Personal details: ',
+                          style: TextStyle(
+                              fontSize: 23.0, fontFamily: 'DancingScript')),)),
+                      SizedBox(
+                        height: 8,),
                       Container(
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.lightGreen.shade400,
+                            color: Colors.lime,
                             boxShadow: kContainerElevation),
                         child: Row(
                           children: [
                             Icon(
                               Icons.account_circle,
-                              size: 100.0,
+                              size: 50.0,
+                              color: Colors.teal.shade900,
                             ),
                             SizedBox(
                               width: 10,
@@ -70,19 +80,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Column(
                               children: [
                                 SizedBox(
-                                  width: 225,
+                                  width: 275,
                                   child: Text(
                                     '${_loggedInUser.username}\n${_loggedInUser.email}',
                                     style: TextStyle(
-                                      fontSize: 19,
+                                      fontSize: 15,
                                       height: 2,
+                                        color: Colors.teal.shade900,
                                     ),
                                     overflow: TextOverflow.fade,
                                     softWrap: false,
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
+                                SizedBox(height: 5),
                                 RaisedButton(
+                                  color: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
@@ -94,22 +107,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           'forgot_password': false,
                                         });
                                   },
-                                  child: Text('   Reset Password   '),
-                                )
+                                  child: Text('   Reset Password   ', style: TextStyle(
+                                      fontSize: 17.0, color: Colors.teal.shade900)),),
+
                               ],
                             )
                           ],
                         ),
                       ), //profile info
                       SizedBox(
-                        height: 5,
+                        height: 25,
                       ),
-                      Divider(
-                        thickness: 5,
-                      ),
-                      header_card(
-                        title: 'Waste Disposal Data',
-                      ),
+                      // Divider(
+                      //   thickness: 5,
+                      // ),
+                      Container(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text('Waste disposal records: ',
+                                style: TextStyle(
+                                    fontSize: 23.0, fontFamily: 'DancingScript')),)),
+                      SizedBox(
+                        height: 8,),
+                      // header_card(
+                      //   title: 'Waste Disposal Data',
+                      // ),
                     ] +
                     buildWasteRecordCards(),
               ),
