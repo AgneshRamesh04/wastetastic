@@ -28,16 +28,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text('Choose waste category for nearby vendors:',
                 style: TextStyle(
                     fontSize: 23.0, fontFamily: 'DancingScript')),),
-          Container(
+          Expanded(
+
+          child: SingleChildScrollView(
+          child: Container(
             padding: EdgeInsets.symmetric(horizontal:20),
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-            // decoration: BoxDecoration(
-            //   border: Border.all(
-            //     color: Colors.black,
-            //     width: 4,
-            //   ),
-            //   borderRadius: BorderRadius.circular(32),
-            // ),
             child: Column(
               children: [
                 SizedBox(
@@ -126,6 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+          )
+          )
           )
         ],
       ),

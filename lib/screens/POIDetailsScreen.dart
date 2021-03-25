@@ -74,19 +74,32 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                 ),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.all(25),
+                    padding: EdgeInsets.all(15),
+
+                    child: Container(
+                      padding: const EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.teal.shade700,
+                          width: 0.5,
+                        ),
+                        borderRadius: BorderRadius.circular(40),
+                      ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
+                            SizedBox(height: 10,),
                             Text(
                               'Name:      \t',
                               style: TextStyle(
+                                  color: Colors.teal.shade900,
                                 letterSpacing: 1,
                                 height: 1.2,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
+                                  fontFamily: 'DancingScript'
                               ),
                             ),
                             Flexible(
@@ -109,21 +122,27 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                         Row(
                           children: [
                             Text(
-                              'Category: \t',
+                              'Category:  \t',
                               style: TextStyle(
+                                  color: Colors.teal.shade900,
                                 letterSpacing: 1,
                                 height: 1.2,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
+                                  fontFamily: 'DancingScript'
                               ),
                             ),
                             Flexible(
-                              child: Text(
+
+                              child: Text(POI.wasteCategory
+                                  .toString().split('.')
+                                  .last
+                                  .replaceAll('_', ' ')[0].toUpperCase()+
                                 POI.wasteCategory
                                     .toString()
                                     .split('.')
                                     .last
-                                    .replaceAll('_', ' '),
+                                    .replaceAll('_', ' ').toLowerCase().substring(1),
                                 style: TextStyle(
                                   letterSpacing: 1,
                                   height: 1.2,
@@ -140,12 +159,14 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                         Row(
                           children: [
                             Text(
-                              'About:      \t',
+                              'About:     \t',
                               style: TextStyle(
+                                  color: Colors.teal.shade900,
                                 letterSpacing: 1,
                                 height: 1.2,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
+                                  fontFamily: 'DancingScript'
                               ),
                             ),
                             Flexible(
@@ -168,17 +189,21 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                           children: [
                             Text(
                               'Address:  \t',
+
                               style: TextStyle(
+                                color: Colors.teal.shade900,
                                 letterSpacing: 1,
                                 height: 1.2,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
+                                  fontFamily: 'DancingScript'
+
                               ),
                             ),
                             Flexible(
                               child: Text(
                                 POI.address.trim() +
-                                    '. Singapore ' +
+                                    '. Postal code: ' +
                                     POI.POI_postalcode.toString(),
                                 style: TextStyle(
                                   letterSpacing: 1,
@@ -192,6 +217,7 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                         ),
                       ],
                     ),
+                  )
                   ),
                 ),
               ]),
@@ -234,7 +260,7 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
                       ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 Center(
                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -255,7 +281,7 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
 
                         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       ),
-                      label: Text('NearBy CarPark', style: TextStyle(
+                      label: Text('Nearby Car Park', style: TextStyle(
                         fontSize: 20,
                         color: Colors.teal.shade900,
                         fontWeight: FontWeight.bold,)),
@@ -267,7 +293,7 @@ class _POI_DetialScreenState extends State<POI_DetialScreen> {
 
                   ),
                 SizedBox(
-                  height: 50,
+                  height: 40,
                 ),
                 ],
 

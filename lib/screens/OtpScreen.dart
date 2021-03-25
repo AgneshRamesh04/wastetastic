@@ -96,12 +96,12 @@ class _OTPScreenState extends State<OTPScreen> {
                   ),
                   SimpleButton(
                     content: 'Submit',
-                    onPress: () {
+                    onPress: () async {
                       if (_formKey.currentState.validate()) {
                         if (OTPMgr.verifyOTP(email, enteredOTP)) {
                           if (SignUp)
-                            RegistrationMgr.registerUserAccount(
-                                name, email, password, username);
+                           await RegistrationMgr.registerUserAccount(
+                                name, email, password, username) ;
                           SignUp
                               ? Navigator.pushNamed(
                                   context,

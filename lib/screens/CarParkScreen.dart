@@ -17,7 +17,10 @@ class _CarParkScreenState extends State<CarParkScreen> {
   List<Widget> build_carpark_cards(List<List> carParkList) {
     //List<WastePOI> favorites = retrieveFavoritesFromDatabase(username)
     List<Widget> carpark_card_list = [
-      Center(child: Text('Near ' + POI.POI_name)),
+      Center(child: Text(('Near ' + POI.POI_name+':'),
+          style: TextStyle(
+              fontSize: 20.0, fontFamily: 'DancingScript')),),
+          //child: Text('Near ' + POI.POI_name)),
       SizedBox(
         height: 5,
       )
@@ -40,15 +43,46 @@ class _CarParkScreenState extends State<CarParkScreen> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Wastetastic'),
-          centerTitle: true,
+        // appBar: AppBar(
+        //   title: Text('Wastetastic'),
+        //   centerTitle: true,
+        // ),
+        appBar: PreferredSize(
+          preferredSize: Size.square(70),  //fromHeight(80.0),
+          child:AppBar(
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: <Color>[
+                        Colors.green.shade700,
+                        Colors.teal.shade700,
+                      ])
+              ),
+            ),
+            title: Column(
+              children:[
+                SizedBox(height: 14),
+                Row(
+                  children: [
+                    SizedBox(width: 60),
+                    Text('Wastetastic',
+                        style: TextStyle(
+                            fontSize: 30.0, fontFamily: "DancingScript")),
+                  ],
+                ),
+              ],
+            ),
+            centerTitle: true,
+          ),
         ),
         body: Container(
           child: Column(children: [
             header_card(
               title: 'Car Parking Facilities',
             ),
+
             Expanded(
                 child: FutureBuilder(
                     future:
