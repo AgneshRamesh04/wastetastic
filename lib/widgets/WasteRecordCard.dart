@@ -13,6 +13,8 @@ class WasteRecord_card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String cat= category.toLowerCase();
+    String catt= cat[0].toUpperCase()+cat.substring(1);
     return Container(
       padding: EdgeInsets.all(20.0),
       margin: EdgeInsets.all(10.0),
@@ -34,11 +36,11 @@ class WasteRecord_card extends StatelessWidget {
         children: [
           Flexible(
             child: Text(
-              '  $category\n  $date - $time',
+              '  $catt\n  $date - $time',
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 15,
+                fontSize: 16,
                 height: 2,
               ),
             ),
@@ -53,12 +55,13 @@ class WasteRecord_card extends StatelessWidget {
             children: [
               Text(
                 'Weight:',
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(fontSize: 15, color: Colors.teal.shade900),
               ),
               Text(
                 weight.toString(),
                 style: TextStyle(
                   fontSize: 45,
+                    color: Colors.teal.shade900
                 ),
               ),
             ],
