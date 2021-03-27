@@ -15,7 +15,7 @@ class CategoryButton extends StatelessWidget {
           onPressed: redirect,
           child: Icon(
             icon,
-            size: 60,
+            size: 80,
             color: Colors.teal.shade900,
           ),
           shape: CircleBorder(),
@@ -25,11 +25,13 @@ class CategoryButton extends StatelessWidget {
         SizedBox(
           height: 5,
         ),
-        Text(category,
-        style: TextStyle(
-          fontFamily: "DancingScript",
-          fontSize: 20,
-        ),),
+        Text(
+          category,
+          style: TextStyle(
+            fontFamily: "DancingScript",
+            fontSize: 20,
+          ),
+        ),
       ],
     );
   }

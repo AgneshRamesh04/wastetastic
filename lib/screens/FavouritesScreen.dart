@@ -15,38 +15,59 @@ class FavouritesScreen extends StatefulWidget {
 class _FavouritesScreenState extends State<FavouritesScreen> {
   List<WastePOI> Fav_WastePOI_List;
 
-  List<POI_card> build_fav_cards() {
+  List<Widget> build_fav_cards() {
     Fav_WastePOI_List = UserAccountMgr.userDetails.favorites;
     //List<WastePOI> favorites = retrieveFavoritesFromDatabase(username)
     List<POI_card> fav_card_list = [];
-    for (WastePOI w in Fav_WastePOI_List) {
-      String POICategory = w.wasteCategory.toString().split('.').last;
-      POICategory = POICategory.replaceAll('_', ' ');
-      fav_card_list.add(
-        POI_card(
-          name: w.POI_name,
-          address: w.address.trim(),
-          postalcode: w.POI_postalcode,
-          description: w.POI_description,
-          wasteCategory: POICategory,
-          fav: true,
-          TO_POI_page: () async {
-            await Navigator.pushNamed(
-              context,
-              POI_DetialScreen.id,
-              arguments: w,
-            );
-            if (POI_DetialScreen.favChanged) setState(() {});
-          },
-          FavFunct: () {
-            setState(() {
-              UserAccountMgr.editFav(w);
-            });
-          },
+    if (Fav_WastePOI_List.isNotEmpty) {
+      for (WastePOI w in Fav_WastePOI_List) {
+        String POICategory = w.wasteCategory.toString().split('.').last;
+        POICategory = POICategory.replaceAll('_', ' ');
+        fav_card_list.add(
+          POI_card(
+            name: w.POI_name,
+            address: w.address.trim(),
+            postalcode: w.POI_postalcode,
+            description: w.POI_description,
+            wasteCategory: POICategory,
+            fav: true,
+            TO_POI_page: () async {
+              await Navigator.pushNamed(
+                context,
+                POI_DetialScreen.id,
+                arguments: w,
+              );
+              if (POI_DetialScreen.favChanged) setState(() {});
+            },
+            FavFunct: () {
+              setState(() {
+                UserAccountMgr.editFav(w);
+              });
+            },
+          ),
+        );
+      }
+      return fav_card_list;
+    } else {
+      return [
+        SizedBox(
+          height: 100,
         ),
-      );
+        Icon(
+          Icons.star,
+          color: Colors.grey[300],
+          size: 80,
+        ),
+        Text(
+          'No Favourites Yet',
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.grey[300],
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ];
     }
-    return fav_card_list;
   }
 
   @override
@@ -61,8 +82,9 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
               ),
               Container(
                 child: Text('A list of favourite recycling vendors:',
-                    style: TextStyle(
-                        fontSize: 23.0, fontFamily: 'DancingScript')),),
+                    style:
+                        TextStyle(fontSize: 23.0, fontFamily: 'DancingScript')),
+              ),
               SizedBox(
                 height: 20,
               ),
