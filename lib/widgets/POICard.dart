@@ -11,7 +11,6 @@ class POI_card extends StatelessWidget {
   final bool fav;
   final Function FavFunct;
 
-
   POI_card(
       {this.name,
       this.address,
@@ -24,10 +23,9 @@ class POI_card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String cat= wasteCategory.toLowerCase();
-    String wasteCat= cat[0].toUpperCase()+cat.substring(1);
+    String cat = wasteCategory.toLowerCase();
+    String wasteCat = cat[0].toUpperCase() + cat.substring(1);
     return RawMaterialButton(
-
       onPressed: TO_POI_page,
       child: Container(
         padding: EdgeInsets.all(20.0),
@@ -49,7 +47,6 @@ class POI_card extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
-
               child: Text(
                 "$name\n$address\nPostal Code: $postalcode "
                 "\nCategory: $wasteCat",
@@ -70,7 +67,7 @@ class POI_card extends StatelessWidget {
             ),
             IconButton(
               onPressed: FavFunct,
-              iconSize: 30,
+              iconSize: 35,
               icon: Icon(
                 Icons.star,
                 color: fav ? Colors.yellow.shade600 : Colors.white,

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wastetastic/control/CatalogMgr.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
+import 'package:wastetastic/screens/MapTestingScreen.dart';
 import 'package:wastetastic/widgets/POICard.dart';
 import 'package:wastetastic/Constants.dart';
 import 'package:wastetastic/entity/WastePOI.dart';

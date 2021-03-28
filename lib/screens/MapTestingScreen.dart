@@ -39,7 +39,7 @@ class _MapTestingScreenState extends State<MapTestingScreen> {
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.blue,
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(1),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

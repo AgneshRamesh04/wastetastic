@@ -47,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           height: 30,
         ),
         Icon(
-          Icons.restore_from_trash,
+          Icons.delete,
           color: Colors.grey[300],
           size: 80,
         ),
@@ -153,7 +153,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           color: Colors.teal.shade900)),
                                 ),
                                 RaisedButton.icon(
-                                  icon: Icon(Icons.exit_to_app),
+                                  icon: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Icon(Icons.logout),
+                                  ),
                                   color: Colors.red,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
@@ -163,10 +167,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ModalRoute.withName(WelcomeScreen.id));
                                   },
                                   label: Text(
-                                    '  Logout  ',
+                                    'Logout  ',
                                     style: TextStyle(
-                                        fontSize: 17.0,
-                                        color: Colors.teal.shade900),
+                                      fontSize: 17.0,
+                                      //color: Colors.teal.shade900
+                                    ),
                                   ),
                                 ),
                               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/ProfileScreen.dart';
 import 'FavouritesScreen.dart';
 import 'HomeScreen.dart';
@@ -77,7 +78,30 @@ class _MainScreenState extends State<MainScreen> {
                         style: TextStyle(
                             fontSize: 30.0, fontFamily: "DancingScript")),
                     SizedBox(width: 80),
-                    Icon(Icons.pending_actions_rounded)
+                    Stack(
+                      children: [
+                        Icon(
+                          Icons.shield,
+                          size: 45,
+                          color: Colors.greenAccent,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 10,
+                              width: 45,
+                            ),
+                            Text(
+                              '${UserAccountMgr.userDetails.points}',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],

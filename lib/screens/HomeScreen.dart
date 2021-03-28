@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CategoryButton(
-                          icon: Icons.restore_from_trash,
+                          icon: Icons.delete,
                           category: 'Normal Waste',
                           redirect: () {
                             Navigator.pushNamed(

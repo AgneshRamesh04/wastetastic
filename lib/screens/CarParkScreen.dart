@@ -51,25 +51,39 @@ class _CarParkScreenState extends State<CarParkScreen> {
         appBar: PreferredSize(
           preferredSize: Size.square(70), //fromHeight(80.0),
           child: AppBar(
+            automaticallyImplyLeading: false,
             flexibleSpace: Container(
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: <Color>[
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
                     Colors.green.shade700,
                     Colors.teal.shade700,
-                  ])),
+                  ],
+                ),
+              ),
             ),
             title: Column(
               children: [
                 SizedBox(height: 14),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(width: 60),
-                    Text('Wastetastic',
-                        style: TextStyle(
-                            fontSize: 30.0, fontFamily: "DancingScript")),
+                    IconButton(
+                      icon: Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    Text(
+                      'Wastetastic',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontFamily: "DancingScript",
+                      ),
+                    ),
+                    SizedBox(width: 50),
                   ],
                 ),
               ],

@@ -40,7 +40,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             gradient: LinearGradient(
               begin: Alignment.bottomLeft,
               end: Alignment.topRight,
-              colors: [Colors.lightGreen.shade700, Colors.lime.shade400,],
+              colors: [
+                Colors.lightGreen.shade700,
+                Colors.lime.shade400,
+              ],
             ),
           ),
           child: SafeArea(
@@ -56,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         //backgroundImage: AssetImage('')
                         backgroundColor: Colors.transparent,
                         backgroundImage:
-                        AssetImage('assets/images/wastetastic_1.png'),
+                            AssetImage('assets/images/wastetastic_1.png'),
                       ),
                       SizedBox(
                         width: 150.0,
@@ -166,8 +169,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         margin:
                             EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                         child: TextFormField(
-                          validator: (value) =>
-                              value.isEmpty ? "Enter Password" : null,
+                          validator: (value) => value.isEmpty
+                              ? "Enter Password"
+                              : value.length < 6
+                                  ? "Password must contain atleast 6 characters"
+                                  : null,
                           onChanged: (value) {
                             enteredPassword = value;
                           },
@@ -175,8 +181,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           maxLength: 30,
                           obscureText: _obscureText,
                           decoration: InputDecoration(
-                            icon: Icon(Icons.lock,
-                                color: Colors.teal[900]),
+                            icon: Icon(Icons.lock, color: Colors.teal[900]),
 
                             labelText: 'Password',
                             labelStyle: TextStyle(
@@ -222,8 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           maxLength: 30,
                           obscureText: _obscureConfirmText,
                           decoration: InputDecoration(
-                            icon: Icon(Icons.lock,
-                                color: Colors.teal[900]),
+                            icon: Icon(Icons.lock, color: Colors.teal[900]),
 
                             labelText: 'Confirm Password',
 
@@ -253,7 +257,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                       ),
-
                       SizedBox(
                         height: 20,
                       ),

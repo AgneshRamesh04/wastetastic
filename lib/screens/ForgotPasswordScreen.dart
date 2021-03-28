@@ -6,7 +6,6 @@ import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:email_validator/email_validator.dart';
 
 final _formKey = GlobalKey<FormState>();
-final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 String enteredEmail;
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -19,6 +18,8 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
     return Scaffold(
         key: _scaffoldKey,
         extendBodyBehindAppBar: true,
