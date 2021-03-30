@@ -73,6 +73,7 @@ class _NearYouScreenState extends State<NearYouScreen> {
         appBar: PreferredSize(
           preferredSize: Size.square(70), //fromHeight(80.0),
           child: AppBar(
+            automaticallyImplyLeading: false,
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -87,11 +88,22 @@ class _NearYouScreenState extends State<NearYouScreen> {
               children: [
                 SizedBox(height: 14),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(width: 60),
-                    Text('Wastetastic',
-                        style: TextStyle(
-                            fontSize: 30.0, fontFamily: "DancingScript")),
+                    IconButton(
+                      icon: Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    Text(
+                      'Wastetastic',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontFamily: "DancingScript",
+                      ),
+                    ),
+                    SizedBox(width: 50),
                   ],
                 ),
               ],

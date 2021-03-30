@@ -5,8 +5,27 @@ class RecycleInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: AlertDialog(
-        title: Center(
-          child: Text('Lets Recycle'),
+        insetPadding: EdgeInsets.symmetric(
+          horizontal: 25,
+          vertical: 40,
+        ),
+        titlePadding: EdgeInsets.all(0),
+        contentPadding: EdgeInsets.fromLTRB(24.0, 0.0, 24.0, 0.0),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0))),
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          height: 60.00,
+          width: double.infinity,
+          child: Center(
+            child: Text('Lets Recycle'),
+          ),
         ),
         content: SingleChildScrollView(
           child: Column(

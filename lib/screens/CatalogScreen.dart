@@ -58,6 +58,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       body: Stack(
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               header_card(
                 title: 'Catalog',
@@ -72,6 +73,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
               ),
               SafeArea(
                 child: Container(
+                  constraints: BoxConstraints(maxWidth: 200),
                   decoration: BoxDecoration(
                       color: Colors.lime,
                       border: Border.all(
@@ -79,9 +81,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(30))),
                   //color: Colors.lime,
-                  margin: EdgeInsets.symmetric(
+                  /*margin: EdgeInsets.symmetric(
                     horizontal: 100,
-                  ),
+                  ),*/
                   padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
                   child: DropdownButtonFormField<String>(
                     decoration: InputDecoration(

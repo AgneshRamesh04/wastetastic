@@ -55,7 +55,7 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 SizedBox(height: 14),
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       child: CircleAvatar(
@@ -73,11 +73,11 @@ class _MainScreenState extends State<MainScreen> {
                         );
                       },
                     ),
-                    SizedBox(width: 67),
+                    //SizedBox(width: 67),
                     Text('Wastetastic',
                         style: TextStyle(
                             fontSize: 30.0, fontFamily: "DancingScript")),
-                    SizedBox(width: 80),
+                    //SizedBox(width: 80),
                     Stack(
                       children: [
                         Icon(
