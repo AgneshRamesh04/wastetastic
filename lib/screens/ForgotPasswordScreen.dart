@@ -102,9 +102,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         SimpleButton(
                           content: 'Request Reset Link',
                           onPress: () async {
-                            Map args = {
-                              'email': enteredEmail,
-                            };
                             if (_formKey.currentState.validate()) {
                               var emailExist =
                                   await UserAccountMgr.validateUsername_Email(

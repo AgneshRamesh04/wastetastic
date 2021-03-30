@@ -282,7 +282,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   'username': enteredUsername,
                                   'email': enteredEmail,
                                   'password': enteredPassword,
-                                  'SignUp': true,
                                 },
                               );
                             } else {
