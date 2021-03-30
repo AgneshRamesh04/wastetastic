@@ -24,7 +24,10 @@ class LoginMgr {
       try {
         final user = await _auth.signInWithEmailAndPassword(
             email: email, password: enteredPassword);
-        if (user != null) return true;
+        if (user != null) {
+          await UserAccountMgr.readUserDetails(username);
+          return true;
+        }
       } catch (e) {
         print(e);
         return false;
