@@ -155,9 +155,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         SimpleButton(
                           content: 'Reset Password',
                           onPress: () {
-                            UserAccountMgr.updateUserPassword(
-                                email, newPassword);
                             if (_formKey.currentState.validate()) {
+                              UserAccountMgr.updateUserPassword(
+                                  email, newPassword);
                               showDialog(
                                 context: context,
                                 builder: (BuildContext dialogContext) {

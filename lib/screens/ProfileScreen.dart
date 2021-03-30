@@ -275,7 +275,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     context, ResetPasswordScreen.id,
                                     arguments: {
                                       'email': _loggedInUser.email,
-                                      'forgot_password': false,
                                     });
                               },
                               child: Text(' Reset Password ',
