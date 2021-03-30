@@ -5,6 +5,8 @@ import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/OtpScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 
 import 'SignInScreen.dart';
 
@@ -108,7 +110,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       null, enteredEmail);
                               if (emailExist != "Email") {
                                 print('incorrect email');
-                                _scaffoldKey.currentState.showSnackBar(
+                                /*_scaffoldKey.currentState.showSnackBar(
                                   SnackBar(
                                     content: Text(
                                       'Entered email - ' +
@@ -122,6 +124,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     ),
                                     duration: Duration(seconds: 3),
                                   ),
+                                );*/
+                                showTopSnackBar(
+                                  context,
+                                  CustomSnackBar.error(
+                                      message: enteredEmail +
+                                          ' is not registered. Please enter a registered email'),
                                 );
                               } else {
                                 //OTPMgr.sendOTP(enteredEmail);
