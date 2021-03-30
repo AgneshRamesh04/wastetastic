@@ -46,6 +46,7 @@ dependencies:
   custom_info_window: ^0.0.4
   clippy_flutter: ^1.1.1
   pie_chart: ^5.0.0
+  top_snackbar_flutter:
 
 dev_dependencies:
   animated_text_kit: ^3.1.2

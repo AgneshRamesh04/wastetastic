@@ -5,6 +5,9 @@ import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:wastetastic/control/LoginMgr.dart';
 
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+
 final _formKey = GlobalKey<FormState>();
 
 class SignInScreen extends StatefulWidget {
@@ -39,7 +42,10 @@ class _SignInScreenState extends State<SignInScreen> {
           gradient: LinearGradient(
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
-            colors: [Colors.lightGreen.shade700, Colors.lime.shade400,],//Colors.green[700], Colors.lime[200]],
+            colors: [
+              Colors.lightGreen.shade700,
+              Colors.lime.shade400,
+            ], //Colors.green[700], Colors.lime[200]],
             //center: Alignment(0.0, 0.0),
           ),
         ),
@@ -186,7 +192,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 );
                               },
                             );*/
-                            _scaffoldKey.currentState.showSnackBar(
+
+                            /*_scaffoldKey.currentState.showSnackBar(
                               SnackBar(
                                 content: Text(
                                   'You have entered a wrong username or password, '
@@ -198,6 +205,13 @@ class _SignInScreenState extends State<SignInScreen> {
                                   textAlign: TextAlign.center,
                                 ),
                                 duration: Duration(seconds: 3),
+                              ),
+                            );*/
+                            showTopSnackBar(
+                              context,
+                              CustomSnackBar.error(
+                                message:
+                                    "Wrong username or password. Please check your credentials and try again.",
                               ),
                             );
                           }

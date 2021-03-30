@@ -5,6 +5,8 @@ import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/OtpScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 
 final _formKey = GlobalKey<FormState>();
 final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -285,7 +287,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 },
                               );
                             } else {
-                              _scaffoldKey.currentState.showSnackBar(
+                              /*_scaffoldKey.currentState.showSnackBar(
                                 SnackBar(
                                   content: Text(
                                     'Entered ' +
@@ -298,6 +300,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     textAlign: TextAlign.center,
                                   ),
                                   duration: Duration(seconds: 3),
+                                ),
+                              );*/
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message: "Entered " +
+                                      username_emailExist +
+                                      " already exist. Please enter another " +
+                                      username_emailExist +
+                                      " and try again.",
                                 ),
                               );
                             }
