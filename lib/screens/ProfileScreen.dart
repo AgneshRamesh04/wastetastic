@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wastetastic/Constants.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
@@ -7,7 +8,6 @@ import 'package:wastetastic/screens/WelcomeScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/entity/WasteRecord.dart';
 import 'package:wastetastic/widgets/WasteRecordCard.dart';
-
 import 'package:pie_chart/pie_chart.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -293,7 +293,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                               ),
-                              onPressed: () {
+                              onPressed: () async {
+                                try {
+                                  await FirebaseAuth.instance.signOut();
+                                  print("Successful sign out!");
+                                } catch (e) {
+                                  print("Error signing out!");
+                                }
                                 Navigator.popUntil(context,
                                     ModalRoute.withName(WelcomeScreen.id));
                               },

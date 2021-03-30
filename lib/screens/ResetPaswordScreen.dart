@@ -24,7 +24,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context).settings.arguments;
     final String email = args['email'];
-    final bool ForgotPassword = args['forgot_password'];
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -170,15 +169,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                     actions: <Widget>[
                                       new FlatButton(
                                         onPressed: () {
-                                          ForgotPassword
-                                              ? Navigator.popUntil(
-                                                  context,
-                                                  ModalRoute.withName(
-                                                      SignInScreen.id))
-                                              : Navigator.popUntil(
-                                                  context,
-                                                  ModalRoute.withName(
-                                                      MainScreen.id));
+                                          Navigator.popUntil(
+                                              context,
+                                              ModalRoute.withName(
+                                                  MainScreen.id));
                                         },
                                         textColor: Colors.grey,
                                         child: const Text('Continue'),

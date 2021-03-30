@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    //UserAccountMgr.userDetails.printUserDetails();
+    UserAccountMgr.userDetails.printUserDetails();
   }
 
   Widget build(BuildContext context) {

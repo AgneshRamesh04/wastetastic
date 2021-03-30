@@ -45,7 +45,7 @@ dependencies:
   google_maps_flutter: ^1.1.1
   custom_info_window: ^0.0.4
   clippy_flutter: ^1.1.1
-  pie_chart:
+  pie_chart: ^5.0.0
 
 dev_dependencies:
   animated_text_kit: ^3.1.2

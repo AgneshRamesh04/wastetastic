@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wastetastic/control/OTPMgr.dart';
 import 'package:wastetastic/control/RegistrationMgr.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/OtpScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:email_validator/email_validator.dart';
+
+import 'SignInScreen.dart';
 
 final _formKey = GlobalKey<FormState>();
 String enteredEmail;
@@ -97,11 +100,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           height: 20,
                         ),
                         SimpleButton(
-                          content: 'Request OTP',
+                          content: 'Request Reset Link',
                           onPress: () async {
                             Map args = {
                               'email': enteredEmail,
-                              'SignUp': false,
                             };
                             if (_formKey.currentState.validate()) {
                               var emailExist =
@@ -125,11 +127,36 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   ),
                                 );
                               } else {
-                                OTPMgr.sendOTP(enteredEmail);
-                                Navigator.pushNamed(
+                                //OTPMgr.sendOTP(enteredEmail);
+                                /*Navigator.pushNamed(
                                   context,
                                   OTPScreen.id,
                                   arguments: args,
+                                );*/
+                                await UserAccountMgr.forgotPassword(
+                                    enteredEmail);
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext dialogContext) {
+                                    return AlertDialog(
+                                      title:
+                                          Center(child: Text('Reset Password')),
+                                      content: Text(
+                                          'Please change your password at the link sent to your registered email address.'),
+                                      actions: <Widget>[
+                                        new FlatButton(
+                                          onPressed: () {
+                                            Navigator.popUntil(
+                                                context,
+                                                ModalRoute.withName(
+                                                    SignInScreen.id));
+                                          },
+                                          textColor: Colors.grey,
+                                          child: const Text('Done!'),
+                                        ),
+                                      ],
+                                    );
+                                  },
                                 );
                               }
                             }

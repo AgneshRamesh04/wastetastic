@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/entity/UserAccount.dart';
@@ -11,6 +12,7 @@ import 'package:latlong/latlong.dart';
 
 class UserAccountMgr {
   static final _firestore = FirebaseFirestore.instance;
+  static final _auth = FirebaseAuth.instance;
   static UserAccount userDetails = new UserAccount();
 
   static readUserDetails(String username) async {
@@ -36,8 +38,7 @@ class UserAccountMgr {
             List<WastePOI> WastePOIs = List<WastePOI>();
             try {
               for (var waste_POI_name in Documents['favorites']) {
-                var w =
-                await _firestore
+                var w = await _firestore
                     .collection('WastePOI')
                     .doc(waste_POI_name)
                     .get();
@@ -51,9 +52,8 @@ class UserAccountMgr {
                 WastePOIs.add(WastePOI(
                   id: waste_POI_name,
                   name: w['name'],
-                  category: WasteCategory.values
-                      .firstWhere((element) =>
-                  element.toString() == w['category']),
+                  category: WasteCategory.values.firstWhere(
+                      (element) => element.toString() == w['category']),
                   location: gp.GeoPoint.fromLatLng(
                       point: LatLng(
                           w['location'].latitude, w['location'].longitude)),
@@ -86,12 +86,11 @@ class UserAccountMgr {
                   print('Hello There!');
                   print('Doc id' + Doc.id);
                   WasteRecords.add(WasteRecord(
-                    dateTime: DateTime.fromMillisecondsSinceEpoch(
-                        int.parse(Doc.id)),
+                    dateTime:
+                        DateTime.fromMillisecondsSinceEpoch(int.parse(Doc.id)),
                     weight: Doc['weight'].toDouble(),
-                    category: WasteCategory.values
-                        .firstWhere((element) =>
-                    element.toString() == Doc['category']),
+                    category: WasteCategory.values.firstWhere(
+                        (element) => element.toString() == Doc['category']),
                   ));
                 }
               } else {
@@ -101,7 +100,6 @@ class UserAccountMgr {
             }
             userDetails.waste_records = WasteRecords;
           }
-
         }
       }
       break;
@@ -160,25 +158,35 @@ class UserAccountMgr {
     await for (var snapshot in _firestore
         .collection('UserAccounts')
         .where('email', isEqualTo: email)
-        .snapshots()){
+        .snapshots()) {
       var docs = snapshot.docs;
       if (docs.isNotEmpty) {
         for (var Doc in docs) {
-          if(Doc['email']==email){
-            username=Doc.id;
+          if (Doc['email'] == email) {
+            username = Doc.id;
             print(username);
           }
         }
-      }
-      else {
-        print("No user has this email id registered!"); // figure out how to fix this, maybe check email id in ForgotPassword when the user initially enters an email id
+      } else {
+        print(
+            "No user has this email id registered!"); // figure out how to fix this, maybe check email id in ForgotPassword when the user initially enters an email id
       }
       break;
     }
-    await _firestore
-        .collection('UserAccounts')
-        .doc(username)
-        .update({'password': newPassword});
+//    await _firestore
+//        .collection('UserAccounts')
+//        .doc(username)
+//        .update({'password': newPassword});
+    var user = _auth.currentUser;
+    try {
+      await user.updatePassword(newPassword);
+    } catch (e) {
+      print('Error changing password!');
+    }
     await readUserDetails(username);
+  }
+
+  static forgotPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
   }
 }
