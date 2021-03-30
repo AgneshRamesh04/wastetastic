@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:wastetastic/control/OTPMgr.dart';
-import 'package:wastetastic/control/RegistrationMgr.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/OtpScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:email_validator/email_validator.dart';
@@ -269,7 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     enteredUsername, enteredEmail);
                             */
                             var username_emailExist =
-                                await RegistrationMgr.validateUsername_Email(
+                                await UserAccountMgr.validateUsername_Email(
                                     enteredUsername, enteredEmail);
                             print(username_emailExist);
                             if (username_emailExist == null) {

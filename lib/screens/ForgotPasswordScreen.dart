@@ -107,7 +107,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             };
                             if (_formKey.currentState.validate()) {
                               var emailExist =
-                                  await RegistrationMgr.validateUsername_Email(
+                                  await UserAccountMgr.validateUsername_Email(
                                       null, enteredEmail);
                               if (emailExist != "Email") {
                                 print('incorrect email');
