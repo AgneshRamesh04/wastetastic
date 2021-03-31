@@ -39,7 +39,7 @@ class RegistrationMgr {
         await _firestore.collection('UserAccounts').doc('$username').set({
           'name': name,
           'email': userEmail,
-          'password': password,
+//          'password': password,
           'points': 0
         });
         await UserAccountMgr.readUserDetails(username);
