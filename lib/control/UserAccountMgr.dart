@@ -197,13 +197,10 @@ class UserAccountMgr {
       var documents = snapshot.docs;
       if (documents.isNotEmpty) {
         //print(docs.length);
-        try {
-          for (var Documents in documents) {
-            if (Documents.id == username) return "Username";
-            if (Documents['email'] == email) return "Email";
-          }
-        } catch (e) {
-          return null;
+
+        for (var Documents in documents) {
+          if (Documents.id == username) return "Username";
+          if (Documents['email'] == email) return "Email";
         }
       }
       return null;
