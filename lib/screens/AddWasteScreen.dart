@@ -87,6 +87,10 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                           if (val.isEmpty) {
                             return 'Please enter Time';
                           }
+                          if (DateTime.parse(
+                                  selectedDate.substring(0, 10) + " " + val)
+                              .isAfter(DateTime.now()))
+                            return "Please enter a time before current time";
                           return null;
                         },
                         onChanged: (val) {
@@ -108,6 +112,9 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                           if (value.isEmpty) {
                             return 'Please enter weight';
                           }
+                          if (double.parse(value) == 0)
+                            return "Weight cannot be zero";
+
                           return null;
                         },
                         onChanged: (value) {
@@ -166,7 +173,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                                     selectedDate.substring(0, 10) +
                                         " " +
                                         selectedTime);
-                                if (DateTime.now().isBefore(dt)) {
+                                /*if (DateTime.now().isBefore(dt)) {
                                   print("Wrong time entered!");
                                   showTopSnackBar(
                                     context,
@@ -176,7 +183,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                                     ),
                                   );
                                   return;
-                                }
+                                }*/
                                 print(
                                     'date: ${selectedDate.substring(0, 10)} \n time: $selectedTime \n'
                                     'weight: $enteredWeight \n category: $selectedCategory');
