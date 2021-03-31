@@ -6,7 +6,7 @@ import 'package:wastetastic/entity/WasteRecord.dart';
 class WasteRecordMgr {
   static final _firestore = FirebaseFirestore.instance;
   static addNewRecord(String username, DateTime dateTime, double weight,
-      WasteCategory category) {
+      WasteCategory category) async {
     WasteRecord wasteRecord = WasteRecord(
       dateTime: dateTime,
       weight: weight,
@@ -23,7 +23,7 @@ class WasteRecordMgr {
       'weight': weight,
       'category': category.toString(),
     });
-    UserAccountMgr.readUserDetails(username);
+    await UserAccountMgr.readUserDetails(username);
     UserAccountMgr.userDetails.printUserDetails();
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:wastetastic/Constants.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/control/WasteRecordMgr.dart';
@@ -62,7 +64,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                         ),
                         initialValue: selectedDate,
                         firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
+                        lastDate: DateTime.now(),
                         validator: (val) {
                           if (val.isEmpty) {
                             return 'Please enter Date';
@@ -155,22 +157,34 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 50, vertical: 15),
                             ),
-                            onPressed: () {
+                            onPressed: () async {
                               // Validate returns true if the form is valid, or false
                               // otherwise.
                               if (_formKey.currentState.validate()) {
                                 // If the form is valid, display a Snackbar.
-
+                                DateTime dt = DateTime.parse(
+                                    selectedDate.substring(0, 10) +
+                                        " " +
+                                        selectedTime);
+                                if (DateTime.now().isBefore(dt)) {
+                                  print("Wrong time entered!");
+                                  showTopSnackBar(
+                                    context,
+                                    CustomSnackBar.error(
+                                      message:
+                                          "Please enter a time before the current time.",
+                                    ),
+                                  );
+                                  return;
+                                }
                                 print(
                                     'date: ${selectedDate.substring(0, 10)} \n time: $selectedTime \n'
                                     'weight: $enteredWeight \n category: $selectedCategory');
 
                                 print(selectedCategory.replaceAll(' ', '_'));
-                                WasteRecordMgr.addNewRecord(
+                                await WasteRecordMgr.addNewRecord(
                                   _loggedInUser.username,
-                                  DateTime.parse(selectedDate.substring(0, 10) +
-                                      " " +
-                                      selectedTime),
+                                  dt,
                                   double.parse(enteredWeight),
                                   WasteCategory.values.firstWhere((element) =>
                                       element.toString() ==
