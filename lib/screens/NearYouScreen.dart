@@ -144,8 +144,12 @@ class _NearYouScreenState extends State<NearYouScreen> {
                           children: build_nearby_cards(WastePOIs),
                         );
                       } else {
-                        return Center(
-                          child: CircularProgressIndicator(),
+                        return Align(
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator(
+                            valueColor:
+                                new AlwaysStoppedAnimation<Color>(Colors.lime),
+                          ),
                         );
                       }
                     },

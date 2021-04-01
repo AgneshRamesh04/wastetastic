@@ -22,6 +22,7 @@ String enteredUsername = "";
 class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _obscureText = true;
+  bool _loading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,178 +51,201 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Column(
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 60.0,
-                      //backgroundImage: AssetImage('')
-                      backgroundColor: Colors.transparent,
-                      backgroundImage:
-                          AssetImage('assets/images/wastetastic_1.png'),
-                    ),
-                    SizedBox(height: 20),
-                    SizedBox(
-                      width: 110.0,
-                      child: TypewriterAnimatedTextKit(
-                        text: [
-                          "Login",
-                        ],
-                        textStyle: TextStyle(
-                            fontSize: 35.0, fontFamily: "Source Sans Pro"),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    SizedBox(height: 7.5),
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
-                      child: TextFormField(
-                        validator: (value) =>
-                            value.isEmpty ? "Enter Username" : null,
-                        onChanged: (value) {
-                          enteredUsername = value;
-                        },
-                        cursorColor: Colors.teal[900],
-                        maxLength: 30,
-                        decoration: InputDecoration(
-                          icon: Icon(Icons.person, color: Colors.teal[900]),
-                          labelText: 'Username',
-                          labelStyle:
-                              TextStyle(color: Colors.teal[900], fontSize: 20),
-                          // helperText: 'Number of characters',
-                          // helperStyle: TextStyle(
-                          //     color: Colors.teal[900],
-                          //     fontSize: 14
-                          // ),
-                          //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.teal[900]),
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
+                      children: <Widget>[
+                        CircleAvatar(
+                          radius: 60.0,
+                          //backgroundImage: AssetImage('')
+                          backgroundColor: Colors.transparent,
+                          backgroundImage:
+                              AssetImage('assets/images/wastetastic_1.png'),
+                        ),
+                        SizedBox(height: 20),
+                        SizedBox(
+                          width: 110.0,
+                          child: TypewriterAnimatedTextKit(
+                            text: [
+                              "Login",
+                            ],
+                            textStyle: TextStyle(
+                                fontSize: 35.0, fontFamily: "Source Sans Pro"),
+                            textAlign: TextAlign.start,
                           ),
                         ),
-                      ),
-                    ),
-                    Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
-                        child: TextFormField(
-                          validator: (value) =>
-                              value.isEmpty ? "Enter Password" : null,
-                          onChanged: (value) {
-                            enteredPassword = value;
-                          },
-                          obscureText: _obscureText,
-                          cursorColor: Colors.teal[900],
-                          maxLength: 30,
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.lock, color: Colors.teal[900]),
-                            labelText: 'Password',
-                            labelStyle: TextStyle(
-                                color: Colors.teal[900], fontSize: 20),
-                            // helperText: 'Number of characters',
-                            // helperStyle: TextStyle(
-                            //     color: Colors.teal[900],
-                            //     fontSize: 14
-                            // ),
-                            //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.teal[900]),
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                  _obscureText
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: Colors.teal[900]),
-                              onPressed: () {
-                                setState(() {
-                                  _obscureText = !_obscureText;
-                                });
-                              },
+                        SizedBox(height: 7.5),
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 7.5, horizontal: 20),
+                          child: TextFormField(
+                            validator: (value) =>
+                                value.isEmpty ? "Enter Username" : null,
+                            onChanged: (value) {
+                              enteredUsername = value;
+                            },
+                            cursorColor: Colors.teal[900],
+                            maxLength: 30,
+                            decoration: InputDecoration(
+                              icon: Icon(Icons.person, color: Colors.teal[900]),
+                              labelText: 'Username',
+                              labelStyle: TextStyle(
+                                  color: Colors.teal[900], fontSize: 20),
+                              // helperText: 'Number of characters',
+                              // helperStyle: TextStyle(
+                              //     color: Colors.teal[900],
+                              //     fontSize: 14
+                              // ),
+                              //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.teal[900]),
+                              ),
                             ),
                           ),
-                        )),
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, ForgotPasswordScreen.id);
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SimpleButton(
-                      content: 'Login',
-                      onPress: () async {
-                        //print(enteredPassword);
-                        //print(enteredUsername);
-
-                        if (_formKey.currentState.validate()) {
-                          var k = await LoginMgr.loginToSystem(
-                              enteredUsername, enteredPassword);
-                          if (k)
-                            Navigator.pushNamed(context, MainScreen.id);
-                          else {
-                            /*showDialog(
-                              context: context,
-                              builder: (BuildContext dialogContext) {
-                                return AlertDialog(
-                                  title: Center(
-                                    child: Text('Wrong Username or Password'),
-                                  ),
-                                  content: Text(
-                                    'You have entered a wrong username or password, '
-                                    'please re-entered',
-                                  ),
-                                  actions: <Widget>[
-                                    new FlatButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      textColor: Colors.grey,
-                                      child: const Text('Continue'),
-                                    ),
-                                  ],
-                                );
+                        ),
+                        Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 7.5, horizontal: 20),
+                            child: TextFormField(
+                              validator: (value) =>
+                                  value.isEmpty ? "Enter Password" : null,
+                              onChanged: (value) {
+                                enteredPassword = value;
                               },
-                            );*/
-
-                            /*_scaffoldKey.currentState.showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'You have entered a wrong username or password, '
-                                  'please re-enter.',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
+                              obscureText: _obscureText,
+                              cursorColor: Colors.teal[900],
+                              maxLength: 30,
+                              decoration: InputDecoration(
+                                icon: Icon(Icons.lock, color: Colors.teal[900]),
+                                labelText: 'Password',
+                                labelStyle: TextStyle(
+                                    color: Colors.teal[900], fontSize: 20),
+                                // helperText: 'Number of characters',
+                                // helperStyle: TextStyle(
+                                //     color: Colors.teal[900],
+                                //     fontSize: 14
+                                // ),
+                                //suffixIcon: Icon(Icons.check_circle, color: Colors.teal[900]),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.teal[900]),
                                 ),
-                                duration: Duration(seconds: 3),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                      _obscureText
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.teal[900]),
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscureText = !_obscureText;
+                                    });
+                                  },
+                                ),
                               ),
-                            );*/
-                            showTopSnackBar(
-                              context,
-                              CustomSnackBar.error(
-                                message:
-                                    "Wrong username or password. Please check your credentials and try again.",
-                              ),
-                            );
-                          }
-                        }
-                      },
+                            )),
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, ForgotPasswordScreen.id);
+                          },
+                          child: Text(
+                            'Forgot Password?',
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SimpleButton(
+                          content: 'Login',
+                          onPress: () async {
+                            //print(enteredPassword);
+                            //print(enteredUsername);
+
+                            if (_formKey.currentState.validate()) {
+                              setState(() {
+                                _loading = true;
+                              });
+                              var k = await LoginMgr.loginToSystem(
+                                  enteredUsername, enteredPassword);
+                              if (k) {
+                                setState(() {
+                                  _loading = false;
+                                });
+                                Navigator.pushNamed(context, MainScreen.id);
+                              } else {
+                                setState(() {
+                                  _loading = false;
+                                });
+                                /*showDialog(
+                                  context: context,
+                                  builder: (BuildContext dialogContext) {
+                                    return AlertDialog(
+                                      title: Center(
+                                        child: Text('Wrong Username or Password'),
+                                      ),
+                                      content: Text(
+                                        'You have entered a wrong username or password, '
+                                        'please re-entered',
+                                      ),
+                                      actions: <Widget>[
+                                        new FlatButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          textColor: Colors.grey,
+                                          child: const Text('Continue'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );*/
+
+                                /*_scaffoldKey.currentState.showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'You have entered a wrong username or password, '
+                                      'please re-enter.',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    duration: Duration(seconds: 3),
+                                  ),
+                                );*/
+                                showTopSnackBar(
+                                  context,
+                                  CustomSnackBar.error(
+                                    message:
+                                        "Wrong username or password. Please check your credentials and try again.",
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+              _loading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(Colors.lime),
+                      ),
+                    )
+                  : SizedBox(),
+            ],
           ),
         ),
       ),
