@@ -6,6 +6,7 @@ import 'package:wastetastic/screens/LoadingScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/CategoryButton.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:location_permissions/location_permissions.dart' as lp;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -60,6 +61,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                               return;
                             }
+                            lp.PermissionStatus permission =
+                                await lp.LocationPermissions()
+                                    .checkPermissionStatus();
+                            if (permission == lp.PermissionStatus.denied) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please grant location permission for this feature.",
+                                ),
+                              );
+                              return;
+                            }
                             Navigator.pushNamed(
                               context,
                               LoadingScreen.id,
@@ -91,6 +105,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                               return;
                             }
+                            lp.PermissionStatus permission =
+                                await lp.LocationPermissions()
+                                    .checkPermissionStatus();
+                            if (permission == lp.PermissionStatus.denied) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please grant location permission for this feature.",
+                                ),
+                              );
+                              return;
+                            }
                             Navigator.pushNamed(
                               context,
                               LoadingScreen.id,
@@ -112,6 +139,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                 CustomSnackBar.error(
                                   message:
                                       "Please enable location services for this feature.",
+                                ),
+                              );
+                              return;
+                            }
+                            lp.PermissionStatus permission =
+                                await lp.LocationPermissions()
+                                    .checkPermissionStatus();
+                            if (permission == lp.PermissionStatus.denied) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please grant location permission for this feature.",
                                 ),
                               );
                               return;
@@ -149,6 +189,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                               return;
                             }
+                            lp.PermissionStatus permission =
+                                await lp.LocationPermissions()
+                                    .checkPermissionStatus();
+                            if (permission == lp.PermissionStatus.denied) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please grant location permission for this feature.",
+                                ),
+                              );
+                              return;
+                            }
                             Navigator.pushNamed(
                               context,
                               LoadingScreen.id,
@@ -169,6 +222,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                 CustomSnackBar.error(
                                   message:
                                       "Please enable location services for this feature.",
+                                ),
+                              );
+                              return;
+                            }
+                            lp.PermissionStatus permission =
+                                await lp.LocationPermissions()
+                                    .checkPermissionStatus();
+                            if (permission == lp.PermissionStatus.denied) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please grant location permission for this feature.",
                                 ),
                               );
                               return;
