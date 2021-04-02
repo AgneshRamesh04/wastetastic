@@ -83,7 +83,7 @@ class _MainScreenState extends State<MainScreen> {
                         Icon(
                           Icons.shield,
                           size: 45,
-                          color: Colors.greenAccent,
+                          color: Colors.green.shade700,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
                             Text(
                               '${UserAccountMgr.userDetails.points}',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                             )
                           ],

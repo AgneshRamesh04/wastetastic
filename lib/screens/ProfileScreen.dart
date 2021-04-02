@@ -82,11 +82,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget buildPieChart() {
     // change the colors in this list to change PieChart colors
     List<Color> colorList = [
-      Colors.red,
-      Colors.green,
-      Colors.blue,
-      Colors.yellow,
-      Colors.grey,
+      Colors.red.shade700,
+      Colors.blueGrey.shade700,
+      Colors.blueAccent.shade200,
+      Colors.yellow.shade900,
+      Colors.teal.shade700,
     ];
     if (_loggedInUser.waste_records.isEmpty)
       return Column(
@@ -129,8 +129,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         chartValuesOptions: ChartValuesOptions(
           chartValueStyle: TextStyle(
-            fontSize: 18,
-            color: Colors.black,
+            fontSize: 22,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
           showChartValueBackground: false,
           showChartValues: true,
@@ -288,7 +289,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Icon(Icons.logout),
                               ),
-                              color: Colors.red,
+                              color: Colors.red.shade700,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                               ),

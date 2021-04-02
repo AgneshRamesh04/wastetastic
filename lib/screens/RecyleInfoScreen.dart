@@ -15,7 +15,7 @@ class RecycleInfoScreen extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
         title: Container(
           decoration: BoxDecoration(
-            color: Colors.green,
+            color: Colors.lightGreen.shade700,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
@@ -24,7 +24,12 @@ class RecycleInfoScreen extends StatelessWidget {
           height: 60.00,
           width: double.infinity,
           child: Center(
-            child: Text('Lets Recycle'),
+            child: Text('Lets Recycle', style: TextStyle(
+              color: Colors.white,
+              fontSize: 25.0,
+              fontFamily: 'DancingScript',
+              fontWeight: FontWeight.bold,
+            ),),
           ),
         ),
         content: SingleChildScrollView(
@@ -38,10 +43,14 @@ class RecycleInfoScreen extends StatelessWidget {
                 "Normal Waste",
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                  color: Colors.teal.shade900,
                   fontSize: 29.0,
                   fontFamily: 'DancingScript',
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              SizedBox(
+                height: 5,
               ),
               Text(
                 "Normal waste can be generated from: Biodegradable products like food and kitchen waste, green waste, paper, cardboard, glass, bottles or jars. Composite wastes like clothing, tetra pack food, waste plastic from toys or furniture. Some of these are recyclable but materials like plastic must be treated properly. Regardless of being recyclable, they should be disposed of by proper waste management methods.",
@@ -50,18 +59,19 @@ class RecycleInfoScreen extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
-              //Text("Scroll"),
-              //SizedBox(
-              // height: 250,
-              //),
+
               Text(
                 "E-Waste",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 29.0,
+                  color: Colors.teal.shade900,
                   fontFamily: 'DancingScript',
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              SizedBox(
+                height: 5,
               ),
               Text(
                 "E-waste is generated from electrical devices, including computers and computer parts, printers, DVD and music players, TVs, telephones, vacuum cleaners and so on. These may contain toxic metals like lead, mercury, cadmium, and brominated flame retardants, which are all harmful to humans and the environment.",
@@ -75,13 +85,20 @@ class RecycleInfoScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 29.0,
+                  color: Colors.teal.shade900,
                   fontFamily: 'DancingScript',
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(
+                height: 5,
+              ),
               Text(
                 "Lightning waste is generated from different types of bulbs/tubes contain chemicals and materials which maybe harmful to people or the environment and need to be properly disposed of.",
                 style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+              SizedBox(
+                height: 10,
               ),
             ],
           ),
@@ -92,7 +109,11 @@ class RecycleInfoScreen extends StatelessWidget {
               Navigator.of(context).pop();
             },
             textColor: Colors.grey,
-            child: const Text('Okay, got it!'),
+            child: const Text('Okay, got it!', style: TextStyle(
+              fontSize: 16.0,
+              //fontFamily: 'DancingScript',
+              fontWeight: FontWeight.bold,
+            ),),
           ),
         ],
       ),

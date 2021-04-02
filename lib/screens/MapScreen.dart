@@ -43,7 +43,7 @@ class _MapScreenState extends State<MapScreen> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.green,
+                          color: Colors.lime,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Padding(
@@ -95,7 +95,7 @@ class _MapScreenState extends State<MapScreen> {
                   Triangle.isosceles(
                     edge: Edge.BOTTOM,
                     child: Container(
-                      color: Colors.green,
+                      color: Colors.lime,
                       width: 20.0,
                       height: 10.0,
                     ),
