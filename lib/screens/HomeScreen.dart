@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/LoadingScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/CategoryButton.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -43,7 +46,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         CategoryButton(
                           icon: Icons.delete,
                           category: 'Normal Waste',
-                          redirect: () {
+                          redirect: () async {
+                            ServiceStatus serviceStatus =
+                                await PermissionHandler().checkServiceStatus(
+                                    PermissionGroup.location);
+                            if (serviceStatus != ServiceStatus.enabled) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please enable location services for this feature.",
+                                ),
+                              );
+                              return;
+                            }
                             Navigator.pushNamed(
                               context,
                               LoadingScreen.id,
@@ -61,7 +77,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         CategoryButton(
                           icon: Icons.phone_android,
                           category: 'E Waste',
-                          redirect: () {
+                          redirect: () async {
+                            ServiceStatus serviceStatus =
+                                await PermissionHandler().checkServiceStatus(
+                                    PermissionGroup.location);
+                            if (serviceStatus != ServiceStatus.enabled) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please enable location services for this feature.",
+                                ),
+                              );
+                              return;
+                            }
                             Navigator.pushNamed(
                               context,
                               LoadingScreen.id,
@@ -73,7 +102,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon:
                               Icons.emoji_objects_outlined, //lightbulb_outline,
                           category: 'Lighting Waste',
-                          redirect: () {
+                          redirect: () async {
+                            ServiceStatus serviceStatus =
+                                await PermissionHandler().checkServiceStatus(
+                                    PermissionGroup.location);
+                            if (serviceStatus != ServiceStatus.enabled) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please enable location services for this feature.",
+                                ),
+                              );
+                              return;
+                            }
                             Navigator.pushNamed(
                               context,
                               LoadingScreen.id,
@@ -93,7 +135,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: Icons
                               .local_fire_department, //flare,//fireplace_outlined,//bubble_chart,//warning_rounded,
                           category: 'Waste Treatment',
-                          redirect: () {
+                          redirect: () async {
+                            ServiceStatus serviceStatus =
+                                await PermissionHandler().checkServiceStatus(
+                                    PermissionGroup.location);
+                            if (serviceStatus != ServiceStatus.enabled) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please enable location services for this feature.",
+                                ),
+                              );
+                              return;
+                            }
                             Navigator.pushNamed(
                               context,
                               LoadingScreen.id,
@@ -104,7 +159,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         CategoryButton(
                           icon: Icons.attach_money_rounded,
                           category: 'Cash For Trash',
-                          redirect: () {
+                          redirect: () async {
+                            ServiceStatus serviceStatus =
+                                await PermissionHandler().checkServiceStatus(
+                                    PermissionGroup.location);
+                            if (serviceStatus != ServiceStatus.enabled) {
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.error(
+                                  message:
+                                      "Please enable location services for this feature.",
+                                ),
+                              );
+                              return;
+                            }
                             Navigator.pushNamed(
                               context,
                               LoadingScreen.id,
