@@ -1,9 +1,11 @@
 import 'package:clippy_flutter/triangle.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:geopoint/geopoint.dart' as gp;
+import 'package:wastetastic/screens/POIDetailsScreen.dart';
 
 class MapScreen extends StatefulWidget {
   static const String id = 'Map';
@@ -19,7 +21,11 @@ class _MapScreenState extends State<MapScreen> {
 
   void buildMarkerList(List<WastePOI> WastePOIs) {
     for (WastePOI w in WastePOIs) {
-      markerList.add(Marker(
+      String POICategory = w.wasteCategory.toString().split('.').last;
+      POICategory = POICategory.replaceAll('_', ' ').toLowerCase();
+      POICategory = POICategory[0].toUpperCase() + POICategory.substring(1);
+      markerList.add(
+        Marker(
           markerId: MarkerId(w.id),
           draggable: false,
           onTap: () {
@@ -27,46 +33,69 @@ class _MapScreenState extends State<MapScreen> {
               Column(
                 children: [
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.account_circle,
-                              color: Colors.white,
-                              size: 15,
-                            ),
-//                          SizedBox(
-//                            width: 8.0,
-//                          ),
-                            Flexible(
-                              child: Text(
-                                "${w.POI_name}\n${w.address}. Singapore ${w.POI_postalcode} "
-                                "\nCategory: ${w.wasteCategory} \n${w.POI_description}",
-                                overflow: TextOverflow.fade,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          POI_DetialScreen.id,
+                          arguments: w,
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  "${w.POI_name}\n${w.address.trim()}. Singapore ${w.POI_postalcode} "
+                                  "\nCategory: ${POICategory} \n${w.POI_description}",
+                                  overflow: TextOverflow.fade,
+                                  softWrap: false,
 //                            style:
 //                                Theme.of(context).textTheme.headline6.copyWith(
 //                                      color: Colors.white,
 //                                    ),
+                                ),
                               ),
-                            ),
-                          ],
+                              /*Icon(
+                                Icons.account_circle,
+                                color: Colors.white,
+                                size: 15,
+                              ),*/
+//                          SizedBox(
+//                            width: 8.0,
+//                          ),
+                              /*IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    UserAccountMgr.editFav(w);
+                                  });
+                                },
+                                iconSize: 20,
+                                icon: Icon(
+                                  Icons.star,
+                                  color: UserAccountMgr.isFav(w)
+                                      ? Colors.yellow.shade600
+                                      : Colors.white,
+                                ),
+                              ),*/
+                            ],
+                            mainAxisSize: MainAxisSize.max,
+                          ),
                         ),
                       ),
-                      width: double.infinity,
-                      height: double.infinity,
                     ),
                   ),
                   Triangle.isosceles(
                     edge: Edge.BOTTOM,
                     child: Container(
-                      color: Colors.blue,
+                      color: Colors.green,
                       width: 20.0,
                       height: 10.0,
                     ),
@@ -83,7 +112,9 @@ class _MapScreenState extends State<MapScreen> {
           position: LatLng(
             w.location.latitude,
             w.location.longitude,
-          )));
+          ),
+        ),
+      );
     }
   }
 
@@ -151,10 +182,14 @@ class _MapScreenState extends State<MapScreen> {
                       },
                     ),
                     Flexible(
-                      child: Text(title,
-                          overflow: TextOverflow.fade,
-                          style: TextStyle(
-                              fontSize: 20.0, fontFamily: "Source Sans Pro")),
+                      child: Text(
+                        title,
+                        overflow: TextOverflow.fade,
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          fontFamily: "DancingScript",
+                        ),
+                      ),
                     ),
                     SizedBox(width: 50),
                   ],
@@ -182,9 +217,24 @@ class _MapScreenState extends State<MapScreen> {
             ),
             CustomInfoWindow(
               controller: _customInfoWindowController,
-              height: 75,
-              width: 150,
+              height: 100,
+              width: 250,
               offset: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    "Click on the markers for more info",
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        fontFamily: "Source Sans Pro",
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
