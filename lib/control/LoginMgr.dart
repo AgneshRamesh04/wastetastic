@@ -26,6 +26,13 @@ class LoginMgr {
             email: email, password: enteredPassword);
         if (user != null) {
           await UserAccountMgr.readUserDetails(username);
+          int new_point = UserAccountMgr.userDetails.points;
+          new_point += 3;
+          _firestore
+              .collection('UserAccounts')
+              .doc('$username')
+              .update({'points': new_point});
+          UserAccountMgr.userDetails.points = new_point;
           return true;
         }
       } catch (e) {

@@ -167,13 +167,14 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                             onPressed: () async {
                               // Validate returns true if the form is valid, or false
                               // otherwise.
-                              if (_formKey.currentState.validate()) {
-                                // If the form is valid, display a Snackbar.
-                                DateTime dt = DateTime.parse(
-                                    selectedDate.substring(0, 10) +
-                                        " " +
-                                        selectedTime);
-                                /*if (DateTime.now().isBefore(dt)) {
+                              setState(() async {
+                                if (_formKey.currentState.validate()) {
+                                  // If the form is valid, display a Snackbar.
+                                  DateTime dt = DateTime.parse(
+                                      selectedDate.substring(0, 10) +
+                                          " " +
+                                          selectedTime);
+                                  /*if (DateTime.now().isBefore(dt)) {
                                   print("Wrong time entered!");
                                   showTopSnackBar(
                                     context,
@@ -184,45 +185,46 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                                   );
                                   return;
                                 }*/
-                                print(
-                                    'date: ${selectedDate.substring(0, 10)} \n time: $selectedTime \n'
-                                    'weight: $enteredWeight \n category: $selectedCategory');
+                                  print(
+                                      'date: ${selectedDate.substring(0, 10)} \n time: $selectedTime \n'
+                                      'weight: $enteredWeight \n category: $selectedCategory');
 
-                                print(selectedCategory.replaceAll(' ', '_'));
-                                await WasteRecordMgr.addNewRecord(
-                                  _loggedInUser.username,
-                                  dt,
-                                  double.parse(enteredWeight),
-                                  WasteCategory.values.firstWhere((element) =>
-                                      element.toString() ==
-                                      ('WasteCategory.' +
-                                          selectedCategory.replaceAll(
-                                              ' ', '_'))),
-                                );
-                                //Dialog box
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext dialogContext) {
-                                    return AlertDialog(
-                                      title: Center(
-                                          child: Text('New Record Added')),
-                                      content: Text(
-                                        "Yipee! You have added a new Waste Record to "
-                                        "your account",
-                                      ),
-                                      actions: <Widget>[
-                                        new FlatButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          textColor: Colors.grey,
-                                          child: const Text('Continue'),
+                                  print(selectedCategory.replaceAll(' ', '_'));
+                                  await WasteRecordMgr.addNewRecord(
+                                    _loggedInUser.username,
+                                    dt,
+                                    double.parse(enteredWeight),
+                                    WasteCategory.values.firstWhere((element) =>
+                                        element.toString() ==
+                                        ('WasteCategory.' +
+                                            selectedCategory.replaceAll(
+                                                ' ', '_'))),
+                                  );
+                                  //Dialog box
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext dialogContext) {
+                                      return AlertDialog(
+                                        title: Center(
+                                            child: Text('New Record Added')),
+                                        content: Text(
+                                          "Yipee! You have added a new Waste Record to "
+                                          "your account",
                                         ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
+                                        actions: <Widget>[
+                                          new FlatButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            textColor: Colors.grey,
+                                            child: const Text('Continue'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
+                              });
                             },
                             child: Text('Add Record',
                                 style: TextStyle(
