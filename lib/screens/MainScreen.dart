@@ -18,6 +18,10 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedPageIndex = 0;
 
+  void refresh() {
+    setState(() {});
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedPageIndex = index;
@@ -29,7 +33,9 @@ class _MainScreenState extends State<MainScreen> {
     List<Widget> _widgetOptions = <Widget>[
       HomeScreen(),
       CatalogScreen(),
-      AddWasteScreen(),
+      AddWasteScreen(
+        notifyMainScreen: refresh,
+      ),
       FavouritesScreen(),
       ProfileScreen(),
       //BasicTestingScreen(),
