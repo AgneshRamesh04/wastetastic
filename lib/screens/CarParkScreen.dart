@@ -6,6 +6,8 @@ import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/CarparkCard.dart';
 
+import 'MapScreen.dart';
+
 class CarParkScreen extends StatefulWidget {
   static const String id = 'Car_park_screen';
   @override
@@ -14,6 +16,7 @@ class CarParkScreen extends StatefulWidget {
 
 class _CarParkScreenState extends State<CarParkScreen> {
   WastePOI POI;
+  List<List> carParkInfo;
   List<Widget> build_carpark_cards(List<List> carParkList) {
     //List<WastePOI> favorites = retrieveFavoritesFromDatabase(username)
     List<Widget> carpark_card_list = [
@@ -91,36 +94,69 @@ class _CarParkScreenState extends State<CarParkScreen> {
             centerTitle: true,
           ),
         ),
-        body: Container(
-          child: Column(children: [
-            header_card(
-              title: 'Car Parking Facilities',
-            ),
-            Expanded(
-                child: FutureBuilder(
-                    future:
-                        CarParkMgr.retrieveNearbyCarParkInfo(POI.nearbyCarPark),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return SingleChildScrollView(
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:
-                                build_carpark_cards(snapshot.data), //POI_cards
-                          ),
+        body: Stack(children: [
+          Container(
+            child: Column(children: [
+              header_card(
+                title: 'Car Parking Facilities',
+              ),
+              Expanded(
+                  child: FutureBuilder(
+                      future: CarParkMgr.retrieveNearbyCarParkInfo(
+                          POI.nearbyCarPark),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          carParkInfo = snapshot.data;
+                          return SingleChildScrollView(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: build_carpark_cards(
+                                  snapshot.data), //POI_cards
+                            ),
+                          );
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Colors.lime),
+                            ),
+                          );
+                        }
+                      })),
+            ]),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          MapScreen.id,
+                          arguments: {
+                            'title': 'Car Park near ' + POI.POI_name,
+                            'carPark': carParkInfo,
+                            'location': POI.location,
+                            'dispCarPark': true,
+                          },
                         );
-                      } else {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            valueColor:
-                                new AlwaysStoppedAnimation<Color>(Colors.lime),
-                          ),
-                        );
-                      }
-                    })),
-          ]),
-        ),
+                        // Add your onPressed code here!
+                      },
+                      child: const Icon(Icons.map),
+                      backgroundColor: Colors.teal.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ]),
       ),
     );
   }

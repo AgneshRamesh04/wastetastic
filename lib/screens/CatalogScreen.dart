@@ -176,6 +176,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                             'title': selectedCategory[0] +
                                 selectedCategory.toLowerCase().substring(1),
                             'WastePOI': WastePOIs,
+                            'dispCarPark': false,
                           },
                         );
                         // Add your onPressed code here!

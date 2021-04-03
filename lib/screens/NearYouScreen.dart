@@ -174,6 +174,7 @@ class _NearYouScreenState extends State<NearYouScreen> {
                               'title': title,
                               'WastePOI': WastePOIs,
                               'location': location,
+                              'dispCarPark': false,
                             },
                           );
                           // Add your onPressed code here!

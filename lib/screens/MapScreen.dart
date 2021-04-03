@@ -2,6 +2,7 @@ import 'package:clippy_flutter/triangle.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
+import 'package:wastetastic/entity/CarPark.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:geopoint/geopoint.dart' as gp;
@@ -19,7 +20,97 @@ class _MapScreenState extends State<MapScreen> {
   bool changed = false;
   List<Marker> markerList = [];
 
-  void buildMarkerList(List<WastePOI> WastePOIs) {
+  void buildCarParkMarkerList(List<List> carParks) {
+    for (List c in carParks) {
+      markerList.add(
+        Marker(
+          markerId: MarkerId(c[0].carParkNum),
+          draggable: false,
+          onTap: () {
+            _customInfoWindowController.addInfoWindow(
+              Column(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.lime,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  "${c[0].address.trim()}. Singapore\nLots available: ${c[1]}\nCar Park Type:${c[0].carParkType} "
+                                  "\nParking Type: ${c[0].parkingType} \nFree Parking:${c[0].freeParking}",
+                                  overflow: TextOverflow.fade,
+                                  softWrap: false,
+//                            style:
+//                                Theme.of(context).textTheme.headline6.copyWith(
+//                                      color: Colors.white,
+//                                    ),
+                                ),
+                              ),
+                              /*Icon(
+                                Icons.account_circle,
+                                color: Colors.white,
+                                size: 15,
+                              ),*/
+//                          SizedBox(
+//                            width: 8.0,
+//                          ),
+                              /*IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    UserAccountMgr.editFav(w);
+                                  });
+                                },
+                                iconSize: 20,
+                                icon: Icon(
+                                  Icons.star,
+                                  color: UserAccountMgr.isFav(w)
+                                      ? Colors.yellow.shade600
+                                      : Colors.white,
+                                ),
+                              ),*/
+                            ],
+                            mainAxisSize: MainAxisSize.max,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Triangle.isosceles(
+                    edge: Edge.BOTTOM,
+                    child: Container(
+                      color: Colors.lime,
+                      width: 20.0,
+                      height: 10.0,
+                    ),
+                  ),
+                ],
+              ),
+              LatLng(
+                c[0].location.latitude,
+                c[0].location.longitude,
+              ),
+            );
+            print("Marker Tap");
+          },
+          position: LatLng(
+            c[0].location.latitude,
+            c[0].location.longitude,
+          ),
+        ),
+      );
+    }
+  }
+
+  void buildWastePOIMarkerList(List<WastePOI> WastePOIs) {
     for (WastePOI w in WastePOIs) {
       String POICategory = w.wasteCategory.toString().split('.').last;
       POICategory = POICategory.replaceAll('_', ' ').toLowerCase();
@@ -126,6 +217,7 @@ class _MapScreenState extends State<MapScreen> {
 
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context).settings.arguments;
+    final bool dispCarPark = args['dispCarPark'];
     final String title = args['title'];
     final gp.GeoPoint location = args['location'];
     LatLng targetLocation = LatLng(1.3521, 103.8198);
@@ -133,7 +225,10 @@ class _MapScreenState extends State<MapScreen> {
 //    print('Map:' + location.longitude.toString());
     if (location != null)
       targetLocation = LatLng(location.latitude, location.longitude);
-    buildMarkerList(args['WastePOI']);
+    if (!dispCarPark)
+      buildWastePOIMarkerList(args['WastePOI']);
+    else
+      buildCarParkMarkerList(args['carPark']);
     return SafeArea(
       child: Scaffold(
         // appBar: PreferredSize(

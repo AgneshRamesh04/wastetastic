@@ -113,6 +113,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                           arguments: {
                             'WastePOI': Fav_WastePOI_List,
                             'title': 'Favorites',
+                            'dispCarPark': false,
                           },
                         );
                         // Add your onPressed code here!
