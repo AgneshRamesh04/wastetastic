@@ -16,15 +16,15 @@ class WasteRecordMgr {
     print(dateTime.millisecondsSinceEpoch.toString());
     int new_point = UserAccountMgr.userDetails.points;
     if (category == WasteCategory.NORMAL_WASTE) {
-      new_point += 3 * weight.toInt();
+      new_point += 7 * weight.toInt();
     } else if (category == WasteCategory.E_WASTE) {
-      new_point += 6 * weight.toInt();
+      new_point += 3 * weight.toInt();
     } else if (category == WasteCategory.LIGHTING_WASTE) {
       new_point += 4 * weight.toInt();
     } else if (category == WasteCategory.WASTE_TREATMENT) {
-      new_point += 5 * weight.toInt();
+      new_point += 6 * weight.toInt();
     } else {
-      new_point += 2 * weight.toInt();
+      new_point += 9 * weight.toInt();
     }
     _firestore
         .collection('UserAccounts')
