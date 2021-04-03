@@ -143,6 +143,7 @@ class _CarParkScreenState extends State<CarParkScreen> {
                             'title': 'Car Park near ' + POI.POI_name,
                             'carPark': carParkInfo,
                             'location': POI.location,
+                            'POI': POI,
                             'dispCarPark': true,
                           },
                         );

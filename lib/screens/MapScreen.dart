@@ -20,10 +20,11 @@ class _MapScreenState extends State<MapScreen> {
   bool changed = false;
   List<Marker> markerList = [];
 
-  void buildCarParkMarkerList(List<List> carParks) {
+  void buildCarParkMarkerList(List<List> carParks, WastePOI w) {
     for (List c in carParks) {
       markerList.add(
         Marker(
+          icon: BitmapDescriptor.defaultMarkerWithHue(100),
           markerId: MarkerId(c[0].carParkNum),
           draggable: false,
           onTap: () {
@@ -108,6 +109,100 @@ class _MapScreenState extends State<MapScreen> {
         ),
       );
     }
+    String POICategory = w.wasteCategory.toString().split('.').last;
+    POICategory = POICategory.replaceAll('_', ' ').toLowerCase();
+    POICategory = POICategory[0].toUpperCase() + POICategory.substring(1);
+    markerList.add(
+      Marker(
+        markerId: MarkerId(w.id),
+        draggable: false,
+        onTap: () {
+          _customInfoWindowController.addInfoWindow(
+            Column(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        POI_DetialScreen.id,
+                        arguments: w,
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.lime,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                "${w.POI_name}\n${w.address.trim()}. Singapore ${w.POI_postalcode} "
+                                "\nCategory: ${POICategory} \n${w.POI_description}",
+                                overflow: TextOverflow.fade,
+                                softWrap: false,
+//                            style:
+//                                Theme.of(context).textTheme.headline6.copyWith(
+//                                      color: Colors.white,
+//                                    ),
+                              ),
+                            ),
+                            /*Icon(
+                                Icons.account_circle,
+                                color: Colors.white,
+                                size: 15,
+                              ),*/
+//                          SizedBox(
+//                            width: 8.0,
+//                          ),
+                            /*IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    UserAccountMgr.editFav(w);
+                                  });
+                                },
+                                iconSize: 20,
+                                icon: Icon(
+                                  Icons.star,
+                                  color: UserAccountMgr.isFav(w)
+                                      ? Colors.yellow.shade600
+                                      : Colors.white,
+                                ),
+                              ),*/
+                          ],
+                          mainAxisSize: MainAxisSize.max,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Triangle.isosceles(
+                  edge: Edge.BOTTOM,
+                  child: Container(
+                    color: Colors.lime,
+                    width: 20.0,
+                    height: 10.0,
+                  ),
+                ),
+              ],
+            ),
+            LatLng(
+              w.location.latitude,
+              w.location.longitude,
+            ),
+          );
+          print("Marker Tap");
+        },
+        position: LatLng(
+          w.location.latitude,
+          w.location.longitude,
+        ),
+      ),
+    );
   }
 
   void buildWastePOIMarkerList(List<WastePOI> WastePOIs) {
@@ -228,7 +323,7 @@ class _MapScreenState extends State<MapScreen> {
     if (!dispCarPark)
       buildWastePOIMarkerList(args['WastePOI']);
     else
-      buildCarParkMarkerList(args['carPark']);
+      buildCarParkMarkerList(args['carPark'], args['POI']);
     return SafeArea(
       child: Scaffold(
         // appBar: PreferredSize(
