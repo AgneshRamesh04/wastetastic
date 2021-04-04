@@ -32,55 +32,52 @@ class _MapScreenState extends State<MapScreen> {
               Column(
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.lime,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  "${c[0].address.trim()}. Singapore\nLots available: ${c[1]}\nCar Park Type:${c[0].carParkType} "
-                                  "\nParking Type: ${c[0].parkingType} \nFree Parking:${c[0].freeParking}",
-                                  overflow: TextOverflow.fade,
-                                  softWrap: false,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.lime,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                "${c[0].address.trim()}. Singapore\nLots available: ${c[1]}\nCar Park Type:${c[0].carParkType} "
+                                "\nParking Type: ${c[0].parkingType} \nFree Parking:${c[0].freeParking}",
+                                overflow: TextOverflow.fade,
+                                softWrap: false,
 //                            style:
 //                                Theme.of(context).textTheme.headline6.copyWith(
 //                                      color: Colors.white,
 //                                    ),
-                                ),
                               ),
-                              /*Icon(
-                                Icons.account_circle,
-                                color: Colors.white,
-                                size: 15,
-                              ),*/
+                            ),
+                            /*Icon(
+                              Icons.account_circle,
+                              color: Colors.white,
+                              size: 15,
+                            ),*/
 //                          SizedBox(
 //                            width: 8.0,
 //                          ),
-                              /*IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    UserAccountMgr.editFav(w);
-                                  });
-                                },
-                                iconSize: 20,
-                                icon: Icon(
-                                  Icons.star,
-                                  color: UserAccountMgr.isFav(w)
-                                      ? Colors.yellow.shade600
-                                      : Colors.white,
-                                ),
-                              ),*/
-                            ],
-                            mainAxisSize: MainAxisSize.max,
-                          ),
+                            /*IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  UserAccountMgr.editFav(w);
+                                });
+                              },
+                              iconSize: 20,
+                              icon: Icon(
+                                Icons.star,
+                                color: UserAccountMgr.isFav(w)
+                                    ? Colors.yellow.shade600
+                                    : Colors.white,
+                              ),
+                            ),*/
+                          ],
+                          mainAxisSize: MainAxisSize.max,
                         ),
                       ),
                     ),
