@@ -10,11 +10,24 @@ import '../entity/WastePOI.dart';
 import 'package:geopoint/geopoint.dart' as gp;
 import 'package:latlong/latlong.dart';
 
+///Controller Class to manage user accounts
+///
+/// * Interacts with the firestore database of User Accounts
+/// * Keeps track of current logged in user
 class UserAccountMgr {
+  /// A firebase firestore instance to interact with the User Account database
   static final _firestore = FirebaseFirestore.instance;
+
+  /// A firebase authentication instance to validate user login
   static final _auth = FirebaseAuth.instance;
+
+  /// A static User Account variable for details of logged in user
   static UserAccount userDetails = new UserAccount();
 
+  /// Reads details of logged in user from database into local variable
+  ///
+  /// Finds a record in database using [_firestore] having key [username]
+  /// and populates the details in static variable [userDetails]. Returns void.
   static readUserDetails(String username) async {
     //UserAccount userDetails = new UserAccount();
 
@@ -109,6 +122,10 @@ class UserAccountMgr {
     //print(userDetails.waste_records.first.weight);
   }
 
+  /// Checks if a Waste POI is a favorite
+  ///
+  /// Determines if [wp] is in [userDetails.favorites]. Return true
+  /// if it is a favorite, false if not.
   static bool isFav(WastePOI wp) {
     for (WastePOI w in userDetails.favorites) {
       if (wp.id == w.id) {
@@ -118,6 +135,11 @@ class UserAccountMgr {
     return false;
   }
 
+  /// Changes the favorite status of a Waste POI for the logged in user
+  ///
+  /// Adds [wp] to [userDetails.favorites] if it is not a favorite, and
+  /// vice-versa. Also makes changes in database using [_firestore].
+  /// Return void.
   static Future<void> editFav(WastePOI wp) async {
     if (UserAccountMgr.isFav(wp)) {
       print('Found! in editFav');
@@ -142,6 +164,10 @@ class UserAccountMgr {
     return;
   }
 
+  /// Removes a Waste POI from list of favorites
+  ///
+  /// Determines position of [wp] in [userDetails.favorites] and removes it.
+  /// Returns void.
   static void removeFav(WastePOI wp) {
     for (WastePOI w in userDetails.favorites) {
       if (wp.id == w.id) {
@@ -153,6 +179,10 @@ class UserAccountMgr {
     return;
   }
 
+  /// Updates the user's password in the database
+  ///
+  /// Makes use of [_auth] instance to change the password in the database.
+  /// Returns void.
   static updateUserPassword(String email, String newPassword) async {
     String username;
     await for (var snapshot in _firestore
@@ -186,10 +216,16 @@ class UserAccountMgr {
     await readUserDetails(username);
   }
 
+  /// Sends a password reset email to [email] if user forgets password
   static forgotPassword(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
   }
 
+  /// Validates if a user account exists
+  ///
+  /// Interacts with database using [_firestore] and checks if a record has key
+  /// [username] or email field as [email]. Returns "Username" if found by username,
+  /// "Email" if found by email, and null if not found.
   static Future<String> validateUsername_Email(
       String username, String email) async {
     await for (var snapshot
