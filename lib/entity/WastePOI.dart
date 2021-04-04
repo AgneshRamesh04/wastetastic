@@ -1,24 +1,48 @@
 import 'package:flutter/cupertino.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:geopoint/geopoint.dart';
-import 'package:wastetastic/entity/CarPark.dart';
 
+/// Entity class describing a Waste Point of Interest (POI)
 class WastePOI {
+  /// A Unique ID identifying a specific Waste POI
   String _id;
+
+  /// The name of the Waste POI
   String _POI_name;
+
+  /// The category of the Waste POI
   WasteCategory _wasteCategory;
+
+  /// The location of the Waste POI
   GeoPoint _location;
+
+  /// The list of IDs of 5 nearest HDB car parks
   List<String> _nearbyCarPark = List<String>(5);
+
+  /// The postal code of the Waste POI
   int _POI_postalcode;
+
+  /// The address of the Waste POI
   String _address;
+
+  /// The description of the Waste POI
   String _POI_description;
+
+  /// Additional metadata
   String _POI_inc_crc;
+
+  /// Additional metadata
   String _POI_feml_upd_d;
+
+  /// X-coordinate of Waste POI
   double _POI_X;
+
+  /// Y-coordinate of Waste POI
   double _POI_Y;
 
+  /// Named constructor to initialize fields of a Waste POI
   WastePOI({
-    @required String id,
+    String id,
     String name,
     WasteCategory category,
     GeoPoint location,
@@ -39,19 +63,43 @@ class WastePOI {
         _POI_inc_crc = POI_inc_crc,
         _POI_feml_upd_d = POI_feml_upd_d;
 
+  /// The ID of the Waste POI
   String get id => _id;
+
+  /// The category of the Waste POI
   WasteCategory get wasteCategory => _wasteCategory;
+
+  /// The location of the Waste POI
   GeoPoint get location => _location;
+
+  /// The 5 nearest car parks to a Waste POI
   List<String> get nearbyCarPark => _nearbyCarPark;
+
+  /// The name of the Waste POI
   String get POI_name => _POI_name;
+
+  /// The address of the Waste POI
   String get address => _address;
+
+  /// The postal code of the Waste POI
   int get POI_postalcode => _POI_postalcode;
+
+  /// The description of the Waste POI
   String get POI_description => _POI_description;
+
+  /// Additional metadata
   String get POI_inc_crc => _POI_inc_crc;
+
+  /// Additional metadata
   String get POI_feml_upd_d => _POI_feml_upd_d;
+
+  /// X-coordinate of Waste POI
   double get POI_X => _POI_X;
+
+  /// Y-coordinate of Waste POI
   double get POI_Y => _POI_Y;
 
+  /// Prints details of Waste POI (for debug)
   void printDetails() {
     print("Name: $_POI_name");
     print("Address: $_address");
