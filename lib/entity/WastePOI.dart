@@ -34,12 +34,6 @@ class WastePOI {
   /// Additional metadata
   String _POI_feml_upd_d;
 
-  /// X-coordinate of Waste POI
-  double _POI_X;
-
-  /// Y-coordinate of Waste POI
-  double _POI_Y;
-
   /// Named constructor to initialize fields of a Waste POI
   WastePOI({
     String id,
@@ -92,12 +86,6 @@ class WastePOI {
 
   /// Additional metadata
   String get POI_feml_upd_d => _POI_feml_upd_d;
-
-  /// X-coordinate of Waste POI
-  double get POI_X => _POI_X;
-
-  /// Y-coordinate of Waste POI
-  double get POI_Y => _POI_Y;
 
   /// Prints details of Waste POI (for debug)
   void printDetails() {
