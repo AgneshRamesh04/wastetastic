@@ -14,12 +14,22 @@ import 'package:sortedmap/sortedmap.dart';
 import '../entity/WasteCategory.dart';
 import '../entity/WastePOI.dart';
 
+/// The URL of the car park API
 const String carParkDataURL =
     'https://data.gov.sg/api/action/datastore_search?resource_id=139a3035-e624-4f56-b63f-89ae28d4ae4c&limit=4094';
 
+/// Controller Class used to create the firebase databases
+///
+/// Contains functions called only once to create relevant databases in
+/// required format
 class DatabaseCreator {
+  /// A firebase firestore instance to create with the databases
   static final _firestore = FirebaseFirestore.instance;
 
+  /// Gets the 5 nearest car parks near a Waste POI
+  ///
+  /// Finds the 5 nearest car parks to the location of a single Waste POI given by
+  /// [location]. Returns list of 5 nearest car parks.
   static getTop5CarPark(gp.GeoPoint location) async {
     final Distance distance = Distance();
     Map<String, LatLng> listOfCarParkLocations = await readAllCarParks();
@@ -43,6 +53,9 @@ class DatabaseCreator {
     return nearbyCarpark;
   }
 
+  /// Read all car park details from the Car Park database
+  ///
+  /// Returns list of car park locations.
   static readAllCarParks() async {
     Map<String, LatLng> listOfCarParkLocations = Map<String, LatLng>();
     await for (var snaps in _firestore.collection('CarPark').snapshots()) {
@@ -55,6 +68,10 @@ class DatabaseCreator {
     }
   }
 
+  /// Creates database for E-Waste Waste POIs
+  ///
+  /// Makes use of static database downloaded from gov.data.sg and the static
+  /// [_firestore] to create the database. Returns void.
   static createDatabaseForEWaste() async {
     String rawGeoJson = await rootBundle
         .loadString('assets/databases/e-waste-recycling-geojson.geojson');
@@ -116,6 +133,10 @@ class DatabaseCreator {
     }
   }
 
+  /// Creates database for Lighting Waste
+  ///
+  /// Makes use of static database downloaded from gov.data.sg and the static
+  /// [_firestore] to create the database. Returns void.
   static createDatabaseForLightingWaste() async {
     String rawGeoJson = await rootBundle.loadString(
         'assets/databases/lighting-waste-collection-points-geojson.geojson');
@@ -176,6 +197,10 @@ class DatabaseCreator {
     }
   }
 
+  /// Creates database for Waste Treatment
+  ///
+  /// Makes use of static database downloaded from gov.data.sg and the static
+  /// [_firestore] to create the database. Returns void.
   static createDatabaseForWasteTreatment() async {
     String rawGeoJson = await rootBundle
         .loadString('assets/databases/waste-treatment-geojson.geojson');
@@ -229,6 +254,10 @@ class DatabaseCreator {
     }
   }
 
+  /// Creates database for Cash for Trash
+  ///
+  /// Makes use of static database downloaded from gov.data.sg and the static
+  /// [_firestore] to create the database. Returns void.
   static createDatabaseForCashForTrash() async {
     String rawGeoJson = await rootBundle
         .loadString("assets/databases/cash-for-trash-geojson.geojson");
@@ -280,6 +309,10 @@ class DatabaseCreator {
     }
   }
 
+  /// Creates database for Lighting Waste
+  ///
+  /// Makes use of static database downloaded from gov.data.sg and the static
+  /// [_firestore] to create the database. Returns void.
   static createDatabaseForGeneralWasteCollectors() async {
     final data = await rootBundle
         .loadString('assets/databases/listing-of-general-waste-collectors.csv');
@@ -335,6 +368,10 @@ class DatabaseCreator {
     }
   }
 
+  /// Creates database for Car Park
+  ///
+  /// Makes use of static database downloaded from gov.data.sg and the static
+  /// [_firestore] to create the database. Returns void.
   static createDatabaseForCarPark() async {
     final data = await rootBundle
         .loadString('assets/databases/hdb-carpark-information.csv');
