@@ -10,28 +10,49 @@ import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/screens/MainScreen.dart' as ms;
 
+/// Unique Key for the form displayed on the screen
 final _formKey = GlobalKey<FormState>();
 
+/// Boundary Class to display the UI for adding a Waste Record
+///
+/// * Implements various input error handling
+/// * Makes calls to controller class to perform the necessary database updates.
 class AddWasteScreen extends StatefulWidget {
+  /// Callback function used to notify the MainScreen of change in user's points
   final Function() notifyMainScreen;
+
+  /// Named Constructor to initialize the callback function [notifyMainScreen]
   AddWasteScreen({Key key, @required this.notifyMainScreen}) : super(key: key);
   @override
   _AddWasteScreenState createState() => _AddWasteScreenState();
 }
 
 class _AddWasteScreenState extends State<AddWasteScreen> {
+  /// The logged in user
   static UserAccount _loggedInUser;
+
+  /// The user selected time
   String selectedTime = '12:00';
+
+  /// The user selected date
   String selectedDate = DateTime.now().toString();
+
+  /// The user entered weight
   String enteredWeight = '7';
+
+  /// The user selected waste category
   String selectedCategory = 'NORMAL WASTE';
 
+  /// Overridden initState function to read user details into local variable
   @override
   void initState() {
     super.initState();
     _loggedInUser = UserAccountMgr.userDetails;
   }
 
+  /// Renders the widgets onto the screen
+  ///
+  /// Contains various input validations
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData.light().copyWith(
