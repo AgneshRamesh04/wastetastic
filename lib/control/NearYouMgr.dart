@@ -10,8 +10,8 @@ import 'package:latlong/latlong.dart';
 ///
 /// Contains intermediate helper functions to complete the task
 class NearYouMgr {
-  /// A firebase firestore instance to interact with the Waste POI database
-  static final _firestore = FirebaseFirestore.instance;
+//  /// A firebase firestore instance to interact with the Waste POI database
+//  static final _firestore = FirebaseFirestore.instance;
 
   /// Retrieves the device's current location
   ///
