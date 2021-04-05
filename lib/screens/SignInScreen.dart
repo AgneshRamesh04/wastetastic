@@ -8,21 +8,38 @@ import 'package:wastetastic/control/LoginMgr.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 
+/// Unique Key for the form displayed on the screen
 final _formKey = GlobalKey<FormState>();
 
+/// Boundary Class to display the UI for taking user input for login
 class SignInScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static String id = 'sigin_page';
   @override
   _SignInScreenState createState() => _SignInScreenState();
 }
 
+/// The user entered password
 String enteredPassword = "";
+
+/// The user entered username
 String enteredUsername = "";
 
 class _SignInScreenState extends State<SignInScreen> {
+  /// Unique Key for the Scaffold displayed on the screen
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  /// Whether the user has chosen to blue the password field
   bool _obscureText = true;
+
+  /// Whether the loading animation must be displayed
   bool _loading = false;
+
+  /// Renders the widgets onto the screen.
+  ///
+  /// Ensures that the user enters matching password and confirm password fields.
+  /// Makes use of controller classes to ensure that the entered username has
+  /// been registered, and to further validate the login credentials.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

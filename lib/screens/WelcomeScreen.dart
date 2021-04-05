@@ -4,13 +4,18 @@ import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'SignInScreen.dart';
 import 'SignUpScreen.dart';
 
+/// Boundary Class to display the UI for the welcome page of the app
 class WelcomeScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static String id = 'welcome_page';
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  /// Renders the widgets onto the screen
+  ///
+  /// Prompts the user with 2 options: Login or Sign Up.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +27,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               gradient: LinearGradient(
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
-                colors: [Colors.lightGreen.shade700, Colors.lime.shade400,],
+                colors: [
+                  Colors.lightGreen.shade700,
+                  Colors.lime.shade400,
+                ],
                 //colors: [Colors.green[700], Colors.lime[200]],
                 //center: Alignment(0.0, 0.0),
               ),

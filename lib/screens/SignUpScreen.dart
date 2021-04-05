@@ -8,24 +8,52 @@ import 'package:email_validator/email_validator.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 
+/// Unique Key for the form displayed on the screen
 final _formKey = GlobalKey<FormState>();
+
+/// Unique Key for the Scaffold displayed on the screen
 final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
+/// The user entered name
 String enteredName;
+
+/// The user entered username
 String enteredUsername;
+
+/// The user entered email
 String enteredEmail;
+
+/// The user entered password field
 String enteredPassword;
+
+/// The user entered confirm password field
 String enteredConfirmPassword;
 
+/// Boundary Class to display the UI for taking user input to sign up.
+///
+/// * Implements various user input error handling
+/// * Makes use of controller classes to validate if sign up can be successfully
+/// done.
 class SignUpScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static String id = 'signup_page';
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  /// Whether the user has chosen to blue the confirm password field
   bool _obscureConfirmText = true;
+
+  /// Whether the user has chosen to blue the password field
   bool _obscureText = true;
+
+  /// Renders the widgets onto the screen.
+  ///
+  ///Ensures that the user enters matching password and confirm password fields.
+  /// Makes use of controller classes to validate if [enteredUsername] and
+  /// [enteredEmail] are not already registered, and to send an OTP for
+  /// confirmation of email ID.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

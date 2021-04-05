@@ -10,17 +10,25 @@ import 'package:wastetastic/entity/WasteRecord.dart';
 import 'package:wastetastic/widgets/WasteRecordCard.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+/// Boundary Class to display the UI for showing the profile details of the user
+///
+/// Makes use of controller classes to obtain the logged in user
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  /// The logged in user
   static UserAccount _loggedInUser;
   // variables for the toggle functionality //new
+  /// Whether the list/pie chart mode is selected to display user's waste records.
   int selectIndex = 0;
+
+  /// Boolean variable to display which sub-heading must be highlighted
   List<bool> isSelected = [true, false];
-  // map fro the pie chart // new
+
+  /// Mapping required to render the pie chart
   Map<String, double> dataMap = {
     'NORMAL WASTE': 0,
     'E WASTE': 0,
@@ -29,12 +37,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
     'CASH FOR TRASH': 0
   };
 
+  /// Overridden initState method to obtain the logged in user details
   @override
   void initState() {
     super.initState();
     _loggedInUser = UserAccountMgr.userDetails;
   }
 
+  /// Builds waste record cards from data
+  ///
+  /// Makes use of [_loggedInUser.waste_records] to display the user's waste
+  /// records in a formatted manner. Returns the list of widgets to be rendered
+  /// on screen
   List<Widget> buildWasteRecordCards() {
     List<WasteRecord_card> wasteRecordCards = [];
     List<WasteRecord> userRecord = _loggedInUser.waste_records;
@@ -78,7 +92,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  //function to create PieChart //new
+  /// Builds the pie chart.
+  ///
+  /// Makes use of [_loggedInUser.waste_records] in order to display the pie chart
+  /// appropriately. Also implements checks for existence of waste records. Returns
+  /// the pie chart widget.
   Widget buildPieChart() {
     // change the colors in this list to change PieChart colors
     List<Color> colorList = [
@@ -143,8 +161,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
   }
 
-  //function for toggle functionality
-  // also used in the swipe //new
+  /// Toggles the mode of viewing waste records
+  ///
+  /// Refreshes the UI based on changes in the mode of viewing, that is, list mode
+  /// or pie chart mode.
   void toggle(int value) {
     setState(() {
       selectIndex = value;
@@ -161,6 +181,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  /// Renders the widgets onto the screen
+  ///
+  /// Makes use of [_loggedInUser] to display the user's username and email address.
+  /// Also displays the waste records of the user.
   Widget build(BuildContext context) {
     // variables used to detect swipe //new
     double initial = 0.0;

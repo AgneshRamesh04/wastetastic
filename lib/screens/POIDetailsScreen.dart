@@ -8,20 +8,31 @@ import 'package:wastetastic/screens/NearYouScreen.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
 
+/// Boundary Class to display the UI for showing the details of a specific Waste POI
+///
+/// Makes use of controller classes to display favorite button appropriately
 class POI_DetialScreen extends StatefulWidget {
+  /// Whether the favorite status of the Waste POI has been changed
   static bool favChanged = false;
+
+  /// Unique ID to identify the screen and set routing
   static const String id = 'POI_detail_screen';
   @override
   _POI_DetialScreenState createState() => _POI_DetialScreenState();
 }
 
 class _POI_DetialScreenState extends State<POI_DetialScreen> {
+  /// Overridden initState function to initialize the [widget.favChanged] variable
   @override
   void initState() {
     POI_DetialScreen.favChanged = false;
     super.initState();
   }
 
+  /// Renders the widgets onto the screen
+  ///
+  /// Makes use of controller classes to display favorite button appropriately.
+  /// Displays the Waste POI details in a formatted manner.
   @override
   Widget build(BuildContext context) {
     final WastePOI POI = ModalRoute.of(context).settings.arguments;

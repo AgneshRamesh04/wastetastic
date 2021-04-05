@@ -8,18 +8,31 @@ import 'package:wastetastic/screens/ResetPaswordScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:wastetastic/screens/SignUpScreen.dart';
 
-TextEditingController emailController = new TextEditingController();
+//TextEditingController emailController = new TextEditingController();
 
+/// Unique Key for the form displayed on the screen
 final _formKey = GlobalKey<FormState>();
+
+/// The entered OTP
 String enteredOTP;
 
+/// Boundary Class to display the UI for taking the OTP input from user
+///
+/// * Implements user input error handling
+/// * Makes use of controller classes to validate OTP and register a new user
 class OTPScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static String id = 'OTP_Screen';
   @override
   _OTPScreenState createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OTPScreen> {
+  /// Renders the widgets onto the screen
+  ///
+  /// Makes use of controller classes to first validate the OTP entered by the
+  /// user, then to register a new user in case of correct OTP. Also implements
+  /// input error handling.
   @override
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context).settings.arguments;

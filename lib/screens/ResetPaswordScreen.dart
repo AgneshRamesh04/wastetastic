@@ -5,21 +5,39 @@ import 'package:wastetastic/screens/MainScreen.dart';
 import 'package:wastetastic/screens/SignInScreen.dart';
 import 'package:wastetastic/widgets/SimpleButton.dart';
 
-TextEditingController emailController = new TextEditingController();
+//TextEditingController emailController = new TextEditingController();
 
+/// Unique Key for the form displayed on the screen
 final _formKey = GlobalKey<FormState>();
+
+/// User entered new password
 String newPassword;
+
+/// User entered confirm password
 String confirmPassword;
 
+/// Boundary Class to display the UI for taking user input for resetting password
+///
+/// * Implements various user input error handling
+/// * Makes use of controller classes to reset password for the user
 class ResetPasswordScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static String id = 'Forgot_password_page';
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  /// Whether the user has chosen to blue the confirm password field
   bool _obscureConfirmText = true;
+
+  /// Whether the user has chosen to blue the password field
   bool _obscureText = true;
+
+  /// Renders the widgets onto the screen
+  ///
+  /// Ensures that the user enters matching password and confirm password fields.
+  /// Makes use of controller classes to make necessary updates to the database.
   @override
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context).settings.arguments;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Boundary Class to display the UI for showing some basic recycling guidelines
 class RecycleInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
