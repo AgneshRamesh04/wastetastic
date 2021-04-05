@@ -12,16 +12,26 @@ import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/screens/MapScreen.dart';
 
+/// Boundary Class to display the UI for showing the catalog of Waste POI
+///
+/// * Implements various input error handling
+/// * Makes calls to controller classes to retrieve necessary data from databases
 class CatalogScreen extends StatefulWidget {
   @override
   _CatalogScreenState createState() => _CatalogScreenState();
 }
 
 class _CatalogScreenState extends State<CatalogScreen> {
+  /// The user selected waste category
   String selectedCategory = 'LIGHTING WASTE';
+
+  /// Whether a loading animation must be displayed
   bool loading = true;
+
+  /// The catalog of Waste POIs to be displayed
   List<WastePOI> WastePOIs;
 
+  /// Builds the Waste POI cards from the data
   List<POI_card> build_cat_cards(List<WastePOI> POIs) {
     List<POI_card> catalog_Cat = [];
     for (WastePOI wPOI in POIs) {
@@ -52,6 +62,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
     return catalog_Cat;
   }
 
+  /// Renders the widgets onto the screen
+  ///
+  /// * Implements various input error handling
+  /// * Makes use of [WastePOIs] to keep track of the catalog of Waste POIs to be
+  /// displayed
+  /// * Makes use of [loading] to track whether a loading animation needs to be
+  /// displayed while data is retrieved from the database
   @override
   Widget build(BuildContext context) {
     return Scaffold(

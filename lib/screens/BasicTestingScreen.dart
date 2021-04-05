@@ -6,6 +6,7 @@ import 'package:wastetastic/control/WasteRecordMgr.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/screens/MapTestingScreen.dart';
 
+/// Debug Boundary Class used for initial testing and database creation
 class BasicTestingScreen extends StatefulWidget {
   static const String id = 'basic_testing_screen';
   @override
@@ -13,6 +14,7 @@ class BasicTestingScreen extends StatefulWidget {
 }
 
 class _BasicTestingScreenState extends State<BasicTestingScreen> {
+  /// Renders the widgets onto the screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(

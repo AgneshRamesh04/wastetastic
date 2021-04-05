@@ -7,14 +7,20 @@ import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/screens/MapScreen.dart';
 
+/// Boundary Class to display the UI for showing the favorites
+///
+/// * Implements various input error handling
+/// * Makes calls to controller class to retrieve information about the user
 class FavouritesScreen extends StatefulWidget {
   @override
   _FavouritesScreenState createState() => _FavouritesScreenState();
 }
 
 class _FavouritesScreenState extends State<FavouritesScreen> {
+  /// List of favorite Waste POI of logged in user
   List<WastePOI> Fav_WastePOI_List;
 
+  /// Builds Waste POI cards from the favorites data
   List<Widget> build_fav_cards() {
     Fav_WastePOI_List = UserAccountMgr.userDetails.favorites;
     //List<WastePOI> favorites = retrieveFavoritesFromDatabase(username)
@@ -70,6 +76,11 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
     }
   }
 
+  /// Renders the widgets onto the screen
+  ///
+  /// * Implements various input error handling
+  /// * Makes use of [Fav_WastePOI_List] to keep track of the Waste POIs to be
+  /// displayed
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -5,18 +5,27 @@ import 'package:wastetastic/entity/CarPark.dart';
 import 'package:wastetastic/entity/WastePOI.dart';
 import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/CarparkCard.dart';
-
 import 'MapScreen.dart';
 
+/// Boundary Class to display the UI for the showing the nearby car park information
+///
+/// * Implements various input error handling
+/// * Makes calls to controller class to retrieve the necessary data from databases.
 class CarParkScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static const String id = 'Car_park_screen';
   @override
   _CarParkScreenState createState() => _CarParkScreenState();
 }
 
 class _CarParkScreenState extends State<CarParkScreen> {
+  /// The Waste POI nearby to which car park results mustbe displayed
   WastePOI POI;
+
+  /// The nearby car park information
   List<List> carParkInfo;
+
+  /// Builds the Car Park card widgets from the data
   List<Widget> build_carpark_cards(List<List> carParkList) {
     //List<WastePOI> favorites = retrieveFavoritesFromDatabase(username)
     List<Widget> carpark_card_list = [
@@ -41,6 +50,11 @@ class _CarParkScreenState extends State<CarParkScreen> {
     return carpark_card_list;
   }
 
+  /// Renders the widgets onto the screen
+  ///
+  /// * Contains various input validations
+  /// * Makes use of [POI] to keep track of required Waste POI
+  /// * Makes use of [carParkInfo] to keep track of nearby car park to [POI]
   @override
   Widget build(BuildContext context) {
     POI = ModalRoute.of(context).settings.arguments;

@@ -52,7 +52,8 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
 
   /// Renders the widgets onto the screen
   ///
-  /// Contains various input validations
+  /// * Contains various input validations
+  /// * Makes use of [widget.notifyMainScreen] to make necessary UI updates
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData.light().copyWith(
