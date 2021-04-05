@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wastetastic/control/UserAccountMgr.dart';
-import 'package:wastetastic/control/UserAccountMgr.dart';
-import 'package:wastetastic/entity/UserAccount.dart';
 
 class LoginMgr {
   static final _firestore = FirebaseFirestore.instance;

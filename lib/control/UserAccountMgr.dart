@@ -10,7 +10,7 @@ import '../entity/WastePOI.dart';
 import 'package:geopoint/geopoint.dart' as gp;
 import 'package:latlong/latlong.dart';
 
-///Controller Class to manage user accounts
+/// Controller Class to manage user accounts
 ///
 /// * Interacts with the firestore database of User Accounts
 /// * Keeps track of current logged in user
