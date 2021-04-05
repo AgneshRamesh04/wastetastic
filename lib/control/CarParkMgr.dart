@@ -6,8 +6,19 @@ import 'package:wastetastic/control/NetworkMgr.dart';
 import 'package:wastetastic/entity/CarPark.dart';
 import 'package:geopoint/geopoint.dart' as gp;
 
+/// Controller Class to retrieve info on nearby car parks
+///
+/// * Interacts with firebase database to retrieve car park data.
+/// * Makes use of API to retrieve live car park availability
 class CarParkMgr {
+  /// A firebase firestore instance to interact with the Car Park database
   static final _firestore = FirebaseFirestore.instance;
+
+  /// Retrieves information on the nearby car parks to a specific Waste POI.
+  ///
+  /// Makes use of list of keys [nearbyCarParkNum] to retrieve the information from
+  /// Car Park database. Also makes API call to retrieve live car park availability.
+  /// Returns list of car parks with corresponding availability.
   static Future<List> retrieveNearbyCarParkInfo(
       List<String> nearbyCarParkNum) async {
     List<List> nearbyCarPark = List<List>();
