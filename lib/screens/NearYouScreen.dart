@@ -13,17 +13,25 @@ import 'package:wastetastic/Constants.dart';
 import 'MapScreen.dart';
 import 'POIDetailsScreen.dart';
 
+/// Boundary Class to display the UI for showing the nearby Waste POI
+///
+/// * Implements user input error handling
+/// * Makes use of controller classes to display the Waste POI results.
 class NearYouScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static const String id = 'Near_You_Screen';
-
   @override
   _NearYouScreenState createState() => _NearYouScreenState();
 }
 
 class _NearYouScreenState extends State<NearYouScreen> {
+  /// The list of Waste POIs to be displayed as results
   List<WastePOI> WastePOIs;
+
+  /// The title to displayed in the app bar
   String title;
 
+  /// Builds the Waste POI cards from the nearby Waste POI data
   List<POI_card> build_nearby_cards(List<WastePOI> nearbyWastePOI) {
     List<POI_card> nearbyPOI = [];
     for (WastePOI w in nearbyWastePOI) {
@@ -57,6 +65,11 @@ class _NearYouScreenState extends State<NearYouScreen> {
     return nearbyPOI;
   }
 
+  /// Renders the widgets onto the screen
+  ///
+  /// Makes use of controller classes to determine the Waste POI to be displayed
+  /// as results, to determine whether a Waste POI is a favorite of the logged
+  /// in user, and to change the favorite status of a Waste POI.
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context).settings.arguments as Map;

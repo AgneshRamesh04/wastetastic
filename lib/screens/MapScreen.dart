@@ -8,18 +8,25 @@ import 'package:custom_info_window/custom_info_window.dart';
 import 'package:geopoint/geopoint.dart' as gp;
 import 'package:wastetastic/screens/POIDetailsScreen.dart';
 
+/// Boundary Class to display the UI for showing the map on the screen
 class MapScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static const String id = 'Map';
   @override
   _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
+  /// An info window controller for info window displayed on tapping a map marker
   CustomInfoWindowController _customInfoWindowController =
       CustomInfoWindowController();
-  bool changed = false;
+
+  //bool changed = false;
+
+  /// A list of map markers to be displayed on the map
   List<Marker> markerList = [];
 
+  /// Builds the map markers of the locations of the car parks
   void buildCarParkMarkerList(List<List> carParks, WastePOI w) {
     for (List c in carParks) {
       markerList.add(
@@ -202,6 +209,7 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
+  /// Builds the map markers of the locations of the Waste POIs
   void buildWastePOIMarkerList(List<WastePOI> WastePOIs) {
     for (WastePOI w in WastePOIs) {
       String POICategory = w.wasteCategory.toString().split('.').last;
@@ -307,6 +315,12 @@ class _MapScreenState extends State<MapScreen> {
     //UserAccountMgr.userDetails.printUserDetails();
   }
 
+  /// Renders the widgets onto the screen
+  ///
+  /// Makes use of the device's location to determine where to center the map for
+  /// view nearby Waste POI functionality. Makes use of Waste POI's location to
+  /// determine where to center the map for viewing car parks near a specific Waste
+  /// POI.
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context).settings.arguments;
     final bool dispCarPark = args['dispCarPark'];

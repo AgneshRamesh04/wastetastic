@@ -9,25 +9,40 @@ import 'CatalogScreen.dart';
 import 'ProfileScreen.dart';
 import 'RecyleInfoScreen.dart';
 
+/// Boundary Class to display a base-level screen
+///
+/// * Displays the bottom navigation bar and app bar common to multiple different
+/// screens.
+/// * Implements refresh function to be used by other screens to update app bar
 class MainScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static const String id = 'MainScreen';
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
+  /// The selected page index on the bottom navigation bar
   int _selectedPageIndex = 0;
 
+  /// Refreshes the screen to update the app bar
   void refresh() {
     setState(() {});
   }
 
+  /// Refreshes the screen to update the bottom navigation bar
+  /// based on [_selectedPageIndex]
   void _onItemTapped(int index) {
     setState(() {
       _selectedPageIndex = index;
     });
   }
 
+  /// Renders the widgets onto screen
+  ///
+  /// Displays a specific screen from [_widgetOptions] based on
+  /// [_selectedPageIndex]. Makes use of the controller classes to display the
+  /// user's points.
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[

@@ -14,6 +14,8 @@ import 'package:wastetastic/entity/UserAccount.dart';
 import 'package:wastetastic/screens/POIDetailsScreen.dart';
 
 // import 'package:latlng/latlng.dart';
+
+/// Boundary Class for testing map functionality
 class MapTestingScreen extends StatefulWidget {
   static String id = 'MapTestingScreen';
   @override
