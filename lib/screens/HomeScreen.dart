@@ -8,6 +8,9 @@ import 'package:wastetastic/widgets/CategoryButton.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:location_permissions/location_permissions.dart' as lp;
 
+/// Boundary Class to display the UI for showing the home screen
+///
+/// Implements various input error handling
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -20,6 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
     UserAccountMgr.userDetails.printUserDetails();
   }
 
+  /// Renders the widgets onto the screen
+  ///
+  /// Implements various input error handling.
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(

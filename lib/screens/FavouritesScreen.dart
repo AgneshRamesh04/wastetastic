@@ -78,9 +78,8 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
 
   /// Renders the widgets onto the screen
   ///
-  /// * Implements various input error handling
-  /// * Makes use of [Fav_WastePOI_List] to keep track of the Waste POIs to be
-  /// displayed
+  /// Implements various input error handling. Makes use of [Fav_WastePOI_List]
+  /// to keep track of the Waste POIs to be displayed.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

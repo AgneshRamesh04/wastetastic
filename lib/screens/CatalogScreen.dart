@@ -64,11 +64,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
   /// Renders the widgets onto the screen
   ///
-  /// * Implements various input error handling
-  /// * Makes use of [WastePOIs] to keep track of the catalog of Waste POIs to be
-  /// displayed
-  /// * Makes use of [loading] to track whether a loading animation needs to be
-  /// displayed while data is retrieved from the database
+  /// Implements various input error handling. Makes use of [WastePOIs] to keep
+  /// track of the catalog of Waste POIs to be displayed. Makes use of [loading]
+  /// to track whether a loading animation needs to be displayed while data is
+  /// retrieved from the database.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

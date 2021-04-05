@@ -7,10 +7,10 @@ import 'package:wastetastic/widgets/HeaderCard.dart';
 import 'package:wastetastic/widgets/CarparkCard.dart';
 import 'MapScreen.dart';
 
-/// Boundary Class to display the UI for the showing the nearby car park information
+/// Boundary Class to display the UI for showing the nearby car park information
 ///
-/// * Implements various input error handling
-/// * Makes calls to controller class to retrieve the necessary data from databases.
+/// Implements various input error handling. Makes calls to controller class
+/// to retrieve the necessary data from databases.
 class CarParkScreen extends StatefulWidget {
   /// Unique ID to identify the screen and set routing
   static const String id = 'Car_park_screen';

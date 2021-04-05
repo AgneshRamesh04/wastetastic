@@ -7,20 +7,30 @@ import 'package:wastetastic/widgets/SimpleButton.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-
 import 'SignInScreen.dart';
 
+/// Unique Key for the form displayed on the screen
 final _formKey = GlobalKey<FormState>();
+
+/// The user entered email
 String enteredEmail;
 
+/// Boundary Class to display the UI for when the user forgets his/her password.
+///
+/// * Implements various input error handling
+/// * Makes calls to controller class to perform the necessary database updates.
 class ForgotPasswordScreen extends StatefulWidget {
+  /// Unique ID to identify the screen and set routing
   static String id = 'Forgot_Password_screen';
-
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  /// Renders the widgets onto the screen
+  ///
+  /// Implements various input error handling. Makes use [enteredEmail] to
+  /// keep track of the user inputted email.
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey =
