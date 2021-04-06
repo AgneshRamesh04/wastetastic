@@ -3,10 +3,22 @@ import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/entity/WasteRecord.dart';
 
+/// A control class for Waste record updates
+///
+/// Interacts with the firestore database to add new waste record details added by the user
 class WasteRecordMgr {
+  /// A firebase firestore instance to interact with the User Account database
   static final _firestore = FirebaseFirestore.instance;
-  static addNewRecord(String username, DateTime dateTime, double weight,
-      WasteCategory category) async {
+
+  /// Adds new waste record to the user document in the database
+  ///
+  /// Adds a new waste record document with document id, [dateTime], timestamp of the waste disposal,
+  /// weight: [weight] kgs and of category, [category],
+  /// to the WasteRecords collection of user document [username].
+  /// Also adds the points to the user according to the weight and category of the waste record.
+  /// Returns void.
+  static Future<void> addNewRecord(String username, DateTime dateTime,
+      double weight, WasteCategory category) async {
     WasteRecord wasteRecord = WasteRecord(
       dateTime: dateTime,
       weight: weight,

@@ -13,8 +13,8 @@ class RegistrationMgr {
   ///
   /// Registers a new user, [name] with the username: [username] and
   /// password: [password] and linked to the email, [email].
-  /// The points the user is sent to zero during registration.
-  /// Adds the user information to the database use [_firestore] instance.
+  /// The points the user is set to zero during registration.
+  /// Adds the user information to the database using [_firestore] instance.
   /// Returns void
   static Future<void> registerUserAccount(
       String name, String email, String password, String username) async {

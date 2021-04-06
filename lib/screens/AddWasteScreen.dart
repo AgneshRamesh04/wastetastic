@@ -238,7 +238,7 @@ class _AddWasteScreenState extends State<AddWasteScreen> {
                                         "your account",
                                       ),
                                       actions: <Widget>[
-                                        new FlatButton(
+                                        FlatButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
