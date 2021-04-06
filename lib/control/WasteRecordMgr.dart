@@ -3,7 +3,7 @@ import 'package:wastetastic/control/UserAccountMgr.dart';
 import 'package:wastetastic/entity/WasteCategory.dart';
 import 'package:wastetastic/entity/WasteRecord.dart';
 
-/// A control class for Waste record updates
+/// Controller Class for Waste record updates
 ///
 /// Interacts with the firestore database to add new waste record details added by the user
 class WasteRecordMgr {
