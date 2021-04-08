@@ -77,12 +77,15 @@ class _SignInScreenState extends State<SignInScreen> {
                     padding: EdgeInsets.all(10.0),
                     child: Column(
                       children: <Widget>[
-                        CircleAvatar(
-                          radius: 60.0,
-                          //backgroundImage: AssetImage('')
-                          backgroundColor: Colors.transparent,
-                          backgroundImage:
-                              AssetImage('assets/images/wastetastic_1.png'),
+                        Hero(
+                          tag: 'App Logo',
+                          child: CircleAvatar(
+                            radius: 60.0,
+                            //backgroundImage: AssetImage('')
+                            backgroundColor: Colors.transparent,
+                            backgroundImage: AssetImage(
+                                'assets/images/wastetastic logo.png'),
+                          ),
                         ),
                         SizedBox(height: 20),
                         SizedBox(

@@ -83,7 +83,7 @@ class _MainScreenState extends State<MainScreen> {
                         radius: 27.0,
                         backgroundColor: Colors.transparent,
                         backgroundImage:
-                            AssetImage('assets/images/wastetastic_1.png'),
+                            AssetImage('assets/images/wastetastic logo.png'),
                       ),
                       onTap: () {
                         showDialog(

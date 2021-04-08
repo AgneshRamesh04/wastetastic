@@ -343,49 +343,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(
                     height: 25,
                   ),
-                  // Divider(
-                  //   thickness: 5,
-                  // ),
-                  /*Container(
-                      child: Align(
-                    alignment: Alignment.center,
-                    child: Text('Waste disposal records: ',
-                        style: TextStyle(
-                            fontSize: 23.0, fontFamily: 'DancingScript')),
-                  )),
-                  SizedBox(
-                    height: 8,
-                  ),*/
-                  // header_card(
-                  //   title: 'Waste Disposal Data',
-                  // ),
-                  // Toggle buttons //new
                   Center(
-                    child: ToggleButtons(
-                      //borderRadius: BorderRadius.circular(20.0),
-                      disabledColor: Colors.transparent,
-                      selectedColor: Colors.green,
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
+                    child: Theme(
+                      data: ThemeData.light().copyWith(
+                        primaryColor: Colors.green,
+                        colorScheme: ColorScheme.light(primary: Colors.green),
                       ),
-                      renderBorder: false,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Records",
-                          ),
+                      child: ToggleButtons(
+                        //borderRadius: BorderRadius.circular(20.0),
+                        disabledColor: Colors.transparent,
+                        textStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Pie Chart",
+                        renderBorder: false,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Records",
+                            ),
                           ),
-                        ),
-                      ],
-                      onPressed: (int value) => toggle(value),
-                      isSelected: isSelected,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Pie Chart",
+                            ),
+                          ),
+                        ],
+                        onPressed: (int value) => toggle(value),
+                        isSelected: isSelected,
+                      ),
                     ),
                   ),
                   WasteRecordStats[selectIndex],

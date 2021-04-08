@@ -91,11 +91,14 @@ class _CatalogScreenState extends State<CatalogScreen> {
                 child: Container(
                   constraints: BoxConstraints(maxWidth: 200),
                   decoration: BoxDecoration(
-                      color: Colors.lime,
-                      border: Border.all(
-                        color: Colors.teal.shade900,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                    color: Colors.lime,
+                    border: Border.all(
+                      color: Colors.teal.shade900,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(30),
+                    ),
+                  ),
                   //color: Colors.lime,
                   /*margin: EdgeInsets.symmetric(
                     horizontal: 100,
@@ -103,8 +106,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
                   child: DropdownButtonFormField<String>(
                     decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent))),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                    ),
                     value: selectedCategory,
                     icon: Icon(
                       Icons.arrow_drop_down,

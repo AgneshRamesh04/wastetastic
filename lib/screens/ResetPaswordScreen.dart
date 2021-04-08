@@ -74,7 +74,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           //backgroundImage: AssetImage('')
                           backgroundColor: Colors.transparent,
                           backgroundImage:
-                              AssetImage('assets/images/wastetastic_1.png'),
+                              AssetImage('assets/images/wastetastic logo.png'),
                         ),
                         SizedBox(height: 20),
                         Text('Reset Password',

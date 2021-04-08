@@ -68,7 +68,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           //backgroundImage: AssetImage('')
                           backgroundColor: Colors.transparent,
                           backgroundImage:
-                              AssetImage('assets/images/wastetastic_1.png'),
+                              AssetImage('assets/images/wastetastic logo.png'),
                         ),
                         SizedBox(height: 20),
                         Text('Forgot Password?',

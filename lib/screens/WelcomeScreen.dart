@@ -44,12 +44,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Container(
                     padding: EdgeInsets.all(20.0),
                   ),
-                  CircleAvatar(
-                    radius: 120.0,
-                    //backgroundImage: AssetImage('')
-                    backgroundColor: Colors.transparent,
-                    backgroundImage:
-                        AssetImage('assets/images/wastetastic_1.png'),
+                  Hero(
+                    tag: 'App Logo',
+                    child: CircleAvatar(
+                      radius: 120.0,
+                      //backgroundImage: AssetImage('')
+                      backgroundColor: Colors.transparent,
+                      backgroundImage:
+                          AssetImage('assets/images/wastetastic logo.png'),
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.all(10.0),

@@ -41,7 +41,7 @@ class RecycleInfoScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image(
-                image: AssetImage('assets/images/Wastetastic (2).png'),
+                image: AssetImage('assets/images/Wastetastic_Logo.png'),
               ),
               Text(
                 "Point System",
